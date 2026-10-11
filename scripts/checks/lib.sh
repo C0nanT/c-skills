@@ -35,7 +35,7 @@ MARKER_RE='^<!-- aligned-with: sha256:([0-9a-f]{64}) -->$'
 # TRADUCAO.pt-BR.md and RESUMO.md -> SKILL.md; <name>.pt-BR.md -> <name>.md.
 translation_source() {
   local f="$1" dir base
-  dir="$(dirname "$f")"; base="$(basename "$f")"
+  dir="${f%/*}"; base="${f##*/}"
   case "$base" in
     TRADUCAO.pt-BR.md|RESUMO.md) echo "$dir/SKILL.md" ;;
     *.pt-BR.md) echo "$dir/${base%.pt-BR.md}.md" ;;

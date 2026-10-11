@@ -9,9 +9,7 @@ failures=0
 ok() { echo "  ok:   $*"; }
 bad() { echo "  FAIL: $*" >&2; failures=$((failures + 1)); }
 
-CHECKS=(frontmatter readme-public readme-private readme-links bucket-readmes
-  plugin-json bucket-readme-disk markdownlint invocation-mode
-  setup-skills-merge wizard-write-env spec-file-name stale-router untrusted-data stale-translation)
+source "$HERE/scripts/checks/list.sh"
 
 echo "==> every check runs alone and passes on the real repo"
 for c in "${CHECKS[@]}"; do

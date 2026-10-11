@@ -131,15 +131,15 @@ JSON
   fi
 
   # e. Missing file and empty file: created with the deny rules.
-  for case in missing empty; do
-    d="$_merge_tmp/$case"; mkdir -p "$d"
-    if [[ "$case" == empty ]]; then mkdir -p "$d/.claude"; : > "$d/.claude/settings.json"; fi
+  for kind in missing empty; do
+    d="$_merge_tmp/$kind"; mkdir -p "$d"
+    if [[ "$kind" == empty ]]; then mkdir -p "$d/.claude"; : > "$d/.claude/settings.json"; fi
     want="$(grep -c . "$_merge_tmp/deny-list.txt")"
     if run_merge "$d" "$PATH" \
         && jq -e --argjson n "$want" '(.permissions.deny | length) == $n' "$d/.claude/settings.json" > /dev/null; then
-      pass "setup-skills merge: $case settings.json created with the deny rules"
+      pass "setup-skills merge: $kind settings.json created with the deny rules"
     else
-      fail "setup-skills merge: $case settings.json not created with the deny rules"
+      fail "setup-skills merge: $kind settings.json not created with the deny rules"
     fi
   done
 fi
