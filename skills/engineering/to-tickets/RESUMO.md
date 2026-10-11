@@ -7,3 +7,5 @@
 **Como invocar:** `/to-tickets`. É uma skill só para o usuário (`disable-model-invocation: true`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:14246f857e03382a50824df5a6be88b687333c07b23053b990d3776534c744f3 -->

@@ -7,3 +7,5 @@
 **Como invocar:** `/tdd`, ou o agente pode chamá-la sozinho quando a tarefa pedir TDD ou testes de integração (sem `disable-model-invocation`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:fe26cf06dea2522e1d3e0f9a08d737e3e83fb8014bac99d68c32e46d95b41598 -->

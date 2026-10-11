@@ -7,3 +7,5 @@
 **Como invocar:** `/setup-statusline`. É uma skill só para o usuário (`disable-model-invocation: true`). Está em `misc/`, ou seja, é de uso raro.
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:9c5c65c2b4262d07400f306645961d548355b8f199f0e485a3bd1dcd0a62db5c -->

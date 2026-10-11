@@ -7,3 +7,5 @@
 **Como invocar:** o agente a chama sozinho quando você pedir hooks de pre-commit, Husky ou lint-staged (sem `disable-model-invocation`). Também pode pedir com `/setup-pre-commit`. Está em `misc/`, ou seja, é de uso raro.
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:cff1e45d792f0609451fcc85204250f54349a2a4d4c24025a1c2e1db802b25bc -->

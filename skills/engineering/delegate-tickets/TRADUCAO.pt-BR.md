@@ -73,3 +73,5 @@ uncertainty. Include the hash of the commit `/implement` made.
 Quando todos os tickets tiverem sucesso, liste os tickets concluídos com as sessões de subagente e os commits de cada um.
 
 Se a sequência parar, identifique o ticket que falhou, o problema dele e onde está o trabalho dele (o commit, ou a árvore de trabalho não commitada).
+
+<!-- aligned-with: sha256:3f82198a35dd98908bb68d9602c958d3783ea6fda639e008606842e454f5721d -->

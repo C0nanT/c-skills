@@ -49,3 +49,5 @@ Exemplo, operação destrutiva:
 > ```
 >
 > Caveman resume. Verify backup exist first.
+
+<!-- aligned-with: sha256:b4bb6fe3bf3da222993ca0aee5e7c6f5368b182dd30ce1172e8f8e3280eb7052 -->

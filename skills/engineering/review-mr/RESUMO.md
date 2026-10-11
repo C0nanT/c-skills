@@ -7,3 +7,5 @@
 **Como invocar:** `/review-mr`, com o número, a URL ou os dois branches. É uma skill só para o usuário (`disable-model-invocation: true`). Ela nunca publica comentários sozinha: só depois da sua aprovação, comentário por comentário.
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:f46b199f793ffd498cd55becb2c41ac13585b47087f717ff649350aa81af39b4 -->

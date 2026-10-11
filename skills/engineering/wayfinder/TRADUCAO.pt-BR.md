@@ -126,3 +126,5 @@ O usuário invoca com um mapa (URL ou número). Um ticket é **opcional**: sem u
 5. Adicione os tickets recém-surgidos (criar e depois conectar); gradue qualquer névoa que a resposta tenha tornado especificável, retirando cada remendo graduado de **Not yet specified** para que ele viva apenas como o novo ticket. Se a resposta revelar que um ticket (este ou outro) está além do destino, **exclua-o do escopo** em vez de resolvê-lo na rota. Se a decisão invalidar outras partes do mapa, atualize ou apague esses tickets.
 
 O usuário pode rodar tickets desbloqueados em paralelo, então espere que outras sessões estejam editando o tracker ao mesmo tempo.
+
+<!-- aligned-with: sha256:5e9b9d6fe19709a39e63dc6c8d7babce005ad4f520a4840614eb583241e067b3 -->

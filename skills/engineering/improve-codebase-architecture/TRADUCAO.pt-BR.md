@@ -70,3 +70,5 @@ Efeitos colaterais acontecem em linha, à medida que as decisões se consolidam:
 - **Refinou um termo vago durante a conversa?** Atualize o `GLOSSARY.md` ali mesmo.
 - **O usuário rejeita o candidato por um motivo que sustenta a decisão?** Ofereça um ADR, enquadrado assim: _"Quer que eu registre isto como ADR para que as próximas revisões de arquitetura não o sugiram de novo?"_ Ofereça só quando o motivo for realmente necessário para que um futuro explorador não sugira a mesma coisa de novo; pule motivos efêmeros ("não vale a pena agora") e os que são autoevidentes.
 - **Quer explorar interfaces alternativas para o módulo aprofundado?** Use a abordagem de projetar duas vezes: crie subagentes paralelos para rascunhar interfaces alternativas e depois compare-as.
+
+<!-- aligned-with: sha256:3254f7ace6b1afe7da331b65599e1bddb94e6f6a0f4624f27ba27ce11b6e817b -->

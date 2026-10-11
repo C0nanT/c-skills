@@ -7,3 +7,5 @@
 **Como invocar:** `/setup-skills`. É uma skill só para o usuário (`disable-model-invocation: true`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução), os modelos-semente `issue-tracker-github`, `issue-tracker-gitlab`, `issue-tracker-local`, `triage-labels`, `domain`, `git-guardrails` (cada um em inglês e em `.pt-BR.md`) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:877e61e41cbe4095167a75cafbeddbb0c22b27bce5db1a1490ec0f7e9c7186f6 -->

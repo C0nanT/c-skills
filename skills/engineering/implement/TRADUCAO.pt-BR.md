@@ -68,3 +68,5 @@ Uma linha: o emoji, seguido de um motivo curto. 🟢 é o emoji **sozinho**, sem
 - 🔴 Algo não foi concluído, ou o usuário precisa agir antes de seguir: uma parte não foi implementada, `/review-axes` encontrou uma lacuna na especificação, uma decisão precisa da avaliação dele, uma etapa de credencial, migração ou manual é necessária, ou qualquer coisa que quebre o fluxo "apenas comece o próximo ticket". Diga o que é e o que ele precisa fazer.
 
 Escolha a pior cor aplicável: qualquer condição vermelha torna o veredito 🔴, mesmo que o resto tenha corrido bem.
+
+<!-- aligned-with: sha256:86dc9c7a45e21e906d811c4cdb3f28108903b861ceefa5b4dd62e618a8815c7c -->

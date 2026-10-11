@@ -7,3 +7,5 @@
 **Como invocar:** `/setup-solid`. É uma skill só para o usuário (`disable-model-invocation: true`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:bddbf9031ac2dd52815dafdb406e4126820df137cbcd18dc711fb9897216cb82 -->

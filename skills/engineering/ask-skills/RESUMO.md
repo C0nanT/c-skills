@@ -7,3 +7,5 @@
 **Como invocar:** `/ask-skills`. É uma skill só para o usuário (`disable-model-invocation: true`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução), `PHASE-BOUNDARIES.md` / `PHASE-BOUNDARIES.pt-BR.md` (árvore de limites de fase, em inglês e em português) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:fbae0616e0a03b0724f55fbd0b79809548abe47454035061a622b63d385411bb -->

@@ -7,3 +7,5 @@
 **Como invocar:** `/retro`. É uma skill só para o usuário (`disable-model-invocation: true`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:e852b653078b8e29046962589c38b65f63055ba2322588b2080b66ae01be4d12 -->

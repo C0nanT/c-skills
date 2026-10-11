@@ -146,3 +146,5 @@ Diga ao usuário:
 - Se o socket do Docker está montado e, se estiver, repita o trade-off uma vez para que a decisão fique registrada.
 - Quais checagens de aceitação passaram, e quais falharam ou você não conseguiu rodar.
 - Que a toolchain agora pertence ao container: novas ferramentas vão para o estágio da imagem, não para o host.
+
+<!-- aligned-with: sha256:93cc1af27e36934c4bc3ac827b9df16d765c799878d07e9458c7c586caae08e9 -->

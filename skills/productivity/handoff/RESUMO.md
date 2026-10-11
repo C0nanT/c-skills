@@ -7,3 +7,5 @@
 **Como invocar:** `/handoff`. É uma skill só para o usuário (`disable-model-invocation: true`). Aceita um argumento que descreve o foco da próxima sessão.
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:4cbb043950dad2ffd3662ff1a5a0b51ae676004b5cae10e3787e8ee7a4ee69d3 -->

@@ -117,3 +117,5 @@ Classifique lendo o código, não adivinhando quanto tempo levaria para alguém.
 **Retorno**, o que a correção traz: **High** elimina uma classe de bug ou destrava uma área inteira, **Medium** torna uma área significativamente mais fácil, **Low** é uma melhoria local.
 
 Ordene o mapa por retorno em relação ao raio de impacto, não por gravidade: um 🟠 que é Contained com retorno High fica acima de um 🔴 que é Systemic. Essa ordenação afunda de propósito os maiores problemas, então a linha de fechamento do mapa nomeia as linhas a limpar antes da próxima funcionalidade, que é onde um 🔴 afundado volta à tona.
+
+<!-- aligned-with: sha256:bb285486bcba42df3e98c1306601fe1a7b5b2d96c6c3c15bb1a75bd644eb5436 -->

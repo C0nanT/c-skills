@@ -7,3 +7,5 @@
 **Como invocar:** `/archive-feature`, com o nome de uma funcionalidade ou sem argumento. É uma skill só para o usuário (`disable-model-invocation: true`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:af14e872a992ab94f19aa0fd4a9b34346cd087b579317eb5b214eaaa90d53f50 -->

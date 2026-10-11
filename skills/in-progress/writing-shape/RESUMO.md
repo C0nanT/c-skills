@@ -7,3 +7,5 @@
 **Como invocar:** `/writing-shape`, com o arquivo de material como argumento. É uma skill só para o usuário (`disable-model-invocation: true`). Está em `in-progress/`, ou seja, é beta.
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:f5e6c57bdd85178ace4a260c92f46da6b64ddee18215b461d875739c68976f72 -->

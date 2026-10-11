@@ -12,3 +12,9 @@ jobs:
 
       - name: Run skill validations
         run: bash scripts/validate.sh
+
+      - name: Run validator fixture harness
+        run: bash tests/validate-fixture.sh
+
+      - name: Run per-check harness
+        run: bash tests/validate-checks.sh

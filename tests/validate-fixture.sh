@@ -1,0 +1,139 @@
+#!/usr/bin/env bash
+# Fixture harness for scripts/validate.sh. Builds a minimal valid repo in a temp
+# dir, runs the validator copied into it, and asserts only exit code and message.
+# Usage: bash tests/validate-fixture.sh
+set -uo pipefail
+
+HERE="$(cd "$(dirname "$0")/.." && pwd)"
+WORK="$(mktemp -d)"
+trap 'rm -rf "$WORK"' EXIT
+
+failures=0
+ok() { echo "  ok:   $*"; }
+bad() { echo "  FAIL: $*" >&2; failures=$((failures + 1)); }
+
+source "$HERE/scripts/checks/lib.sh"
+SENTENCE="$UNTRUSTED_SENTENCE"
+SKILLS=(alpha review-mr review-axes research setup-skills wizard)
+
+write_skill() { # $1 = repo, $2 = name
+  local dir="$1/skills/engineering/$2"
+  mkdir -p "$dir/agents"
+  printf -- '---\nname: %s\ndescription: Fixture skill %s. Use when testing.\n---\n\n# %s\n\n%s\n' \
+    "$2" "$2" "$2" "$SENTENCE" > "$dir/SKILL.md"
+  printf 'policy:\n  allow_implicit_invocation: true\n' > "$dir/agents/openai.yaml"
+}
+
+build_fixture() { # $1 = repo dir
+  local r="$1" s
+  mkdir -p "$r/scripts" "$r/.claude-plugin"
+  cp "$HERE/scripts/validate.sh" "$r/scripts/validate.sh"
+  cp "$HERE/scripts/translation-marker.sh" "$r/scripts/translation-marker.sh"
+  cp -r "$HERE/scripts/checks" "$r/scripts/checks"
+  cp "$HERE/.markdownlint.jsonc" "$r/.markdownlint.jsonc"
+  for s in alpha review-mr review-axes research; do
+    write_skill "$r" "$s"
+  done
+  # setup-skills and wizard are exercised by path (merge snippet, template.sh),
+  # so the fixture takes the real files.
+  mkdir -p "$r/skills/engineering/setup-skills" "$r/skills/engineering/wizard"
+  cp -r "$HERE/skills/engineering/setup-skills/." "$r/skills/engineering/setup-skills/"
+  cp -r "$HERE/skills/engineering/wizard/." "$r/skills/engineering/wizard/"
+  {
+    echo "# Fixture"; echo
+    for s in "${SKILLS[@]}"; do
+      echo "- [$s](./skills/engineering/$s/SKILL.md)"
+    done
+  } > "$r/README.md"
+  {
+    echo "# Engineering"; echo
+    for s in "${SKILLS[@]}"; do
+      echo "- [$s](./$s/SKILL.md)"
+    done
+  } > "$r/skills/engineering/README.md"
+  printf '%s\n' "${SKILLS[@]}" \
+    | jq -R '"./skills/engineering/" + .' \
+    | jq -s '{name: "fixture", skills: .}' > "$r/.claude-plugin/plugin.json"
+}
+
+run_validate() { # $1 = repo dir; sets status and output
+  output="$(bash "$1/scripts/validate.sh" 2>&1)"
+  status=$?
+}
+
+echo "==> minimal valid fixture passes"
+good="$WORK/good"; mkdir -p "$good"; build_fixture "$good"
+run_validate "$good"
+if [[ $status -eq 0 ]] && grep -q "All checks passed." <<< "$output"; then
+  ok "exit 0 and 'All checks passed.'"
+else
+  bad "expected exit 0, got $status"; grep FAIL <<< "$output" >&2
+fi
+
+echo "==> fixture with a broken README link fails"
+broken="$WORK/broken"; mkdir -p "$broken"; build_fixture "$broken"
+echo "- [ghost](./skills/engineering/ghost/SKILL.md)" >> "$broken/README.md"
+run_validate "$broken"
+if [[ $status -ne 0 ]] \
+    && grep -qF "skills/engineering/ghost/SKILL.md linked in README but file not found" <<< "$output"; then
+  ok "non-zero exit and the broken-link message"
+else
+  bad "expected non-zero exit with broken-link message, got $status"; grep FAIL <<< "$output" >&2
+fi
+
+echo "==> translation with a matching marker passes"
+fresh="$WORK/fresh"; mkdir -p "$fresh"; build_fixture "$fresh"
+printf '# alpha pt-BR\n' > "$fresh/skills/engineering/alpha/TRADUCAO.pt-BR.md"
+bash "$fresh/scripts/translation-marker.sh" refresh "$fresh/skills/engineering/alpha/TRADUCAO.pt-BR.md" > /dev/null
+run_validate "$fresh"
+if [[ $status -eq 0 ]]; then ok "helper-refreshed marker passes"; else bad "fresh marker failed ($status)"; grep FAIL <<< "$output" >&2; fi
+
+echo "==> edited SKILL.md with a stale marker fails, naming the skill"
+stale="$WORK/stale"; cp -r "$fresh" "$stale"
+echo "An English edit." >> "$stale/skills/engineering/alpha/SKILL.md"
+run_validate "$stale"
+if [[ $status -ne 0 ]] && grep -qF "skills/engineering/alpha/TRADUCAO.pt-BR.md is stale" <<< "$output"; then
+  ok "non-zero exit naming the skill and file"
+else
+  bad "expected stale failure, got $status"; grep FAIL <<< "$output" >&2
+fi
+
+echo "==> helper refresh clears the stale failure"
+bash "$stale/scripts/translation-marker.sh" refresh "$stale/skills/engineering/alpha/TRADUCAO.pt-BR.md" > /dev/null
+bash "$stale/scripts/translation-marker.sh" refresh "$stale/skills/engineering/alpha/TRADUCAO.pt-BR.md" > /dev/null
+run_validate "$stale"
+if [[ $status -eq 0 ]] && [[ "$(grep -c 'aligned-with' "$stale/skills/engineering/alpha/TRADUCAO.pt-BR.md")" -eq 1 ]]; then
+  ok "refresh is idempotent and passes"
+else
+  bad "refresh did not clear failure ($status)"; grep FAIL <<< "$output" >&2
+fi
+
+echo "==> unmarked RESUMO.md and twin fail; then stale ones fail"
+multi="$WORK/multi"; cp -r "$fresh" "$multi"
+d="$multi/skills/engineering/alpha"
+printf '# resumo\n' > "$d/RESUMO.md"
+printf '# ref\n' > "$d/REF.md"; printf '# ref pt\n' > "$d/REF.pt-BR.md"
+run_validate "$multi"
+if [[ $status -ne 0 ]] && grep -qF "alpha/RESUMO.md has no aligned-with marker, run: bash scripts/translation-marker.sh refresh" <<< "$output" \
+    && grep -qF "alpha/REF.pt-BR.md has no aligned-with marker" <<< "$output"; then
+  ok "unmarked RESUMO.md and twin fail naming the file"
+else
+  bad "unmarked files did not fail"; grep FAIL <<< "$output" >&2
+fi
+bash "$multi/scripts/translation-marker.sh" refresh "$d/RESUMO.md" > /dev/null
+bash "$multi/scripts/translation-marker.sh" refresh "$d/REF.pt-BR.md" > /dev/null
+echo "edit" >> "$d/REF.md"; echo "edit" >> "$d/SKILL.md"
+run_validate "$multi"
+if [[ $status -ne 0 ]] && grep -qF "alpha/RESUMO.md is stale" <<< "$output" \
+    && grep -qF "alpha/REF.pt-BR.md is stale" <<< "$output"; then
+  ok "RESUMO.md and twin reported stale"
+else
+  bad "expected RESUMO and twin stale"; grep FAIL <<< "$output" >&2
+fi
+
+if [[ $failures -eq 0 ]]; then
+  echo "All fixture tests passed."
+else
+  echo "$failures fixture test(s) failed." >&2
+  exit 1
+fi

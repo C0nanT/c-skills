@@ -77,3 +77,5 @@ Antes de cada gravação: releia o arquivo a partir do disco. O usuário pode te
 O usuário pode dizer "corte o último", "reescreva aquele mais afiado", "junte esses dois" a qualquer momento. Trate essas instruções como prioritárias.
 
 </informações-de-apoio>
+
+<!-- aligned-with: sha256:298b0edd23df229183630de592ed8aa4289233560f2040691f6eb77caeaad4ea -->

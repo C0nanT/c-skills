@@ -7,3 +7,5 @@
 **Como invocar:** `/wayfinder`, com uma ideia para desenhar o mapa ou com um mapa existente para continuar. É uma skill só para o usuário (`disable-model-invocation: true`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:5e9b9d6fe19709a39e63dc6c8d7babce005ad4f520a4840614eb583241e067b3 -->

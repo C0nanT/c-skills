@@ -7,3 +7,5 @@
 **Como invocar:** o agente a consulta sozinho quando você cria ou edita um documento para agentes (sem `disable-model-invocation`). Também pode pedir com `/writing-for-agents`.
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução), `SKILL-MECHANICS.md` / `SKILL-MECHANICS.pt-BR.md` (frontmatter, escolha de invocação e skills roteadoras, em inglês e em português) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:551adca942227b44192edba88acd4e8db911f0121ce58ad16944ccf6a896a74a -->

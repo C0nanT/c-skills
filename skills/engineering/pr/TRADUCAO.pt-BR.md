@@ -170,3 +170,5 @@ Evidência baseada em execução é de nível A. Resultados de testes, saída do
 Descreva se é uma porta de mão única ou de mão dupla. Você pode voltar atrás por portas de mão dupla, mas não por portas de mão única. Um PR barato de reverter tem risco menor. Mudanças que envolvem ações destrutivas ou decisões difíceis de desfazer são portas de mão única.
 
 O raio de impacto (blast radius) é o impacto potencial ou o escopo das mudanças introduzidas por este PR. Considere todas as possibilidades. Exemplos são deslocamento de layout, quebras para consumidores, responsividade para mobile etc.
+
+<!-- aligned-with: sha256:ab63f1cf78647389edcd386c9427c5dfca27ed2836930c24773ffee834c19bcd -->
