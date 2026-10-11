@@ -1,0 +1,5 @@
+interface:
+  display_name: "Traduzir"
+  short_description: "Translate my last message into pt-BR"
+policy:
+  allow_implicit_invocation: false

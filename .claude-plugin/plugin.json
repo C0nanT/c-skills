@@ -35,6 +35,7 @@
     "./skills/productivity/grilling",
     "./skills/productivity/handoff",
     "./skills/productivity/to-questionnaire",
+    "./skills/productivity/traduzir",
     "./skills/productivity/wait-what",
     "./skills/productivity/writing-for-agents",
     "./skills/misc/setup-statusline"
