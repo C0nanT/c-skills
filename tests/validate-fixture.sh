@@ -27,6 +27,7 @@ build_fixture() { # $1 = repo dir
   local r="$1" s
   mkdir -p "$r/scripts" "$r/.claude-plugin"
   cp "$HERE/scripts/validate.sh" "$r/scripts/validate.sh"
+  cp "$HERE/scripts/translation-marker.sh" "$r/scripts/translation-marker.sh" 2>/dev/null || true
   cp -r "$HERE/scripts/checks" "$r/scripts/checks"
   cp "$HERE/.markdownlint.jsonc" "$r/.markdownlint.jsonc"
   for s in alpha review-mr review-axes research; do
@@ -77,6 +78,51 @@ if [[ $status -ne 0 ]] \
   ok "non-zero exit and the broken-link message"
 else
   bad "expected non-zero exit with broken-link message, got $status"; grep FAIL <<< "$output" >&2
+fi
+
+echo "==> translation with a matching marker passes"
+fresh="$WORK/fresh"; mkdir -p "$fresh"; build_fixture "$fresh"
+printf '# alpha pt-BR\n' > "$fresh/skills/engineering/alpha/TRADUCAO.pt-BR.md"
+bash "$fresh/scripts/translation-marker.sh" refresh "$fresh/skills/engineering/alpha/TRADUCAO.pt-BR.md" > /dev/null
+run_validate "$fresh"
+if [[ $status -eq 0 ]]; then ok "helper-refreshed marker passes"; else bad "fresh marker failed ($status)"; grep FAIL <<< "$output" >&2; fi
+
+echo "==> edited SKILL.md with a stale marker fails, naming the skill"
+stale="$WORK/stale"; cp -r "$fresh" "$stale"
+echo "An English edit." >> "$stale/skills/engineering/alpha/SKILL.md"
+run_validate "$stale"
+if [[ $status -ne 0 ]] && grep -qF "skills/engineering/alpha/TRADUCAO.pt-BR.md is stale" <<< "$output"; then
+  ok "non-zero exit naming the skill and file"
+else
+  bad "expected stale failure, got $status"; grep FAIL <<< "$output" >&2
+fi
+
+echo "==> helper refresh clears the stale failure"
+bash "$stale/scripts/translation-marker.sh" refresh "$stale/skills/engineering/alpha/TRADUCAO.pt-BR.md" > /dev/null
+bash "$stale/scripts/translation-marker.sh" refresh "$stale/skills/engineering/alpha/TRADUCAO.pt-BR.md" > /dev/null
+run_validate "$stale"
+if [[ $status -eq 0 ]] && [[ "$(grep -c 'aligned-with' "$stale/skills/engineering/alpha/TRADUCAO.pt-BR.md")" -eq 1 ]]; then
+  ok "refresh is idempotent and passes"
+else
+  bad "refresh did not clear failure ($status)"; grep FAIL <<< "$output" >&2
+fi
+
+echo "==> stale RESUMO.md and supporting-doc twin fail; unmarked files are skipped"
+multi="$WORK/multi"; cp -r "$fresh" "$multi"
+d="$multi/skills/engineering/alpha"
+printf '# resumo\n' > "$d/RESUMO.md"
+printf '# ref\n' > "$d/REF.md"; printf '# ref pt\n' > "$d/REF.pt-BR.md"
+run_validate "$multi"
+if [[ $status -eq 0 ]]; then ok "unmarked RESUMO.md and twin skipped"; else bad "unmarked files not skipped"; grep FAIL <<< "$output" >&2; fi
+bash "$multi/scripts/translation-marker.sh" refresh "$d/RESUMO.md" > /dev/null
+bash "$multi/scripts/translation-marker.sh" refresh "$d/REF.pt-BR.md" > /dev/null
+echo "edit" >> "$d/REF.md"; echo "edit" >> "$d/SKILL.md"
+run_validate "$multi"
+if [[ $status -ne 0 ]] && grep -qF "alpha/RESUMO.md is stale" <<< "$output" \
+    && grep -qF "alpha/REF.pt-BR.md is stale" <<< "$output"; then
+  ok "RESUMO.md and twin reported stale"
+else
+  bad "expected RESUMO and twin stale"; grep FAIL <<< "$output" >&2
 fi
 
 if [[ $failures -eq 0 ]]; then
