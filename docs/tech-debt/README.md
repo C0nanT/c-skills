@@ -7,7 +7,7 @@ One row per module, maintained by the `tech-debt-map` skill. The partition below
 | Engineering skills | `skills/engineering/**` | declared | 2026-10-03 | `.scratch/tech-debt-map/engineering-skills/2026-10-03.md` | 0 |
 | Docs | `docs/**` | proposed | never | | |
 | In-progress skills | `skills/in-progress/**` | declared | never | | |
-| Plugin and tooling | `scripts/**`, `.claude-plugin/**`, `.github/**`, `.changeset/**`, `*.sh` (repo root), `.agents/local-skills/**` | proposed | never | | |
+| Plugin and tooling | `scripts/**`, `.claude-plugin/**`, `.github/**`, `*.sh` (repo root), `.agents/local-skills/**` | proposed | never | | |
 | Productivity skills | `skills/productivity/**` | declared | never | | |
 | Agent standards | `.agents/*.md`, `.agents/adr/**`, `CLAUDE.md`, `GLOSSARY.md`, `AGENTS.md` | proposed | never | | |
 | Misc skills | `skills/misc/**` | declared | never | | |
