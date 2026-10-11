@@ -44,3 +44,5 @@ Usadas pelo `/wayfinder`. O **mapa** é uma única issue com issues **filhas** c
 - **Consulta da fronteira**: `glab issue list -O json` restrito aos filhos do mapa, descartando qualquer um com bloqueador aberto: um link nativo `blocked_by` para uma issue aberta (`glab api projects/:id/issues/<child-iid>/links`), ou uma issue aberta na linha `Blocked by`, ou com responsável; vence o primeiro na ordem do mapa.
 - **Reivindicar**: `glab issue update <n> --assignee @me`, a primeira escrita da sessão.
 - **Resolver**: `glab issue note <n> --message "<answer>"`, depois `glab issue close <n>`, depois acrescente um ponteiro de contexto (resumo + link) às Decisions-so-far do mapa.
+
+<!-- aligned-with: sha256:3b36851681453f96beefe3554a1d296f8f740e9fa84b83381788b60acca2bcd5 -->

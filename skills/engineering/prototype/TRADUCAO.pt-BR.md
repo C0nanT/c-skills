@@ -24,3 +24,5 @@ Os dois branches produzem artefatos muito diferentes, então errar a escolha des
 4. **Dispense o acabamento.** Sem testes, sem tratamento de erros além do necessário para torná-lo _executável_, sem abstrações. O objetivo é aprender algo rápido.
 5. **Mostre o estado.** Depois de cada ação (lógica) ou a cada troca de variação (UI), imprima ou renderize o estado completo relevante para que o usuário veja o que mudou.
 6. **Registre ao terminar.** Incorpore as decisões validadas ao código real e, em seguida, registre o próprio protótipo como **fonte primária**: faça commit dele em um branch descartável, fora da main, e deixe uma referência de contexto para esse branch na issue de implementação. Registre também a resposta (o veredito e a pergunta que ele resolveu) na issue ou em um commit. A branch main mantém apenas a decisão validada.
+
+<!-- aligned-with: sha256:714de632d116bb73f65cdb5a882db15b9369a6713b9a47c0fad827848f0bfbe3 -->

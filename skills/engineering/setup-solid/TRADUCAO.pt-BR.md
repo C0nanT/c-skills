@@ -104,3 +104,5 @@ Diga ao usuário:
 - **Que isso mudou o comportamento de outras skills.** O `/review-axes` trata um padrão documentado do repositório como vencendo a própria linha de base, então, daqui para frente, ele aponta diffs que quebram estes itens, citando esta seção; o `/implement` os lê ao escrever código. Se isso for mais rígido do que eles querem, este é o momento de suavizar um item.
 
 Rodar esta skill de novo só é necessário para remodelar a própria seção; editá-la diretamente também está bem.
+
+<!-- aligned-with: sha256:bddbf9031ac2dd52815dafdb406e4126820df137cbcd18dc711fb9897216cb82 -->

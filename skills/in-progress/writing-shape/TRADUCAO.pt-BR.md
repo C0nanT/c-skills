@@ -77,3 +77,5 @@ Acrescente ao arquivo do artigo à medida que cada bloco for acordado. Releia o 
 - Publicar, formatar para uma plataforma específica ou acrescentar frontmatter que o usuário não pediu.
 
 </informações-de-apoio>
+
+<!-- aligned-with: sha256:f5e6c57bdd85178ace4a260c92f46da6b64ddee18215b461d875739c68976f72 -->

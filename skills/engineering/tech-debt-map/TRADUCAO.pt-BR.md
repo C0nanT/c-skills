@@ -161,3 +161,5 @@ Depois, diga ao usuário o caminho do relatório e as três primeiras linhas, e 
 - **As estratégias preservam o comportamento** e são incrementais: algo que uma pessoa consegue fazer em uma sentada, sem congelar nada. Quando um achado realmente exigir uma reescrita, diga isso e diga o que ela compra.
 - **A partição é um contrato.** Depois que o nome e os globs de um módulo estiverem no índice, toda revisão posterior é medida contra eles. Corte com cuidado na primeira vez, e quando um corte se revelar errado, renomeie-o pelo passo 1 em vez de traçar discretamente uma nova linha.
 - Respeite as convenções e as restrições existentes do repositório, inclusive as que você teria escolhido de outro jeito.
+
+<!-- aligned-with: sha256:9127eb4e7cdde8467876aba6035277b7daff829b824fe02b9771c47320939cdb -->

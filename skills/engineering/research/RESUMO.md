@@ -7,3 +7,5 @@
 **Como invocar:** `/research`, ou o agente pode chamá-la sozinho quando a tarefa for uma pesquisa (sem `disable-model-invocation`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:3d582ea37be32507b97c6eaf5e6f7e7228a8debc26b0c3c103fcb60d8bcf7db4 -->

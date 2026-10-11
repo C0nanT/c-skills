@@ -51,3 +51,5 @@ _Por que isso importa: decide se provisionamos para picos de tráfego agora ou a
 Uma pergunta final que pega tudo: há algo que não perguntamos e que deveríamos saber?
 
 </questionnaire-template>
+
+<!-- aligned-with: sha256:4aa31c576e8ea749b8e1b599f7b1bc0f63ee2eaaf3605ee766d8ee0735890d64 -->

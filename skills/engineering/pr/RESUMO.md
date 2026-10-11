@@ -7,3 +7,5 @@
 **Como invocar:** o agente a chama sozinho ao escrever um PR (sem `disable-model-invocation`). Não há um comando `/pr` separado para o usuário.
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução), `CREDITS.md` (créditos da origem, mantido em inglês) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:ab63f1cf78647389edcd386c9427c5dfca27ed2836930c24773ffee834c19bcd -->

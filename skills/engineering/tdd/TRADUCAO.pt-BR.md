@@ -42,3 +42,5 @@ Quando o formato dessa interface é em si uma dúvida (quão profundo é o módu
 - **Vermelho antes de verde.** Escreva primeiro o teste que falha, depois apenas o código suficiente para fazê-lo passar. Não antecipe testes futuros nem adicione funcionalidades especulativas.
 - **Uma fatia por vez.** Um seam, um teste, uma implementação mínima por ciclo.
 - **Refatorar não faz parte do ciclo.** Ele pertence à etapa Refactor da skill `implement`, e não ao ciclo de implementação vermelho → verde.
+
+<!-- aligned-with: sha256:fe26cf06dea2522e1d3e0f9a08d737e3e83fb8014bac99d68c32e46d95b41598 -->

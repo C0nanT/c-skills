@@ -43,3 +43,5 @@ Por fim, crie ambientes (e bases de código) que obedeçam à regra de **"sem ga
 - Qualquer desvio das convenções deve ser corrigido proativamente, antes de o trabalho de funcionalidade ser concluído
 
 Seja implacável em melhorar o ambiente. Use cada mensagem do usuário como pretexto para procurar essas melhorias.
+
+<!-- aligned-with: sha256:6cc6e47ab5022f3e45e5be0fedbb0f6e645f4f0190d6b0c51c7cd60c2d7c1d98 -->

@@ -72,3 +72,5 @@ Esta skill fica em `~/.claude/skills`, então uma redefinição completa do Clau
   # inside Claude Code:
   /plugin install conan-mods --marketplace C0nanT/conan-mods
   ```
+
+<!-- aligned-with: sha256:47df85f3a57c3c12ef6cb36a6ccf8db436309f1225f4800e9e088f121dc52bf2 -->

@@ -7,3 +7,5 @@
 **Como invocar:** `/to-questionnaire`. É uma skill só para o usuário (`disable-model-invocation: true`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:4aa31c576e8ea749b8e1b599f7b1bc0f63ee2eaaf3605ee766d8ee0735890d64 -->

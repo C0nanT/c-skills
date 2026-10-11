@@ -53,3 +53,5 @@ Toda jogada exceto **Continuar** transforma uma **fonte primária** em uma **fon
 ## Estas são decisões de julgamento
 
 As perguntas não são objetivas: cada uma tem um pouco de gosto pessoal, e o mesmo limite pode ir para dois lados em dois dias diferentes. O valor está em fazê-las **na ordem**, no limite, e não no meio do trabalho.
+
+<!-- aligned-with: sha256:a8aa20158609ef39e2b308b6ba0660c91066838d07a867202e63a7744a88a3ed -->

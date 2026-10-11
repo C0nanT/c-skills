@@ -7,3 +7,5 @@
 **Como invocar:** `/tech-debt-map`. É uma skill só para o usuário (`disable-model-invocation: true`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução), `AXES.md` / `AXES.pt-BR.md` (eixos e rubricas, em inglês e em português) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:9127eb4e7cdde8467876aba6035277b7daff829b824fe02b9771c47320939cdb -->

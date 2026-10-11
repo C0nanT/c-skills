@@ -7,3 +7,5 @@
 **Como invocar:** `/setup-devcontainer`. É uma skill só para o usuário (`disable-model-invocation: true`). Está em `in-progress/`, ou seja, é beta.
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução), `REFERENCE.md` / `REFERENCE.pt-BR.md` (raciocínio das montagens, tabela de falhas e anti-padrões, em inglês e em português) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:93cc1af27e36934c4bc3ac827b9df16d765c799878d07e9458c7c586caae08e9 -->

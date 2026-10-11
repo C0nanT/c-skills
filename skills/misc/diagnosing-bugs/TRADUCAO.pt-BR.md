@@ -136,3 +136,5 @@ Obrigatório antes de declarar concluído:
 - [ ] Toda instrumentação `[DEBUG-...]` foi removida (`grep` no prefixo)
 - [ ] Protótipos descartáveis apagados (ou movidos para um local de depuração claramente marcado)
 - [ ] A hipótese que se revelou correta está declarada na mensagem do commit / PR, para que o próximo depurador aprenda com ela
+
+<!-- aligned-with: sha256:849198df88cdb65fd0d97236604c1fca7ff2f22d2f705f9724a800d0266b118d -->

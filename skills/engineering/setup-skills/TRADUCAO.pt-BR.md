@@ -229,3 +229,5 @@ Escreva também `docs/agents/git-guardrails.md` a partir do modelo-semente.
 Diga ao usuário que a configuração está completa e quais skills de engenharia passarão a ler estes arquivos. Se os guardrails de git foram adicionados, aponte para `.claude/settings.json` → `permissions.deny` (não para hooks). Mencione que ele pode editar `docs/agents/*.md` e a lista de negações diretamente depois: rodar esta skill de novo só é necessário se ele quiser trocar de issue tracker, atualizar as regras de negação ou recomeçar do zero.
 
 Depois, recomende, sem executar: a skill complementar `/setup-solid` escreve uma seção SOLID no `CLAUDE.md`, no nível de arquitetura, independente de linguagem e delimitada pela regra do escoteiro, de modo que SOLID se aplique ao código novo e ao código que cada mudança já toca, em vez de disparar uma refatoração do repositório inteiro. É o padrão de código para o qual os fluxos de engenharia depois constroem. Deixe para o usuário digitar.
+
+<!-- aligned-with: sha256:877e61e41cbe4095167a75cafbeddbb0c22b27bce5db1a1490ec0f7e9c7186f6 -->

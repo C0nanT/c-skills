@@ -262,3 +262,5 @@ O que esta skill existe para evitar:
 - Escrever alvos `test` / `lint` / `proto` antes de existir o código que eles rodam → o primeiro uso do Makefile é uma falha.
 - Trazer testcontainers quando os testes já rodam dentro da rede do Compose.
 - Fixar uma tag de imagem que você nunca verificou que existe → a falha aparece no `up`, depois que todo o resto já foi escrito.
+
+<!-- aligned-with: sha256:ff94a9db9e739919f241b831eee66e48d29dd56a42f38123136f208c92be9df5 -->

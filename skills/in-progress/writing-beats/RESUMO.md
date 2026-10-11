@@ -7,3 +7,5 @@
 **Como invocar:** `/writing-beats`. É uma skill só para o usuário (`disable-model-invocation: true`). Está em `in-progress/`, ou seja, é beta.
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:a96abafa2372eede8267d770138b322d6125da8adaa7ccf0a5e08e4ee13ee71e -->

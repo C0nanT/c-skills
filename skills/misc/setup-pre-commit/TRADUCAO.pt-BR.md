@@ -89,3 +89,5 @@ Isso vai passar pelos novos hooks de pre-commit: um bom teste de fumaça de que 
 - Arquivos de hook do Husky v9+ não precisam de shebang
 - `prettier --ignore-unknown` pula arquivos que o Prettier não consegue interpretar (imagens etc.)
 - O pre-commit roda primeiro o lint-staged (rápido, só os arquivos staged) e depois o typecheck e os testes completos
+
+<!-- aligned-with: sha256:cff1e45d792f0609451fcc85204250f54349a2a4d4c24025a1c2e1db802b25bc -->

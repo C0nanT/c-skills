@@ -32,3 +32,5 @@ Usadas pelo `/wayfinder`. O **mapa** é um arquivo com um arquivo **filho** por 
 ## Funcionalidades concluídas
 
 Uma pasta de funcionalidade concluída é movida inteira para `docs/archive/<feature-slug>/` (veja `docs/archive/README.md`). Rode `/archive-feature` para chegar lá: ele define a especificação e os tickets como `done` e faz o `git mv`.
+
+<!-- aligned-with: sha256:d1a146065b4e6e833b226f9f3ba3014def088167434c553b8fdac5549002234c -->

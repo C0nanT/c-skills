@@ -75,3 +75,5 @@ Os passos 2 a 6 acima são os mesmos usados em uma execução de funcionalidade 
 ## 7. Relatório
 
 Termine com um relatório. Para uma execução sem argumento, uma entrada por funcionalidade, mais as pastas ignoradas. Por funcionalidade: a funcionalidade arquivada e o novo caminho dela, quais tickets foram marcados como `done`, quais foram mantidos como estavam e por quê, e se uma nota `## Comments` foi adicionada. Se uma funcionalidade ou a execução parou (tracker remoto, destino existente, usuário optou por parar ou deixou de fora, sem especificação, `git mv` falhou), diga o motivo. Lembre o usuário de que os arquivos movidos e editados estão staged ou modificados, mas não commitados.
+
+<!-- aligned-with: sha256:af14e872a992ab94f19aa0fd4a9b34346cd087b579317eb5b214eaaa90d53f50 -->

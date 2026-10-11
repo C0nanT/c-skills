@@ -7,3 +7,5 @@
 **Como invocar:** `/to-spec`. É uma skill que o agente também pode chamar sozinho (sem `disable-model-invocation`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:d5feb908b9fecb03482437a72b443a032ee3e2d4b8ec0b82986405f0c44c0060 -->
