@@ -12,7 +12,7 @@ failures=0
 ok() { echo "  ok:   $*"; }
 bad() { echo "  FAIL: $*" >&2; failures=$((failures + 1)); }
 
-SENTENCE="$(grep -m1 -oP "^UNTRUSTED_SENTENCE='\K[^']+(?=')" "$HERE/scripts/validate.sh")"
+SENTENCE="$(grep -m1 -oP "^UNTRUSTED_SENTENCE='\K[^']+(?=')" "$HERE/scripts/checks/lib.sh")"
 SKILLS=(alpha review-mr review-axes research setup-skills wizard)
 
 write_skill() { # $1 = repo, $2 = name
@@ -27,6 +27,7 @@ build_fixture() { # $1 = repo dir
   local r="$1" s
   mkdir -p "$r/scripts" "$r/.claude-plugin"
   cp "$HERE/scripts/validate.sh" "$r/scripts/validate.sh"
+  cp -r "$HERE/scripts/checks" "$r/scripts/checks"
   cp "$HERE/.markdownlint.jsonc" "$r/.markdownlint.jsonc"
   for s in alpha review-mr review-axes research; do
     write_skill "$r" "$s"
