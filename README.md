@@ -19,10 +19,10 @@ Prefere um bundle só-leitura no Claude Code? Use o plugin (escolha um dos dois,
 
 ### Hooks
 
-Os hooks vêm do plugin `conan-mods`, do projeto separado [claude-hooks](https://github.com/C0nanT/claude-hooks). Dentro do Claude Code:
+Os hooks vêm do plugin `conan-mods`, do projeto separado [conan-mods](https://github.com/C0nanT/conan-mods). Dentro do Claude Code:
 
 ```text
-/plugin install conan-mods --marketplace C0nanT/claude-hooks
+/plugin install conan-mods --marketplace C0nanT/conan-mods
 ```
 
 Atualizar: `claude plugin update conan-mods` e depois `/reload-plugins`.
@@ -47,7 +47,7 @@ Ligar/desligar uma função, valendo na hora e para todas as sessões do PC:
 /conan-mods git-guard on
 ```
 
-Vindo dos hooks antigos via npm? Rode a limpeza antes, veja o [MIGRATING.md](https://github.com/C0nanT/claude-hooks/blob/main/MIGRATING.md).
+Vindo dos hooks antigos via npm? Rode a limpeza antes, veja o [MIGRATING.md](https://github.com/C0nanT/conan-mods/blob/main/MIGRATING.md).
 
 ## Desinstalar
 

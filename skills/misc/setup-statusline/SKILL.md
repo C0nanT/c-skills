@@ -51,7 +51,7 @@ rm -f "$HOME/.claude/statusline-command.sh" \
 Tell the user to run, inside Claude Code:
 
 ```text
-/plugin install conan-mods --marketplace C0nanT/claude-hooks
+/plugin install conan-mods --marketplace C0nanT/conan-mods
 ```
 
 Already installed: `claude plugin update conan-mods`, then `/reload-plugins`.

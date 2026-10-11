@@ -65,12 +65,12 @@ The plugin is a read-only bundle you subscribe to. skills.sh writes files you ow
 
 ## Hooks
 
-Hooks are not part of this repo. They ship as the `conan-mods` plugin from [C0nanT/claude-hooks](https://github.com/C0nanT/claude-hooks), installed separately on either route.
+Hooks are not part of this repo. They ship as the `conan-mods` plugin from [C0nanT/conan-mods](https://github.com/C0nanT/conan-mods), installed separately on either route.
 
 <canonical-block name="hooks">
 
 ```text
-/plugin install conan-mods --marketplace C0nanT/claude-hooks
+/plugin install conan-mods --marketplace C0nanT/conan-mods
 ```
 
 Update with `claude plugin update conan-mods`, then `/reload-plugins`. Remove with `/plugin uninstall conan-mods`.

@@ -22,7 +22,7 @@ O resto do `settings.json` fica intacto.
 ## Instalar o plugin
 
 ```text
-/plugin install conan-mods --marketplace C0nanT/claude-hooks
+/plugin install conan-mods --marketplace C0nanT/conan-mods
 ```
 
 Já instalado: `claude plugin update conan-mods` e depois `/reload-plugins`.

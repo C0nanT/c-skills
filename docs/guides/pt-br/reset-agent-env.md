@@ -71,5 +71,5 @@ bash ~/.claude/skills/reset-agent-env/scripts/reset-agent-env.sh --hard --agent 
   ```bash
   npx skills@latest add C0nanT/skills
   # dentro do Claude Code:
-  /plugin install conan-mods --marketplace C0nanT/claude-hooks
+  /plugin install conan-mods --marketplace C0nanT/conan-mods
   ```

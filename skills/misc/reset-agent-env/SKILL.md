@@ -81,5 +81,5 @@ using it again.
   ```bash
   npx skills@latest add C0nanT/skills
   # inside Claude Code:
-  /plugin install conan-mods --marketplace C0nanT/claude-hooks
+  /plugin install conan-mods --marketplace C0nanT/conan-mods
   ```
