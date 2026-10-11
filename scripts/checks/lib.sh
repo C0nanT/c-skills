@@ -26,6 +26,29 @@ is_unpromoted() {
   return 1
 }
 
+# ── pt-BR translation markers ────────────────────────────────────────────────
+# A translation ends with `<!-- aligned-with: sha256:<hex> -->`, the hash of
+# the English file it was last aligned with.
+MARKER_RE='^<!-- aligned-with: sha256:([0-9a-f]{64}) -->$'
+
+# English source of a translation file, or nothing if $1 is not one.
+# TRADUCAO.pt-BR.md and RESUMO.md -> SKILL.md; <name>.pt-BR.md -> <name>.md.
+translation_source() {
+  local f="$1" dir base
+  dir="$(dirname "$f")"; base="$(basename "$f")"
+  case "$base" in
+    TRADUCAO.pt-BR.md|RESUMO.md) echo "$dir/SKILL.md" ;;
+    *.pt-BR.md) echo "$dir/${base%.pt-BR.md}.md" ;;
+  esac
+}
+
+source_hash() { sha256sum "$1" | cut -d' ' -f1; }
+
+# Hash recorded in a translation, empty if it has no marker.
+recorded_hash() {
+  { grep -oE "$MARKER_RE" "$1" || true; } | tail -n1 | sed -E 's/.*sha256:([0-9a-f]+).*/\1/'
+}
+
 errors=0
 fail() {
   echo "  FAIL: $*" >&2

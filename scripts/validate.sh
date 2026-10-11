@@ -20,6 +20,7 @@ CHECKS=(
   spec-file-name
   stale-router
   untrusted-data
+  stale-translation
 )
 
 count_file="$(mktemp)"
