@@ -7,3 +7,5 @@
 **Como invocar:** `/review-axes`, com um ponto fixo e, opcionalmente, o caminho do ticket. Pode ser chamada pelo agente (sem `disable-model-invocation`), por exemplo pelo `/implement`.
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:b283e0bbd5af23dc1a8aaafd10a4f7c509b232634d8e432286317613bd1a1a5e -->

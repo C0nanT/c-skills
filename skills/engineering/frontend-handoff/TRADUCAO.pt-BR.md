@@ -140,3 +140,5 @@ Workarounds do frontend que uma mudança no backend costuma aposentar. Cada um, 
 - uma tela congelada porque um estado apenas parece terminal
 - recálculo no cliente de uma regra que o backend agora devolve
 - um cache que serve estado derivado desatualizado depois de uma mutação
+
+<!-- aligned-with: sha256:fc43a628db9ed185ebc4cb04cd9ba630f120b7aa7df1dccf657d8c60913ff8da -->

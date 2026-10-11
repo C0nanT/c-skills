@@ -7,3 +7,5 @@
 **Como invocar:** `/delegate-tickets`. É uma skill só para o usuário (`disable-model-invocation: true`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:3f82198a35dd98908bb68d9602c958d3783ea6fda639e008606842e454f5721d -->

@@ -41,3 +41,5 @@ Os **subagentes implementadores** devem rodar em segundo plano sempre que possí
    Em um tracker local em markdown, resolver um ticket significa marcar o arquivo dele no checkout principal (não em um worktree): troque cada critério de aceitação que o branch de integração implementa para `- [x]`, com base no relatório de Spec do passo 7 e no trabalho mesclado do ticket, deixe os não atendidos como `- [ ]` e defina `Status: ready-for-human` quando todas as caixas estiverem marcadas. Um ticket com alguma caixa desmarcada mantém o status e é listado no relatório. É isso que o `/archive-feature` verifica antes de arquivar a funcionalidade.
 
 10. Limpe todos os worktrees dos **subagentes implementadores**.
+
+<!-- aligned-with: sha256:f69455888c22472ddac7fc4990442f6e7c177488f8e147727c63ef4e6984af1d -->

@@ -7,3 +7,5 @@
 **Como invocar:** `/implement-spec`. É uma skill só para o usuário (`disable-model-invocation: true`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`. Usa as skills `tdd` e `review-axes`, além de `/archive-feature`.
+
+<!-- aligned-with: sha256:f69455888c22472ddac7fc4990442f6e7c177488f8e147727c63ef4e6984af1d -->

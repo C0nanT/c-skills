@@ -110,3 +110,5 @@ O conjunto completo de variantes é a fonte primária, então ele vai para o bra
 - **Compartilhar código demais entre variantes.** Um `<Header>` compartilhado é aceitável; um `<Layout>` compartilhado anula o objetivo. Cada variante precisa ser livre para descartar o layout.
 - **Conectar as variantes a mutações reais.** Protótipos somente leitura são aceitáveis. Se uma variante precisar mutar, aponte-a para um stub: a pergunta é "como isto deveria parecer", não "o backend funciona".
 - **Promover o protótipo diretamente para produção.** O código das variantes foi escrito sob as restrições do protótipo (sem testes, tratamento de erro mínimo). Reescreva-o direito ao incorporá-lo.
+
+<!-- aligned-with: sha256:723211e878acbc7b6ff09755263f3295cde724ba902ff0064da41eed51d45ad3 -->

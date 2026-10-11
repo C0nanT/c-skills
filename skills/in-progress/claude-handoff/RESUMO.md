@@ -7,3 +7,5 @@
 **Como invocar:** `/claude-handoff`. É uma skill só para o usuário (`disable-model-invocation: true`). Está em `in-progress/`, ou seja, é beta e ainda não faz parte do plugin.
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:79357a18425d66d4c24048bedf83dceb79d3bba356f38014950f764a7fab4026 -->

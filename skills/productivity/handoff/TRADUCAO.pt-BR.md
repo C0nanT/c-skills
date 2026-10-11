@@ -14,3 +14,5 @@ Não repita conteúdo já registrado em outros artefatos (especificações, plan
 Redija qualquer informação sensível, como chaves de API, senhas ou dados pessoais identificáveis.
 
 Se o usuário passar argumentos, trate-os como a descrição do foco da próxima sessão e adapte o documento a isso.
+
+<!-- aligned-with: sha256:4cbb043950dad2ffd3662ff1a5a0b51ae676004b5cae10e3787e8ee7a4ee69d3 -->

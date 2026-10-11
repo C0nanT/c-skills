@@ -7,3 +7,5 @@
 **Como invocar:** `/writing-fragments`. É uma skill só para o usuário (`disable-model-invocation: true`). Está em `in-progress/`, ou seja, é beta.
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:298b0edd23df229183630de592ed8aa4289233560f2040691f6eb77caeaad4ea -->

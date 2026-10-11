@@ -7,3 +7,5 @@
 **Como invocar:** `/implement`, ou o agente pode chamá-la sozinho quando você pedir para implementar um trabalho pronto (sem `disable-model-invocation`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:86dc9c7a45e21e906d811c4cdb3f28108903b861ceefa5b4dd62e618a8815c7c -->

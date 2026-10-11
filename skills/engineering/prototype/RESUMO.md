@@ -7,3 +7,5 @@
 **Como invocar:** `/prototype`, ou o agente pode chamá-la sozinho quando a tarefa for um protótipo de design (sem `disable-model-invocation`).
 
 **Arquivos:** `SKILL.md` (original em inglês) e `TRADUCAO.pt-BR.md` (tradução), além de `LOGIC.md` / `LOGIC.pt-BR.md` (caminho de lógica), `UI.md` / `UI.pt-BR.md` (caminho de UI) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:714de632d116bb73f65cdb5a882db15b9369a6713b9a47c0fad827848f0bfbe3 -->

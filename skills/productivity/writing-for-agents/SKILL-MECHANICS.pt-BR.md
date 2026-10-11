@@ -20,3 +20,5 @@ O corte por invocação da divisão (o corte por sequência está em `TRADUCAO.p
 ## Skills roteadoras
 
 Quando as skills invocadas pelo usuário se multiplicam além do que você consegue lembrar, essa carga cognitiva acumulada é curada por uma **skill roteadora**: uma skill invocada pelo usuário que nomeia as outras e indica quando usar cada uma, para que o humano tenha uma skill para lembrar em vez de muitas. Ela só pode sugerir, nunca disparar: skills invocadas pelo usuário não têm descrição, então nada além do humano consegue alcançá-las.
+
+<!-- aligned-with: sha256:c768e6307c7c10728c401c213f2c4ba71c542127eeb7ad2956aabd15a0fa0059 -->

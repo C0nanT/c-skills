@@ -49,3 +49,5 @@ Se o conceito de que você precisa ainda não estiver no glossário, isso é um 
 Se a sua saída contradisser um ADR existente, traga isso à tona explicitamente, em vez de sobrescrevê-lo em silêncio:
 
 > _Contradicts ADR-0007 (event-sourced orders), but worth reopening because…_
+
+<!-- aligned-with: sha256:19faf80536ccc91c783ee0fe773fb5b745f74273bc182e5087c42ed6b4de6e37 -->

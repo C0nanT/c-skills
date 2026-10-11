@@ -64,3 +64,5 @@ Se já estiver instalado: `claude plugin update conan-mods`, depois `/reload-plu
 ```
 
 O relógio de reinício usa o fuso horário local da máquina. Se a detecção automática estiver errada, defina `STATUSLINE_TZ` (nome IANA, por exemplo `America/Sao_Paulo`) em `env` no `~/.claude/settings.json`.
+
+<!-- aligned-with: sha256:9c5c65c2b4262d07400f306645961d548355b8f199f0e485a3bd1dcd0a62db5c -->

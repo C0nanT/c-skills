@@ -7,3 +7,5 @@
 **Como invocar:** `/frontend-handoff`, com a mudança como argumento. É uma skill só para o usuário (`disable-model-invocation: true`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:fc43a628db9ed185ebc4cb04cd9ba630f120b7aa7df1dccf657d8c60913ff8da -->

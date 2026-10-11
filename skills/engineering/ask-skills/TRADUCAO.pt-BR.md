@@ -89,3 +89,5 @@ Fora do fluxo principal.
 
 - **`/setup-skills`**: rode antes do seu primeiro fluxo de engenharia para configurar o issue tracker, os rótulos de triagem, a organização dos documentos e as regras de negação do `.claude/settings.json` do projeto para git destrutivo. Trackers de issues customizados também funcionam.
 - **`/setup-solid`**: opcional, uma vez por repositório. Escreve uma seção SOLID no `CLAUDE.md` que vincula todos os fluxos seguintes: no nível de arquitetura, independente de linguagem, e delimitada pela **regra do escoteiro** (boy scout rule). SOLID se aplica ao código novo e ao código que uma mudança já toca, então a base de código converge uma mudança por vez. Enquanto o `/improve-codebase-architecture` encontra uma refatoração a _fazer_, esta define o padrão com que o código é _escrito_.
+
+<!-- aligned-with: sha256:fbae0616e0a03b0724f55fbd0b79809548abe47454035061a622b63d385411bb -->

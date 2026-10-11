@@ -7,3 +7,5 @@
 **Como invocar:** `/grilling`, ou o agente pode chamá-la sozinho quando você pedir para ser questionado sobre um plano (sem `disable-model-invocation`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:f21becdaf62ba829a510f38dac90bc4f54ad90533b325dc3eca17e75253d67f2 -->

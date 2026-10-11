@@ -7,3 +7,5 @@
 **Como invocar:** `/grill-with-docs`. É uma skill só para o usuário (`disable-model-invocation: true`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:5d2d1d964ea9909a7947cbca097eea7a9e986eafaee9859c8fe6dd3bec79ba77 -->

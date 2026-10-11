@@ -7,3 +7,5 @@
 **Como invocar:** o agente a chama sozinho quando você relata um bug (sem `disable-model-invocation`). Você também pode pedir explicitamente com `/diagnosing-bugs`. Está em `misc/`, ou seja, é uma skill de uso raro e não faz parte do plugin.
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução), `scripts/hitl-loop.template.sh` (template de script para loops com humano, não traduzido por ser código) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:849198df88cdb65fd0d97236604c1fca7ff2f22d2f705f9724a800d0266b118d -->

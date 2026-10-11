@@ -7,3 +7,5 @@
 **Como invocar:** `/wait-what`. É uma skill só para o usuário (`disable-model-invocation: true`), o agente não a chama sozinho.
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:d961bb37defd975c539427edb8f450cdbccdcdd552e213c1ece46676a7970905 -->

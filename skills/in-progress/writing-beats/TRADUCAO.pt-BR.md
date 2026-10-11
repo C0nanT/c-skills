@@ -65,3 +65,5 @@ O artigo termina quando a jornada está completa, não quando a pilha acaba. A m
 - Se o usuário disser "rewrite that beat" ou "go back and try a different beat 3", faça: edite no lugar e deixe o resto intocado.
 
 </informações-de-apoio>
+
+<!-- aligned-with: sha256:a96abafa2372eede8267d770138b322d6125da8adaa7ccf0a5e08e4ee13ee71e -->

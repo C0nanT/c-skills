@@ -14,3 +14,5 @@ As skills falam em termos de seis papéis canônicos de triagem. Este arquivo ma
 Quando uma skill mencionar um papel (por exemplo, "aplique o rótulo de triagem pronto para AFK"), use a string de rótulo correspondente desta tabela.
 
 Edite a coluna "Rótulo no nosso tracker" para que corresponda ao vocabulário que você de fato usa.
+
+<!-- aligned-with: sha256:5a7d9abb88b1351009538260b68a237369ec48505bcbd82894eed13f808ae698 -->

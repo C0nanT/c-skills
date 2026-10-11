@@ -16,3 +16,5 @@ Não repita conteúdo já registrado em outros artefatos (especificações, plan
 Redija qualquer informação sensível, como chaves de API, senhas ou dados pessoais identificáveis, já que o resumo se torna o prompt do agente.
 
 Se o usuário passar argumentos, trate-os como a descrição do foco da próxima sessão e adapte o resumo a isso.
+
+<!-- aligned-with: sha256:79357a18425d66d4c24048bedf83dceb79d3bba356f38014950f764a7fab4026 -->

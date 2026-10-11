@@ -307,3 +307,5 @@ Depois, rederive o veredito a partir do estado reconciliado e reescreva o bloco 
 Se o usuário pedir para publicar ("post those three on the MR"), então, para cada comentário, mostre o texto exato e o alvo (arquivo + linha) e espere a aprovação antes de enviar: `glab mr note` / `gh pr review`. Envie apenas o que ele aprovou.
 
 Este é código de outra pessoa, em uma conversa entre pessoas. Um falso positivo publicado em público não é um bug de software, é um custo social que cai sobre o usuário. E um bot que despeja quinze comentários em um MR é exatamente o que faz as equipes desligarem esse tipo de ferramenta.
+
+<!-- aligned-with: sha256:f46b199f793ffd498cd55becb2c41ac13585b47087f717ff649350aa81af39b4 -->

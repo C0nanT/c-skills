@@ -42,3 +42,5 @@ Você tem acesso a vários arquivos no repositório:
 - `CODING_STANDARDS.md`: esse arquivo é lido durante a revisão, não durante a implementação. Adicione **ponteiros de navegação** para pastas de documentação se o arquivo de padrões passar de 1.000 linhas.
 - Documentação: use a documentação como arquivos de referência, apontados por outros arquivos. Procure documentação existente antes de escrever uma nova.
 - Skills: use skills para documentação (já que a descrição delas entra na janela de contexto do agente), ou para comandos invocados pelo usuário. Siga as orientações da skill `writing-for-agents`.
+
+<!-- aligned-with: sha256:e852b653078b8e29046962589c38b65f63055ba2322588b2080b66ae01be4d12 -->

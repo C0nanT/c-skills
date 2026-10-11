@@ -44,3 +44,5 @@ Usadas pelo `/wayfinder`. O **mapa** é uma única issue com issues **filhas** c
 - **Consulta da fronteira**: liste os filhos abertos do mapa (`gh issue list --state open`, restrito às sub-issues / lista de tarefas do mapa), descarte qualquer um com bloqueador aberto (`issue_dependencies_summary.blocked_by > 0`, ou uma issue aberta na linha `Blocked by`) ou com responsável; vence o primeiro na ordem do mapa.
 - **Reivindicar**: `gh issue edit <n> --add-assignee @me`, a primeira escrita da sessão.
 - **Resolver**: `gh issue comment <n> --body "<answer>"`, depois `gh issue close <n>`, depois acrescente um ponteiro de contexto (resumo + link) às Decisions-so-far do mapa.
+
+<!-- aligned-with: sha256:2703118ae760780edbf241e0ed228a52ecb4e77bba1a74497eccf18e6e6f569b -->

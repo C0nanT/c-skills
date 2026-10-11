@@ -7,3 +7,5 @@
 **Como invocar:** `/caveman`, ou o agente pode ativá-la sozinho quando você pedir economia de tokens (sem `disable-model-invocation`). Para desligar, diga "stop caveman" ou "normal mode".
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:b4bb6fe3bf3da222993ca0aee5e7c6f5368b182dd30ce1172e8f8e3280eb7052 -->

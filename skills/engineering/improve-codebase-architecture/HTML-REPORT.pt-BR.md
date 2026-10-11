@@ -121,3 +121,5 @@ Português claro, conciso, mas os substantivos e verbos arquiteturais vêm diret
 **Os bullets de ganhos** nomeiam o ganho com termos do glossário: _"locality: bugs concentrate in one module"_, _"leverage: one interface, N call sites"_, _"interface shrinks; implementation absorbs the wrappers"_. Não escreva _"easier to maintain"_ nem _"cleaner code"_, porque esses termos não estão no glossário e não merecem lugar.
 
 Sem hedging, sem enrolação, sem "vale notar que…". Se uma frase pode ser um bullet, transforme-a em bullet. Se um bullet pode ser cortado, corte-o. Se um termo não está no glossário de arquitetura, procure um que esteja antes de inventar um novo.
+
+<!-- aligned-with: sha256:dcce429bd60903cf5531d007c43ce1b56c015691f9b83648c2c43913c4b7e53d -->

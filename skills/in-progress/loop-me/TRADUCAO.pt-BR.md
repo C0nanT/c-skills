@@ -30,3 +30,5 @@ Uma especificação de fluxo de trabalho está pronta quando um agente implement
 
 - `workflows/*.md`: uma especificação por fluxo de trabalho.
 - `NOTES.md`: anotações brutas sobre o mundo do usuário, as ferramentas que ele usa, os canais que processa e a terminologia própria dele para ambos. Quando estiver vazio ou pobre, entreviste o usuário sobre o mundo dele antes de especificar qualquer coisa. Transforme termos vagos em termos canônicos conforme eles surgirem, e registre-os aqui.
+
+<!-- aligned-with: sha256:e44d1cc3e760fb86ac42964c2a5f1fcac511715db50fb375f3f7be814de1eaa7 -->

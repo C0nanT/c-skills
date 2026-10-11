@@ -34,3 +34,5 @@ Uma negação é um sinal de parada. Relate ao usuário e espere; nunca contorne
 As regras `git -C <dir>` vêm em pares porque um espaço seguido de `*` no fim só casa com o comando nu quando ele é o único curinga da regra. O `*` do meio pode abranger qualquer texto, então um comando somente leitura que apenas menciona um subcomando negado mais adiante (`git -C . log --grep push`) também é negado; rode-o sem `-C`.
 
 Para alterar a lista, edite `.claude/settings.json` → `permissions.deny`.
+
+<!-- aligned-with: sha256:859a6af5ae7eb7cd322bf96ff957894c264a224ea0b73dbd410494dca85ec940 -->

@@ -43,3 +43,5 @@ Mantenha o padrão que o template estabelece: abra a URL antes de pedir o valor 
 - Não execute o script de ponta a ponta você mesmo: ele abre navegadores e fica bloqueado esperando a entrada humana. Em vez disso, verifique estaticamente: cada valor do passo 1 é capturado e cai onde o passo 1 disse, e cada nome de `set_secret` corresponde exatamente a uma referência `secrets.*` no CI.
 - ENV_FILE está no gitignore: o `write_env` da biblioteca pergunta antes da primeira escrita quando ele não está, mas um wizard que define `ENV_FILE` com um caminho não padrão deve apontar para um arquivo que o repositório ignora.
 - Diga ao usuário como executá-lo. Se for um caminho de configuração repetível, faça commit dele e linke-o a partir do README, para que a próxima pessoa execute o script em vez de perguntar a uma IA.
+
+<!-- aligned-with: sha256:53b490247c8e6d791470df03c819421d70c35c57dd4cefe6350f3f3d7594f4e0 -->

@@ -28,3 +28,5 @@ Cada resposta do usuário remodela a árvore: decisões resolvidas empurram a fr
 Encontrar _fatos_ é tarefa sua, nunca do usuário. Quando uma pergunta da fronteira depender de um fato do ambiente (sistema de arquivos, ferramentas etc.), despache um subagente para encontrá-lo; não peça ao usuário nada que você mesmo possa consultar. Não fique bloqueado por isso: uma exploração em andamento é um pré-requisito não resolvido, então apenas as perguntas que dependem dela aguardam o relatório do subagente; faça agora o restante da fronteira. As _decisões_ são do usuário: apresente cada uma a ele e espere.
 
 A sessão termina quando a fronteira estiver vazia: cada ramo da árvore de design foi visitado, e nada foi deixado assumido em silêncio. Não aja com base nela até que o usuário confirme que chegaram a um entendimento compartilhado.
+
+<!-- aligned-with: sha256:f21becdaf62ba829a510f38dac90bc4f54ad90533b325dc3eca17e75253d67f2 -->

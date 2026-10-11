@@ -65,3 +65,5 @@ Quando o protótipo tiver respondido à pergunta, registre a resposta e, em segu
 - **Não misture a lógica com a página.** Se o módulo puro referenciar o DOM, `document` ou handlers de botão, ele deixou de poder ser retirado. Mantenha a página como uma casca fina sobre um módulo puro.
 - **Não recorra a framework, bundler ou servidor.** Um arquivo que o destinatário abre com duplo clique; um app React ou um servidor de desenvolvimento anula o "compartilhável".
 - **Não envie a casca HTML para produção.** A página é otimizada para ser clicada à mão. O módulo de lógica por trás dela é a parte que vale a pena manter.
+
+<!-- aligned-with: sha256:f61c7d249e786a79ef289018901c348271e1798dd0b0bc5607b5c6f4d4a01ab9 -->

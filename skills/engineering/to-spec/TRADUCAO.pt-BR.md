@@ -97,3 +97,5 @@ Uma descrição das coisas que estão fora do escopo desta especificação.
 Quaisquer outras observações sobre a funcionalidade.
 
 </spec-template>
+
+<!-- aligned-with: sha256:d5feb908b9fecb03482437a72b443a032ee3e2d4b8ec0b82986405f0c44c0060 -->

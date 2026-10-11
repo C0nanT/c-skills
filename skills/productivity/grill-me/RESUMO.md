@@ -7,3 +7,5 @@
 **Como invocar:** `/grill-me`, ou o agente pode chamá-la sozinho quando você pedir para ser questionado sobre um plano (sem `disable-model-invocation`).
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
+
+<!-- aligned-with: sha256:7316161c226ed2e86e3a9b5d0114dcc5d13ffcd6b3ded1de4624a297ae0dd41b -->
