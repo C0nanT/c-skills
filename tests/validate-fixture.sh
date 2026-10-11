@@ -12,7 +12,8 @@ failures=0
 ok() { echo "  ok:   $*"; }
 bad() { echo "  FAIL: $*" >&2; failures=$((failures + 1)); }
 
-SENTENCE="$(grep -m1 -oP "^UNTRUSTED_SENTENCE='\K[^']+(?=')" "$HERE/scripts/checks/lib.sh")"
+source "$HERE/scripts/checks/lib.sh"
+SENTENCE="$UNTRUSTED_SENTENCE"
 SKILLS=(alpha review-mr review-axes research setup-skills wizard)
 
 write_skill() { # $1 = repo, $2 = name
@@ -27,7 +28,7 @@ build_fixture() { # $1 = repo dir
   local r="$1" s
   mkdir -p "$r/scripts" "$r/.claude-plugin"
   cp "$HERE/scripts/validate.sh" "$r/scripts/validate.sh"
-  cp "$HERE/scripts/translation-marker.sh" "$r/scripts/translation-marker.sh" 2>/dev/null || true
+  cp "$HERE/scripts/translation-marker.sh" "$r/scripts/translation-marker.sh"
   cp -r "$HERE/scripts/checks" "$r/scripts/checks"
   cp "$HERE/.markdownlint.jsonc" "$r/.markdownlint.jsonc"
   for s in alpha review-mr review-axes research; do
@@ -107,13 +108,18 @@ else
   bad "refresh did not clear failure ($status)"; grep FAIL <<< "$output" >&2
 fi
 
-echo "==> stale RESUMO.md and supporting-doc twin fail; unmarked files are skipped"
+echo "==> unmarked RESUMO.md and twin fail; then stale ones fail"
 multi="$WORK/multi"; cp -r "$fresh" "$multi"
 d="$multi/skills/engineering/alpha"
 printf '# resumo\n' > "$d/RESUMO.md"
 printf '# ref\n' > "$d/REF.md"; printf '# ref pt\n' > "$d/REF.pt-BR.md"
 run_validate "$multi"
-if [[ $status -eq 0 ]]; then ok "unmarked RESUMO.md and twin skipped"; else bad "unmarked files not skipped"; grep FAIL <<< "$output" >&2; fi
+if [[ $status -ne 0 ]] && grep -qF "alpha/RESUMO.md has no aligned-with marker, run: bash scripts/translation-marker.sh refresh" <<< "$output" \
+    && grep -qF "alpha/REF.pt-BR.md has no aligned-with marker" <<< "$output"; then
+  ok "unmarked RESUMO.md and twin fail naming the file"
+else
+  bad "unmarked files did not fail"; grep FAIL <<< "$output" >&2
+fi
 bash "$multi/scripts/translation-marker.sh" refresh "$d/RESUMO.md" > /dev/null
 bash "$multi/scripts/translation-marker.sh" refresh "$d/REF.pt-BR.md" > /dev/null
 echo "edit" >> "$d/REF.md"; echo "edit" >> "$d/SKILL.md"

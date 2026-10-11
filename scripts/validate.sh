@@ -5,23 +5,7 @@ set -uo pipefail
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
 
-CHECKS=(
-  frontmatter
-  readme-public
-  readme-private
-  readme-links
-  bucket-readmes
-  plugin-json
-  bucket-readme-disk
-  markdownlint
-  invocation-mode
-  setup-skills-merge
-  wizard-write-env
-  spec-file-name
-  stale-router
-  untrusted-data
-  stale-translation
-)
+source "$HERE/checks/list.sh"
 
 count_file="$(mktemp)"
 trap 'rm -f "$count_file"' EXIT
