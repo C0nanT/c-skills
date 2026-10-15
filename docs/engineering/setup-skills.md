@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add C0nanT/skills --skill=setup-skills
+npx skills add C0nanT/c-skills --skill=setup-skills
 ```
 
 ```bash
 npx skills update setup-skills
 ```
 
-[Source](https://github.com/C0nanT/skills/tree/main/skills/engineering/setup-skills)
+[Source](https://github.com/C0nanT/c-skills/tree/main/skills/engineering/setup-skills)
 
 ## What it does
 

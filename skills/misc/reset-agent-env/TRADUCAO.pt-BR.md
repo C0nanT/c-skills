@@ -48,7 +48,7 @@ bash ~/.claude/skills/reset-agent-env/scripts/reset-agent-env.sh --hard --agent 
 
 Diga ao usuário o que foi removido. Para `--apply`, informe o caminho do backup e a dica de restauração (mover os arquivos de volta para fora do diretório de backup).
 
-Esta skill fica em `~/.claude/skills`, então uma redefinição completa do Claude Code **remove a própria skill**: reinstale com `npx skills@latest add C0nanT/skills` antes de usá-la de novo.
+Esta skill fica em `~/.claude/skills`, então uma redefinição completa do Claude Code **remove a própria skill**: reinstale com `npx skills@latest add C0nanT/c-skills` antes de usá-la de novo.
 
 ## O que ela toca
 
@@ -68,9 +68,9 @@ Esta skill fica em `~/.claude/skills`, então uma redefinição completa do Clau
 - Depois de redefinir, reinstale para verificar uma configuração limpa:
 
   ```bash
-  npx skills@latest add C0nanT/skills
+  npx skills@latest add C0nanT/c-skills
   # inside Claude Code:
-  /plugin install conan-mods --marketplace C0nanT/conan-mods
+  /plugin install c-mods --marketplace C0nanT/c-mods
   ```
 
-<!-- aligned-with: sha256:47df85f3a57c3c12ef6cb36a6ccf8db436309f1225f4800e9e088f121dc52bf2 -->
+<!-- aligned-with: sha256:3ec35104efebb80f1dda565bb25c3359f4f5fcb72d576b2135cfb45ce8698cfb -->

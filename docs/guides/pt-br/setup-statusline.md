@@ -1,8 +1,8 @@
-# `/setup-statusline`: Migrar a barra de status para o `conan-mods`
+# `/setup-statusline`: Migrar a barra de status para o `c-mods`
 
 ## O que é
 
-A barra de status (modelo, effort, contexto, duração, rate limit e branch git) agora é a função `statusline` do plugin `conan-mods`. A skill não instala mais nada: ela limpa o modelo antigo (script bash + hook shell) e manda instalar o plugin.
+A barra de status (modelo, effort, contexto, duração, rate limit e branch git) agora é a função `statusline` do plugin `c-mods`. A skill não instala mais nada: ela limpa o modelo antigo (script bash + hook shell) e manda instalar o plugin.
 
 ## Como invocar
 
@@ -22,16 +22,16 @@ O resto do `settings.json` fica intacto.
 ## Instalar o plugin
 
 ```text
-/plugin install conan-mods --marketplace C0nanT/conan-mods
+/plugin install c-mods --marketplace C0nanT/c-mods
 ```
 
-Já instalado: `claude plugin update conan-mods` e depois `/reload-plugins`.
+Já instalado: `claude plugin update c-mods` e depois `/reload-plugins`.
 
 ## Ligar/desligar
 
 ```text
-/conan-mods statusline on
-/conan-mods statusline off
+/c-mods statusline on
+/c-mods statusline off
 ```
 
 ## Pré-requisitos

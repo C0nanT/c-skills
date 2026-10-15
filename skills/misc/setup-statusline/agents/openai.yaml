@@ -1,5 +1,5 @@
 interface:
   display_name: "Setup Statusline"
-  short_description: "Replace the old shell status line with conan-mods"
+  short_description: "Replace the old shell status line with c-mods"
 policy:
   allow_implicit_invocation: false

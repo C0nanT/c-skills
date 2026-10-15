@@ -8,4 +8,4 @@
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução), `scripts/reset-agent-env.sh` (script, não traduzido por ser código) e este `RESUMO.md`.
 
-<!-- aligned-with: sha256:47df85f3a57c3c12ef6cb36a6ccf8db436309f1225f4800e9e088f121dc52bf2 -->
+<!-- aligned-with: sha256:3ec35104efebb80f1dda565bb25c3359f4f5fcb72d576b2135cfb45ce8698cfb -->

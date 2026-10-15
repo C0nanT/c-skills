@@ -1,11 +1,11 @@
-# conan-skills
+# c-skills
 
 Coleção de agent skills (comandos `/slash`) para Claude Code. Fork do [repositório do Matt Pocock](https://github.com/mattpocock/skills).
 
 ## Instalar
 
 ```bash
-npx skills@latest add C0nanT/skills
+npx skills@latest add C0nanT/c-skills
 ```
 
 Quando o instalador perguntar quais skills levar, inclua `setup-skills`. Para atualizar, rode `npx skills@latest update`, e rode o `add` de novo para pegar skills novas.
@@ -13,19 +13,19 @@ Quando o instalador perguntar quais skills levar, inclua `setup-skills`. Para at
 Prefere um bundle só-leitura no Claude Code? Use o plugin (escolha um dos dois, nunca ambos, senão cada skill aparece duas vezes):
 
 ```text
-/plugin marketplace add C0nanT/skills
-/plugin install conan-skills@conan-skills
+/plugin marketplace add C0nanT/c-skills
+/plugin install c-skills@c-skills
 ```
 
 ### Hooks
 
-Os hooks vêm do plugin `conan-mods`, do projeto separado [conan-mods](https://github.com/C0nanT/conan-mods). Dentro do Claude Code:
+Os hooks vêm do plugin `c-mods`, do projeto separado [c-mods](https://github.com/C0nanT/c-mods). Dentro do Claude Code:
 
 ```text
-/plugin install conan-mods --marketplace C0nanT/conan-mods
+/plugin install c-mods --marketplace C0nanT/c-mods
 ```
 
-Atualizar: `claude plugin update conan-mods` e depois `/reload-plugins`.
+Atualizar: `claude plugin update c-mods` e depois `/reload-plugins`.
 
 O plugin traz sete funções:
 
@@ -42,12 +42,12 @@ O plugin traz sete funções:
 Ligar/desligar uma função, valendo na hora e para todas as sessões do PC:
 
 ```text
-/conan-mods                  # lista cada função com on/off
-/conan-mods git-guard off
-/conan-mods git-guard on
+/c-mods                  # lista cada função com on/off
+/c-mods git-guard off
+/c-mods git-guard on
 ```
 
-Vindo dos hooks antigos via npm? Rode a limpeza antes, veja o [MIGRATING.md](https://github.com/C0nanT/conan-mods/blob/main/MIGRATING.md).
+Vindo dos hooks antigos via npm? Rode a limpeza antes, veja o [MIGRATING.md](https://github.com/C0nanT/c-mods/blob/main/MIGRATING.md).
 
 ## Desinstalar
 
@@ -61,7 +61,7 @@ npx skills@latest remove --all -g     # todas (escopo global)
 
 Sem `-g`, o comando age no projeto atual. Com `-g`, em `~/.agents/skills/` (e nos symlinks de cada agente).
 
-Hooks: `/plugin uninstall conan-mods`.
+Hooks: `/plugin uninstall c-mods`.
 
 ## Por que estas skills existem
 
@@ -213,13 +213,13 @@ General workflow tools, not code-specific.
 **Model-invoked**
 
 - **[grill-me](./skills/productivity/grill-me/SKILL.md)**: Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved.
-- **[caveman](./skills/productivity/caveman/SKILL.md)**: Ultra-compressed communication mode: drops articles, filler, and pleasantries while keeping full technical accuracy (~75% fewer tokens). Optionally auto-activated each session via the `conan-mods` plugin.
+- **[caveman](./skills/productivity/caveman/SKILL.md)**: Ultra-compressed communication mode: drops articles, filler, and pleasantries while keeping full technical accuracy (~75% fewer tokens). Optionally auto-activated each session via the `c-mods` plugin.
 - **[grilling](./skills/productivity/grilling/SKILL.md)**: Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved. The reusable interview primitive behind `grill-me`, `grill-with-docs`, `wayfinder` and `improve-codebase-architecture`.
 - **[writing-for-agents](./skills/productivity/writing-for-agents/SKILL.md)**: Writing documents for agents: skills, AGENTS.md/CLAUDE.md, and any doc an agent reaches by a pointer.
 
 ### Misc
 
-- **[setup-statusline](./skills/misc/setup-statusline/SKILL.md)**: Remove the old shell status line from `~/.claude` and point to the `conan-mods` plugin, which now draws it.
+- **[setup-statusline](./skills/misc/setup-statusline/SKILL.md)**: Remove the old shell status line from `~/.claude` and point to the `c-mods` plugin, which now draws it.
 
 ## Dev local
 
@@ -228,4 +228,4 @@ General workflow tools, not code-specific.
 ./scripts/sync-upstream.sh  # merge upstream (mattpocock/skills) e remove as skills excluídas deste fork
 ```
 
-Skills que só servem para manter este repositório ficam em `.agents/local-skills/` e são expostas ao Claude Code por um symlink em `.claude/skills/`. Elas não entram no `npx skills@latest add C0nanT/skills`: quem instala as skills não recebe as ferramentas de manutenção do fork. Hoje isso vale para `sync-upstream`.
+Skills que só servem para manter este repositório ficam em `.agents/local-skills/` e são expostas ao Claude Code por um symlink em `.claude/skills/`. Elas não entram no `npx skills@latest add C0nanT/c-skills`: quem instala as skills não recebe as ferramentas de manutenção do fork. Hoje isso vale para `sync-upstream`.

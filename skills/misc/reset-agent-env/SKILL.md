@@ -54,7 +54,7 @@ Tell the user what was removed. For `--apply`, give the backup path and the
 restore hint (move files back out of the backup dir).
 
 This skill lives under `~/.claude/skills`, so a full Claude Code reset **removes
-the skill itself**: reinstall with `npx skills@latest add C0nanT/skills` before
+the skill itself**: reinstall with `npx skills@latest add C0nanT/c-skills` before
 using it again.
 
 ## What it touches
@@ -79,7 +79,7 @@ using it again.
 - After resetting, reinstall to verify a clean setup:
 
   ```bash
-  npx skills@latest add C0nanT/skills
+  npx skills@latest add C0nanT/c-skills
   # inside Claude Code:
-  /plugin install conan-mods --marketplace C0nanT/conan-mods
+  /plugin install c-mods --marketplace C0nanT/c-mods
   ```

@@ -1,12 +1,12 @@
 ```yaml
 name: setup-statusline
-description: Substitua a antiga status line em shell pelo plugin conan-mods
+description: Substitua a antiga status line em shell pelo plugin c-mods
 disable-model-invocation: true
 ```
 
 # Configurar a status line
 
-A status line agora vive no plugin `conan-mods` (função `statusline`): modelo, esforço, uso de contexto, duração da sessão, limite de taxa e branch do git, sem script bash, sem `jq` e sem arquivo de linha de base. Esta skill não instala mais nada. Ela remove da máquina o modelo antigo baseado em shell e aponta para o plugin.
+A status line agora vive no plugin `c-mods` (função `statusline`): modelo, esforço, uso de contexto, duração da sessão, limite de taxa e branch do git, sem script bash, sem `jq` e sem arquivo de linha de base. Esta skill não instala mais nada. Ela remove da máquina o modelo antigo baseado em shell e aponta para o plugin.
 
 ## O que é removido
 
@@ -51,18 +51,18 @@ rm -f "$HOME/.claude/statusline-command.sh" \
 Diga ao usuário para rodar, dentro do Claude Code:
 
 ```text
-/plugin install conan-mods --marketplace C0nanT/conan-mods
+/plugin install c-mods --marketplace C0nanT/c-mods
 ```
 
-Se já estiver instalado: `claude plugin update conan-mods`, depois `/reload-plugins`.
+Se já estiver instalado: `claude plugin update c-mods`, depois `/reload-plugins`.
 
 ### 3. Ative e desative
 
 ```text
-/conan-mods statusline off
-/conan-mods statusline on
+/c-mods statusline off
+/c-mods statusline on
 ```
 
 O relógio de reinício usa o fuso horário local da máquina. Se a detecção automática estiver errada, defina `STATUSLINE_TZ` (nome IANA, por exemplo `America/Sao_Paulo`) em `env` no `~/.claude/settings.json`.
 
-<!-- aligned-with: sha256:9c5c65c2b4262d07400f306645961d548355b8f199f0e485a3bd1dcd0a62db5c -->
+<!-- aligned-with: sha256:4a29da9a4f9728cae9a0dfcccba26584cb36c5060f6c0eadf37054de4c61588c -->

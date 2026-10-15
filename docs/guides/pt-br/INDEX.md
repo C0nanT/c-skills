@@ -55,7 +55,7 @@ Skills mantidas mas raramente usadas.
 | Skill | O que faz |
 |-------|-----------|
 | [setup-pre-commit](./setup-pre-commit.md) | Husky + lint-staged + Prettier como pre-commit |
-| [setup-statusline](./setup-statusline.md) | Limpa a status line shell antiga e aponta para o plugin `conan-mods` |
+| [setup-statusline](./setup-statusline.md) | Limpa a status line shell antiga e aponta para o plugin `c-mods` |
 | [reset-agent-env](./reset-agent-env.md) | Limpa skills, hooks, rules e MCP globais de Claude Code, Cursor, Windsurf e Antigravity (dry-run por padrão) |
 | [diagnosing-bugs](./diagnosing-bugs.md) | Loop de feedback → reproduz → minimiza → hipóteses → instrumenta → fix → regressão |
 

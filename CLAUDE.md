@@ -28,7 +28,7 @@ Install commands are copied verbatim from [.agents/install-block.md](./.agents/i
 
 Skills that only make sense inside this clone (repo maintenance, not end-user work) live in `.agents/local-skills/<skill-name>/`, **not** under `skills/`. `sync-upstream` is the one that lives there today.
 
-Why that path: `npx skills@latest add C0nanT/skills` scans the GitHub tree for `SKILL.md` files under `skills/`, `.claude/skills/`, `.agents/skills/`, and the other agents' skill directories, so anything sitting in one of those is offered to people installing this repo. `.agents/local-skills/` is on none of those lists, so the installer never sees it.
+Why that path: `npx skills@latest add C0nanT/c-skills` scans the GitHub tree for `SKILL.md` files under `skills/`, `.claude/skills/`, `.agents/skills/`, and the other agents' skill directories, so anything sitting in one of those is offered to people installing this repo. `.agents/local-skills/` is on none of those lists, so the installer never sees it.
 
 To make it usable while working in this clone, `.claude/skills/<skill-name>` is a **symlink** into `.agents/local-skills/<skill-name>`. Claude Code follows it and loads the skill as a project skill; git stores it as a single symlink blob whose path does not end in `SKILL.md`, so the installer still sees nothing. `.gitignore` ignores `.claude/` except for those symlinks.
 
