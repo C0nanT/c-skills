@@ -1,12 +1,12 @@
 ---
 name: setup-statusline
-description: Replace the old shell status line with the conan-mods plugin
+description: Replace the old shell status line with the c-mods plugin
 disable-model-invocation: true
 ---
 
 # Setup Status Line
 
-The status line now lives in the `conan-mods` plugin (`statusline` function): model, effort, context usage, session duration, rate limit and git branch, with no bash script, `jq` or baseline file. This skill no longer installs anything. It removes the old shell-based model from the machine and points to the plugin.
+The status line now lives in the `c-mods` plugin (`statusline` function): model, effort, context usage, session duration, rate limit and git branch, with no bash script, `jq` or baseline file. This skill no longer installs anything. It removes the old shell-based model from the machine and points to the plugin.
 
 ## What gets removed
 
@@ -51,16 +51,16 @@ rm -f "$HOME/.claude/statusline-command.sh" \
 Tell the user to run, inside Claude Code:
 
 ```text
-/plugin install conan-mods --marketplace C0nanT/conan-mods
+/plugin install c-mods --marketplace C0nanT/c-mods
 ```
 
-Already installed: `claude plugin update conan-mods`, then `/reload-plugins`.
+Already installed: `claude plugin update c-mods`, then `/reload-plugins`.
 
 ### 3. Toggle
 
 ```text
-/conan-mods statusline off
-/conan-mods statusline on
+/c-mods statusline off
+/c-mods statusline on
 ```
 
 The reset clock uses the machine's local timezone. If auto-detect is wrong, set `STATUSLINE_TZ` (IANA name, e.g. `America/Sao_Paulo`) in `~/.claude/settings.json` `env`.

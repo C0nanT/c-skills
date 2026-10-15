@@ -12,7 +12,7 @@ seria removido e não muda nada até você escolher um modo.
 
 ## Para que serve
 
-- Simular um PC novo para verificar se `npx skills add` / `/plugin install conan-mods` funcionam de ponta a ponta
+- Simular um PC novo para verificar se `npx skills add` / `/plugin install c-mods` funcionam de ponta a ponta
 - Limpar resíduo cross-tool deixado por desinstalações parciais
 - Entregar um ambiente limpo
 
@@ -66,10 +66,10 @@ bash ~/.claude/skills/reset-agent-env/scripts/reset-agent-env.sh --hard --agent 
 - Edições de JSON são cirúrgicas (`del(.hooks)`, `del(.mcpServers)`): modelo, tema
   e demais preferências no `settings.json` são preservados. Esses passos precisam de `jq`.
 - A skill vive em `~/.claude/skills`, então um reset completo do Claude Code **remove
-  a própria skill**: reinstale com `npx skills@latest add C0nanT/skills` depois.
+  a própria skill**: reinstale com `npx skills@latest add C0nanT/c-skills` depois.
 - Reinstale para verificar um setup limpo:
   ```bash
-  npx skills@latest add C0nanT/skills
+  npx skills@latest add C0nanT/c-skills
   # dentro do Claude Code:
-  /plugin install conan-mods --marketplace C0nanT/conan-mods
+  /plugin install c-mods --marketplace C0nanT/c-mods
   ```

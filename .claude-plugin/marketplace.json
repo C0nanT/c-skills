@@ -1,13 +1,13 @@
 {
-  "name": "conan-skills",
+  "name": "c-skills",
   "owner": {
     "name": "Conan Torres",
-    "url": "https://github.com/C0nanT/skills"
+    "url": "https://github.com/C0nanT/c-skills"
   },
   "description": "Engineering and productivity skills for Claude Code, as an installable plugin.",
   "plugins": [
     {
-      "name": "conan-skills",
+      "name": "c-skills",
       "source": "./",
       "description": "Agent skills for real engineering: diagnosis, TDD, architecture review, prototyping, issue workflow and more.",
       "category": "engineering",

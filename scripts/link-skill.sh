@@ -143,7 +143,7 @@ case "$action_arg" in
     unlink)
         rm -f "$CLAUDE_SKILLS/$skill" "$AGENTS_SKILLS/$skill"
         echo "Unlinked: $skill removed from ~/.claude/skills and ~/.agents/skills."
-        echo "Run 'npx skills@latest add C0nanT/skills --skill=$skill' to get the real install back."
+        echo "Run 'npx skills@latest add C0nanT/c-skills --skill=$skill' to get the real install back."
         ;;
     *)
         echo "No action taken."

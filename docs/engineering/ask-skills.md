@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add C0nanT/skills --skill=ask-skills
+npx skills add C0nanT/c-skills --skill=ask-skills
 ```
 
 ```bash
 npx skills update ask-skills
 ```
 
-[Source](https://github.com/C0nanT/skills/tree/main/skills/engineering/ask-skills)
+[Source](https://github.com/C0nanT/c-skills/tree/main/skills/engineering/ask-skills)
 
 ## What it does
 
@@ -28,4 +28,4 @@ The idea `ask-skills` gives you to think with is the **flow**: a path *through* 
 
 ## Where it fits
 
-`ask-skills` is the **router**: the standalone map that sits over the whole set. It never sits *in* a chain; it points *into* every chain. From here you'll most often land on [grill-with-docs](https://aihero.dev/skills-grill-with-docs), the head of the main flow. When even the router's own picture is stale, its [Source](https://github.com/C0nanT/skills/tree/main/skills/engineering/ask-skills) is the map of record.
+`ask-skills` is the **router**: the standalone map that sits over the whole set. It never sits *in* a chain; it points *into* every chain. From here you'll most often land on [grill-with-docs](https://aihero.dev/skills-grill-with-docs), the head of the main flow. When even the router's own picture is stale, its [Source](https://github.com/C0nanT/c-skills/tree/main/skills/engineering/ask-skills) is the map of record.

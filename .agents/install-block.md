@@ -9,7 +9,7 @@ The documented route is skills.sh: it copies the skills into `~/.agents/skills/<
 <canonical-block name="skills-sh">
 
 ```bash
-npx skills@latest add C0nanT/skills
+npx skills@latest add C0nanT/c-skills
 ```
 
 When the installer asks which skills to take, include `setup-skills`. To update, run `npx skills@latest update`, and re-run `add` to pick up new skills.
@@ -21,7 +21,7 @@ Use the single-skill form wherever one skill is named on its own, including the 
 <canonical-block name="skills-sh-one-skill">
 
 ```bash
-npx skills@latest add C0nanT/skills --skill=<name>
+npx skills@latest add C0nanT/c-skills --skill=<name>
 ```
 
 ```bash
@@ -51,11 +51,11 @@ Without `-g` the command acts on the current project; with `-g`, on `~/.agents/s
 <canonical-block name="claude-code-plugin">
 
 ```text
-/plugin marketplace add C0nanT/skills
-/plugin install conan-skills@conan-skills
+/plugin marketplace add C0nanT/c-skills
+/plugin install c-skills@c-skills
 ```
 
-Update with `claude plugin update conan-skills`, then `/reload-plugins`.
+Update with `claude plugin update c-skills`, then `/reload-plugins`.
 
 </canonical-block>
 
@@ -65,14 +65,14 @@ The plugin is a read-only bundle you subscribe to. skills.sh writes files you ow
 
 ## Hooks
 
-Hooks are not part of this repo. They ship as the `conan-mods` plugin from [C0nanT/conan-mods](https://github.com/C0nanT/conan-mods), installed separately on either route.
+Hooks are not part of this repo. They ship as the `c-mods` plugin from [C0nanT/c-mods](https://github.com/C0nanT/c-mods), installed separately on either route.
 
 <canonical-block name="hooks">
 
 ```text
-/plugin install conan-mods --marketplace C0nanT/conan-mods
+/plugin install c-mods --marketplace C0nanT/c-mods
 ```
 
-Update with `claude plugin update conan-mods`, then `/reload-plugins`. Remove with `/plugin uninstall conan-mods`.
+Update with `claude plugin update c-mods`, then `/reload-plugins`. Remove with `/plugin uninstall c-mods`.
 
 </canonical-block>
