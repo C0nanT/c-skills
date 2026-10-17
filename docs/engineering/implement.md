@@ -1,39 +1,39 @@
 ## What it does
 
-`implement` builds work that has already been decided. You point it at a [ticket](https://www.aihero.dev/ai-coding-dictionary/ticket), a [spec](https://www.aihero.dev/ai-coding-dictionary/spec), or the plan you just agreed in the conversation, and it writes the code, drives [tdd](https://aihero.dev/skills-tdd) at the seams, typechecks as it goes, refactors its own diff once the suite is green, runs [review-axes](./review-axes.md) at the end, commits the work to the current branch, and hands you a one-line verdict.
+`implement` builds work that has already been decided. You point it at a ticket, a spec, or the plan you just agreed in the conversation, and it writes the code, drives [tdd](./tdd.md) at the seams, typechecks as it goes, refactors its own diff once the suite is green, runs [review-axes](./review-axes.md) at the end, commits the work to the current branch, and hands you a one-line verdict.
 
-It never reopens the plan. There is no interview, no clarifying round, no proposal of a different approach. Whatever was settled upstream is the input, and the skill's whole job is to turn that into a ready-to-commit diff plus a message. That is what separates it from typing "build this" at a fresh [agent](https://www.aihero.dev/ai-coding-dictionary/agent), which will happily redesign the work while it builds it.
+It never reopens the plan. There is no interview, no clarifying round, no proposal of a different approach. Whatever was settled upstream is the input, and the skill's whole job is to turn that into a ready-to-commit diff plus a message. That is what separates it from typing "build this" at a fresh agent, which will happily redesign the work while it builds it.
 
 ## When to reach for it
 
-Type `/implement`, or let the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) reach for it when a spec or ticket is ready to build. It is model-invoked in both Claude Code and Codex, so other skills such as `delegate-tickets` can call it too. Wherever [ask-skills](./ask-skills.md) or [to-tickets](https://aihero.dev/skills-to-tickets) says "then `/implement` per ticket", that is still the step to take per ticket.
+Type `/implement`, or let the agent reach for it when a spec or ticket is ready to build. It is model-invoked in both Claude Code and Codex, so other skills such as `delegate-tickets` can call it too. Wherever [ask-skills](./ask-skills.md) or [to-tickets](./to-tickets.md) says "then `/implement` per ticket", that is still the step to take per ticket.
 
 Where the work currently lives decides whether this is the right skill:
 
 | The work is… | Reach for |
 | --- | --- |
-| A ticket on the tracker | `/implement #42`, one ticket per [session](https://www.aihero.dev/ai-coding-dictionary/session), [clearing](https://www.aihero.dev/ai-coding-dictionary/clearing) context between tickets |
-| A spec, not yet split up, and the build spans sessions | [to-tickets](https://aihero.dev/skills-to-tickets) first, then `/implement` per ticket |
+| A ticket on the tracker | `/implement #42`, one ticket per session, clearing context between tickets |
+| A spec, not yet split up, and the build spans sessions | [to-tickets](./to-tickets.md) first, then `/implement` per ticket |
 | A spec, and the build is small | `/implement` directly against the spec |
 | Only in the conversation you just had, and it's still small | `/implement` right there, in the same window |
-| Not written down anywhere yet | [grill-with-docs](https://aihero.dev/skills-grill-with-docs), or [grill-me](https://aihero.dev/skills-grill-me) if there's no codebase |
-| One concrete behaviour you want test-first, with no spec | [tdd](https://aihero.dev/skills-tdd) directly |
+| Not written down anywhere yet | [grill-with-docs](./grill-with-docs.md), or [grill-me](../productivity/grill-me.md) if there's no codebase |
+| One concrete behaviour you want test-first, with no spec | [tdd](./tdd.md) directly |
 | Already built, and you want it checked | [review-axes](./review-axes.md) directly |
 
-The same-session case is worth naming because the skill's own first line doesn't cover it. `SKILL.md` says "the spec or tickets", which pushes the [model](https://www.aihero.dev/ai-coding-dictionary/model) to look for a file that doesn't exist. If the plan lives only in the thread, say so when you invoke it.
+The same-session case is worth naming because the skill's own first line doesn't cover it. `SKILL.md` says "the spec or tickets", which pushes the model to look for a file that doesn't exist. If the plan lives only in the thread, say so when you invoke it.
 
 ## Prerequisites
 
 `implement` commits to the branch you are on. Check you are on the branch you want the work on before you start, so the commit lands where you intend.
 
-If the tickets came from [to-tickets](https://aihero.dev/skills-to-tickets), the tracker they live on was configured by [setup-skills](./setup-skills.md). `review-axes` reads the same configuration to find the originating spec at close-out. Local tickets carry a `Spec:` line, and `implement` passes the ticket path along, so inside this chain the review does not depend on search.
+If the tickets came from [to-tickets](./to-tickets.md), the tracker they live on was configured by [setup-skills](./setup-skills.md). `review-axes` reads the same configuration to find the originating spec at close-out. Local tickets carry a `Spec:` line, and `implement` passes the ticket path along, so inside this chain the review does not depend on search.
 
 ## What one run does
 
 A run is seven beats, in order:
 
 1. Read the ticket or spec and work out the seams.
-2. Drive [tdd](https://aihero.dev/skills-tdd) at the pre-agreed seams, one red-green slice at a time.
+2. Drive [tdd](./tdd.md) at the pre-agreed seams, one red-green slice at a time.
 3. Typecheck often, run single test files as it goes.
 4. Run the full test suite once, at the end.
 5. Refactor the run's own diff, only if the suite is green: no behaviour change, no test edits, snapshot first (with `git stash create`, which leaves the index alone), rerun the suite, and restore the snapshot if it went red.
@@ -41,7 +41,7 @@ A run is seven beats, in order:
 7. Commit the work to the current branch.
 8. Give a verdict (🟢 / 🟡 / 🔴).
 
-One run covers one ticket. The tickets [to-tickets](https://aihero.dev/skills-to-tickets) produces are tracer-bullet vertical slices sized to fit a single fresh [context window](https://www.aihero.dev/ai-coding-dictionary/context-window), so the intended rhythm is: clear context, implement one ticket, you commit from the message it wrote, clear again. Each ticket is self-contained, which is what makes the previous ticket's context disposable.
+One run covers one ticket. The tickets [to-tickets](./to-tickets.md) produces are tracer-bullet vertical slices sized to fit a single fresh context window, so the intended rhythm is: clear context, implement one ticket, you commit from the message it wrote, clear again. Each ticket is self-contained, which is what makes the previous ticket's context disposable.
 
 ## Pre-agreed seams
 
@@ -65,7 +65,7 @@ After the full suite is green, `implement` makes one cleanup pass over the code 
 
 **Can I point it at all my tickets at once, or run several in parallel?**
 
-Not with `/implement`: one invocation, one ticket. For a whole spec in one run, use [implement-spec](./implement-spec.md), which gives each ticket on the ready frontier to a [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent) in its own worktree, then merges the results onto one integration branch. Running several `/implement` sessions side by side in one checkout is worse than unsupported. One field report describes a `git commit --amend` in one session landing on another session's commit, a stash vanishing from `refs/stash`, and commits landing on the wrong branch, all in a single afternoon across three issues. The sessions share one working directory, one index, and one HEAD. Users work around this with git worktrees, but `refs/stash` is shared across worktrees too, so worktrees alone do not fix the stash case.
+Not with `/implement`: one invocation, one ticket. For a whole spec in one run, use [implement-spec](./implement-spec.md), which gives each ticket on the ready frontier to a subagent in its own worktree, then merges the results onto one integration branch. Running several `/implement` sessions side by side in one checkout is worse than unsupported. One field report describes a `git commit --amend` in one session landing on another session's commit, a stash vanishing from `refs/stash`, and commits landing on the wrong branch, all in a single afternoon across three issues. The sessions share one working directory, one index, and one HEAD. Users work around this with git worktrees, but `refs/stash` is shared across worktrees too, so worktrees alone do not fix the stash case.
 
 **Can it open a pull request instead of committing?**
 
@@ -79,7 +79,7 @@ Separately, some people deliberately do not want the review inside the run at al
 
 **One ticket burned 150k tokens. Am I using it wrong?**
 
-Probably not. The ticket is more likely too big. A run does codebase exploration, a red-green loop per seam, a full suite, and a review, so a non-trivial ticket exceeding 100k [tokens](https://www.aihero.dev/ai-coding-dictionary/token) is normal rather than a sign something broke. The fix is upstream. Right-size the tickets in [to-tickets](https://aihero.dev/skills-to-tickets) so each fits one fresh window. If a single ticket keeps going over, split it rather than raising the [effort](https://www.aihero.dev/ai-coding-dictionary/effort) level.
+Probably not. The ticket is more likely too big. A run does codebase exploration, a red-green loop per seam, a full suite, and a review, so a non-trivial ticket exceeding 100k tokens is normal rather than a sign something broke. The fix is upstream. Right-size the tickets in [to-tickets](./to-tickets.md) so each fits one fresh window. If a single ticket keeps going over, split it rather than raising the effort level.
 
 **Why did it stop and ask before spawning a subagent?**
 
@@ -110,8 +110,8 @@ The agent resolved `#2` against another numbered list in context, such as a todo
 grill-with-docs → to-spec → to-tickets → implement → review-axes → retro
 ```
 
-Its neighbours are [to-tickets](https://aihero.dev/skills-to-tickets), which produces the tickets it consumes and declares the blocking edges that decide their order; [tdd](https://aihero.dev/skills-tdd), which it drives internally at each seam; and [review-axes](./review-axes.md), which it runs before committing. It sits downstream of the planning skills and trusts them. It does not re-validate the shape of what it was handed, so a badly-structured map or a horizontally-layered ticket gets built as written.
+Its neighbours are [to-tickets](./to-tickets.md), which produces the tickets it consumes and declares the blocking edges that decide their order; [tdd](./tdd.md), which it drives internally at each seam; and [review-axes](./review-axes.md), which it runs before committing. It sits downstream of the planning skills and trusts them. It does not re-validate the shape of what it was handed, so a badly-structured map or a horizontally-layered ticket gets built as written.
 
-That trust is why [wayfinder](https://aihero.dev/skills-wayfinder) merges onto the chain at [to-spec](https://aihero.dev/skills-to-spec) rather than looping its map straight into `implement`. Go straight to `implement` from a map only when the effort turned out small.
+That trust is why [wayfinder](./wayfinder.md) merges onto the chain at [to-spec](./to-spec.md) rather than looping its map straight into `implement`. Go straight to `implement` from a map only when the effort turned out small.
 
 [ask-skills](./ask-skills.md) is the router over the whole set when you are not sure which flow you are in.

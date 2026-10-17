@@ -6,18 +6,18 @@ It grills you about the **send**, never the subject. An interview about the topi
 
 ## When to reach for it
 
-You invoke this by typing `/to-questionnaire`; the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) won't reach for it on its own.
+You invoke this by typing `/to-questionnaire`; the agent won't reach for it on its own.
 
 Reach for it when a decision is blocked on knowledge that lives in one other person's head: a client, a domain expert, an exec who owns the business rules, a colleague on a team you don't sit with. Which skill you want depends on where the answers are:
 
 | The answers are in… | Reach for |
 | --- | --- |
-| Your own head, unsharpened | [grill-me](https://aihero.dev/skills-grill-me) |
-| The codebase | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
+| Your own head, unsharpened | [grill-me](./grill-me.md) |
+| The codebase | [grill-with-docs](../engineering/grill-with-docs.md) |
 | Someone else's head | `to-questionnaire` |
-| Nobody's head yet, the question needs something to react to | [prototype](https://aihero.dev/skills-prototype) |
+| Nobody's head yet, the question needs something to react to | [prototype](../engineering/prototype.md) |
 
-The common case is a [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) session that stalls because some of the questions it raised aren't yours to answer. Run `/to-questionnaire` in that same conversation to take those questions offline, then bring the answers back and carry on.
+The common case is a grilling session that stalls because some of the questions it raised aren't yours to answer. Run `/to-questionnaire` in that same conversation to take those questions offline, then bring the answers back and carry on.
 
 ## The send, not the subject
 
@@ -43,19 +43,19 @@ The document is deliberately not two things. It isn't **branching**. The questio
 ## Common questions
 
 **Does it read my grilling session and extract the questions from it?**
-Not as a step of its own. The skill has no ingest phase. It asks about the send, then drafts. What makes it work after a grilling session is that you run it in the **same conversation**, so the [session](https://www.aihero.dev/ai-coding-dictionary/session) is already in [context](https://www.aihero.dev/ai-coding-dictionary/context) and the drafting can draw on it. If you start it in a fresh session, it knows nothing about the grilling, and you supply the topic again yourself when you answer "what do you need back?".
+Not as a step of its own. The skill has no ingest phase. It asks about the send, then drafts. What makes it work after a grilling session is that you run it in the **same conversation**, so the session is already in context and the drafting can draw on it. If you start it in a fresh session, it knows nothing about the grilling, and you supply the topic again yourself when you answer "what do you need back?".
 
 **The missing answers don't all live with the same person. Can it split them by recipient?**
 No. Step one asks for *the* recipient, singular, and the skill pitches the tone and context of the whole document at them. If three people hold three parts of the answer, run it three times, once per person. People have asked for one document that routes questions by discipline or role, but that did not ship.
 
 **Are the questions dependent: does it skip sections based on earlier answers?**
-No. The dependent-question design was explored and did not ship. The output is a static document: themed groups, most-important-first, every question live. The objection to it is fair. A [model](https://www.aihero.dev/ai-coding-dictionary/model) that plans more than two or three questions ahead of a real answer plans badly, and a branching document has to plan all of them ahead of every answer.
+No. The dependent-question design was explored and did not ship. The output is a static document: themed groups, most-important-first, every question live. The objection to it is fair. A model that plans more than two or three questions ahead of a real answer plans badly, and a branching document has to plan all of them ahead of every answer.
 
 **What if the recipient doesn't know either?**
 The document tells them to say so. It explicitly asks for "I don't know" and partial answers. A flagged uncertainty is worth more than a guess, because a vague answer and a confidently wrong one look identical once they're back in your context.
 
 **Does it send it anywhere (Slack, an issue tracker, email)?**
-No. It writes a Markdown file in the current directory and tells you the path. Delivery is yours: paste it into a [ticket](https://www.aihero.dev/ai-coding-dictionary/ticket), drop it in a Slack thread, attach it to an email, or open it on a shared screen and work through it live. People have done all four by hand.
+No. It writes a Markdown file in the current directory and tells you the path. Delivery is yours: paste it into a ticket, drop it in a Slack thread, attach it to an email, or open it on a shared screen and work through it live. People have done all four by hand.
 
 **Isn't this just `/grill-me` in batch mode?**
 No. `grill-me` already asks in **rounds**. It asks the whole frontier of open questions at once, then recomputes it from your answers, so it already meets the "give me all the questions at once" need. `to-questionnaire` differs on another axis. It is about whose head the answers are in, not how the questions are delivered. To answer them yourself faster, use `grill-me`. To get them out of someone else, use this.
@@ -75,4 +75,4 @@ Yes, and plenty of people did before it existed: `OPEN_QUESTIONS.md` files, spre
 
 `to-questionnaire` is a reach-for-it-anytime standalone. You use it where your own knowledge ends and the next move is to ask another person, not to run another skill. That is most often mid-flow, when planning has stalled on something that isn't yours to decide.
 
-Its neighbour is [grill-me](https://aihero.dev/skills-grill-me), and the two split on where the answers live: grilling mines you, a questionnaire mines someone else. What comes back is raw material, feed it into another grilling round, or into [grill-with-docs](https://aihero.dev/skills-grill-with-docs) or [to-spec](https://aihero.dev/skills-to-spec) if the work is heading for a build. When you're unsure which skill fits the moment, [ask-skills](../engineering/ask-skills.md) routes you.
+Its neighbour is [grill-me](./grill-me.md), and the two split on where the answers live: grilling mines you, a questionnaire mines someone else. What comes back is raw material, feed it into another grilling round, or into [grill-with-docs](../engineering/grill-with-docs.md) or [to-spec](../engineering/to-spec.md) if the work is heading for a build. When you're unsure which skill fits the moment, [ask-skills](../engineering/ask-skills.md) routes you.

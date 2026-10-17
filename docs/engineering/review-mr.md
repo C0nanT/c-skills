@@ -13,7 +13,7 @@ You invoke this by typing `/review-mr`, and the agent will not reach for it on i
 | Someone else's MR or PR is waiting on your review | `review-mr` |
 | Your own diff needs checking against the repo's standards and the spec it came from | [review-axes](./review-axes.md) |
 | You want bugs hunted in the current diff, no MR involved | Claude Code's own built-in `/code-review` |
-| The whole codebase has drifted, not one merge request | [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) |
+| The whole codebase has drifted, not one merge request | [improve-codebase-architecture](./improve-codebase-architecture.md) |
 
 Pass the MR as a URL, a number (`!123`, `#456`, or bare `123`), or nothing at all to review the one for the current branch. For two local branches you must name both: the source and the target are what simulate the MR, and the skill stops and asks rather than guessing `main`.
 
@@ -60,7 +60,7 @@ It appends a new `## Review N` section rather than overwriting, and opens it by 
 
 **Why only two reviewers when there are four axes?**
 
-Cost. The session itself takes Correctness and Security, since it already holds the diff, the intent, and the file list. One [sub-agent](https://www.aihero.dev/ai-coding-dictionary/subagent) on a small model takes Performance and Design, because hunting a duplicate implementation means grepping modules the MR never touched, and that fills a [context window](https://www.aihero.dev/ai-coding-dictionary/context-window) with files nobody needs afterwards.
+Cost. The session itself takes Correctness and Security, since it already holds the diff, the intent, and the file list. One sub-agent on a small model takes Performance and Design, because hunting a duplicate implementation means grepping modules the MR never touched, and that fills a context window with files nobody needs afterwards.
 
 **Can a malicious MR make it run something on my machine?**
 

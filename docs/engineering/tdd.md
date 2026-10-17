@@ -2,26 +2,26 @@
 
 `tdd` builds a feature or fixes a bug test-first: one failing test, then just enough code to pass it, then the next behaviour. It carries the standards that make that loop produce tests worth keeping: what a good test is, where tests go, what mocks are for, and the three anti-patterns that make a suite worthless.
 
-It writes no test at a seam you have not agreed to first. Before any test exists, the public boundaries it tests at have to be agreed, because testing effort is finite and this is where you spend it on the critical paths instead of on every edge case. When a ticket or spec already lists the seams, those count as agreed and it does not ask again; it asks only about a seam that is not on the list, or, run standalone with no ticket or spec, it names its seams and waits for your confirmation. The other thing to know is that `tdd` is a **reference**, not a driver. It holds the rules of the loop, and something else (you, or [implement](https://aihero.dev/skills-implement)) runs the [session](https://www.aihero.dev/ai-coding-dictionary/session) that applies them.
+It writes no test at a seam you have not agreed to first. Before any test exists, the public boundaries it tests at have to be agreed, because testing effort is finite and this is where you spend it on the critical paths instead of on every edge case. When a ticket or spec already lists the seams, those count as agreed and it does not ask again; it asks only about a seam that is not on the list, or, run standalone with no ticket or spec, it names its seams and waits for your confirmation. The other thing to know is that `tdd` is a **reference**, not a driver. It holds the rules of the loop, and something else (you, or [implement](./implement.md)) runs the session that applies them.
 
 ## When to reach for it
 
-Type `/tdd`, or the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) reaches for it automatically when a task fits: building a feature or fixing a bug test-first, or when you say "red-green-refactor".
+Type `/tdd`, or the agent reaches for it automatically when a task fits: building a feature or fixing a bug test-first, or when you say "red-green-refactor".
 
 Reach for it when there is a concrete behaviour to build, with an input and an observable output, and you want tests that survive a refactor.
 
 | Your situation | Where to go |
 | --- | --- |
 | A behaviour with defined inputs and outputs (business logic, a request/response contract, a transformation, validation) | `tdd` |
-| The behaviour isn't pinned down yet | [to-spec](https://aihero.dev/skills-to-spec), which also agrees the test seams before any code is written |
-| You have a [spec](https://www.aihero.dev/ai-coding-dictionary/spec) or [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) and want the whole build run for you | [implement](https://aihero.dev/skills-implement), which drives `tdd` per ticket |
+| The behaviour isn't pinned down yet | [to-spec](./to-spec.md), which also agrees the test seams before any code is written |
+| You have a spec or tickets and want the whole build run for you | [implement](./implement.md), which drives `tdd` per ticket |
 | Config, wiring, glue, type annotations, straight CRUD delegation | Nothing here fits well; see the open gap below |
 
 That last row is a real gap. The skill decides *where* the seams go, but nothing in it decides *whether* a change is worth the loop at all. If you run it on a change with no independent source of truth to assert against, you get a test that restates the implementation. That is the tautological anti-pattern the skill warns about, reached from the other direction. It is [issue #746](https://github.com/mattpocock/skills/issues/746), and it is open. Until it closes, you make that call yourself, or write the rule into your `CLAUDE.md`.
 
 ## Prerequisites
 
-None: the skill is [stateless](https://www.aihero.dev/ai-coding-dictionary/stateless) and writes no files of its own.
+None: the skill is stateless and writes no files of its own.
 
 ## The loop, and the seam it runs at
 
@@ -31,7 +31,7 @@ The skill rests on three terms.
 
 **Vertical slice.** Write one test at one seam, then the minimal implementation, then repeat. The first cycle is a **tracer bullet** that proves a single path end to end. The opposite is horizontal slicing: all the tests first, then all the code. Tests written in bulk verify *imagined* behaviour. They check the shape of things rather than what a user does, and they commit you to a test structure before you understand the implementation.
 
-**Pre-agreed seam.** A seam is the public boundary you observe behaviour at without reaching inside. The rule is absolute: no test at an unconfirmed seam. In the full chain the seams are agreed once, during [to-spec](https://aihero.dev/skills-to-spec), and copied into each ticket by [to-tickets](./to-tickets.md). `tdd` takes them from the ticket's `Seams:` line, else the spec's Testing Decisions, else none, and asks only about a seam not on that list. `/review-axes` checks that only agreed-upon test seams were used. Invoked on its own with no ticket or spec, `tdd` asks you directly.
+**Pre-agreed seam.** A seam is the public boundary you observe behaviour at without reaching inside. The rule is absolute: no test at an unconfirmed seam. In the full chain the seams are agreed once, during [to-spec](./to-spec.md), and copied into each ticket by [to-tickets](./to-tickets.md). `tdd` takes them from the ticket's `Seams:` line, else the spec's Testing Decisions, else none, and asks only about a seam not on that list. `/review-axes` checks that only agreed-upon test seams were used. Invoked on its own with no ticket or spec, `tdd` asks you directly.
 
 The three anti-patterns it is written to prevent:
 
@@ -55,7 +55,7 @@ This is the most-reported friction with the skill ([issue #607](https://github.c
 
 **It wrote the implementation before the test, even though the skill says red first.**
 
-It happens. One user pushed the [model](https://www.aihero.dev/ai-coding-dictionary/model) on it and got an unusually honest answer: "I knew the skill said 'one test at a time, watch it fail for the right reason'. I read it. I just defaulted to my normal habit." The skill accepts this. No instruction makes an agent comply 100% of the time, and stricter wording restricts the agent's creativity for little gain. The loop is worth running even when the agent does not follow it strictly, because the results are still better overall. If strict adherence matters for a particular slice, watch the run rather than trusting the skill to enforce it.
+It happens. One user pushed the model on it and got an unusually honest answer: "I knew the skill said 'one test at a time, watch it fail for the right reason'. I read it. I just defaulted to my normal habit." The skill accepts this. No instruction makes an agent comply 100% of the time, and stricter wording restricts the agent's creativity for little gain. The loop is worth running even when the agent does not follow it strictly, because the results are still better overall. If strict adherence matters for a particular slice, watch the run rather than trusting the skill to enforce it.
 
 **Should it write browser or end-to-end tests first?**
 
@@ -91,4 +91,4 @@ No. Run against one ticket, it can propose work that belongs to a sibling ticket
 grill-with-docs → to-spec → to-tickets → implement → review-axes → retro
 ```
 
-[to-spec](https://aihero.dev/skills-to-spec) agrees the test seams once up front and [to-tickets](./to-tickets.md) carries them into each ticket, [implement](https://aihero.dev/skills-implement) drives `tdd` per ticket, and [review-axes](./review-axes.md) checks afterwards that only the agreed seams were used, and `implement`'s Refactor step does the refactoring `tdd` no longer does. You can also reach for it on its own, whenever there is a concrete behaviour to build and no full spec in play. When you are unsure which skill fits your situation, [ask-skills](./ask-skills.md) routes you.
+[to-spec](./to-spec.md) agrees the test seams once up front and [to-tickets](./to-tickets.md) carries them into each ticket, [implement](./implement.md) drives `tdd` per ticket, and [review-axes](./review-axes.md) checks afterwards that only the agreed seams were used, and `implement`'s Refactor step does the refactoring `tdd` no longer does. You can also reach for it on its own, whenever there is a concrete behaviour to build and no full spec in play. When you are unsure which skill fits your situation, [ask-skills](./ask-skills.md) routes you.

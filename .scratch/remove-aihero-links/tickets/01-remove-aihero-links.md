@@ -1,6 +1,6 @@
 # 01: remove the aihero.dev link convention from docs
 
-Status: needs-triage
+Status: ready-for-human
 
 **What to build:** drop the convention that docs pages link skills (and dictionary terms) through `aihero.dev`. This fork's docs are not published there, so those links point at upstream pages that may not match the fork's behaviour. Link skills relatively (`./<name>.md`) instead, and stop prescribing the `aihero.dev` form in the repo guidance.
 
@@ -16,10 +16,10 @@ Status: needs-triage
 
 **Blocked by:** None (can start immediately)
 
-- [ ] `.agents/writing-docs.md` and `CLAUDE.md` no longer prescribe `aihero.dev` links; they say to link skills relatively
-- [ ] No `aihero.dev/skills-*` link remains under `docs/` or `skills/`
-- [ ] Dictionary-link decision applied consistently
-- [ ] Fork-divergences ledger records the divergence with a detection phrase
-- [ ] `ask-skills` re-read, translations refreshed
-- [ ] No em-dashes in changed prose
-- [ ] `scripts/validate.sh` passes
+- [x] `.agents/writing-docs.md` and `CLAUDE.md` no longer prescribe `aihero.dev` links; they say to link skills relatively
+- [x] No `aihero.dev/skills-*` link remains under `docs/` or `skills/`
+- [x] Dictionary-link decision applied consistently
+- [x] Fork-divergences ledger records the divergence with a detection phrase
+- [x] `ask-skills` re-read, translations refreshed
+- [x] No em-dashes in changed prose
+- [x] `scripts/validate.sh` passes

@@ -35,7 +35,7 @@ O caminho que a maior parte do trabalho percorre:
 
 Mantenha os passos 1–3 numa **única janela** até depois de `/to-tickets`. Cada `/implement` começa fresco, lendo o ticket.
 
-Se a sessão se aproximar da [smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone) (~120k tokens) antes de `/to-tickets`, use `/handoff` e continue numa thread nova: não empurre com contexto degradado.
+Se a sessão se aproximar da smart zone (~120k tokens) antes de `/to-tickets`, use `/handoff` e continue numa thread nova: não empurre com contexto degradado.
 
 ## Saúde da codebase
 

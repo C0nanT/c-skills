@@ -18,7 +18,7 @@ O **limite de fase** é o intervalo entre duas fases, e é o único lugar onde e
 
 Percorra de cima para baixo no limite. O primeiro **sim** vence.
 
-**1. Você pode continuar nesta sessão?** Duas coisas tornam a resposta sim: a fase seguinte precisa desta fase como **fonte primária**, ou você ainda tem [smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone) suficiente (cerca de 150 mil tokens) para que a fase seguinte caiba. Grilling → implementação é o sim padrão: a implementação quer o raciocínio literal, não um resumo dele. Continuar não custa nada e não perde nada, então descarte essa opção antes de qualquer outra.
+**1. Você pode continuar nesta sessão?** Duas coisas tornam a resposta sim: a fase seguinte precisa desta fase como **fonte primária**, ou você ainda tem smart zone suficiente (cerca de 150 mil tokens) para que a fase seguinte caiba. Grilling → implementação é o sim padrão: a implementação quer o raciocínio literal, não um resumo dele. Continuar não custa nada e não perde nada, então descarte essa opção antes de qualquer outra.
 
 **2. O contexto é irrelevante para o que vem a seguir?** Tudo nesta sessão (a exploração, as decisões, os becos sem saída) é descartável? Se sim, **`/clear`**. É a jogada mais barata do tabuleiro: não leva tempo e devolve a janela inteira. O `/clear` também não é definitivo: a sessão antiga continua retomável.
 
@@ -54,4 +54,4 @@ Toda jogada exceto **Continuar** transforma uma **fonte primária** em uma **fon
 
 As perguntas não são objetivas: cada uma tem um pouco de gosto pessoal, e o mesmo limite pode ir para dois lados em dois dias diferentes. O valor está em fazê-las **na ordem**, no limite, e não no meio do trabalho.
 
-<!-- aligned-with: sha256:a8aa20158609ef39e2b308b6ba0660c91066838d07a867202e63a7744a88a3ed -->
+<!-- aligned-with: sha256:4b5197bc3fe5535bb34c2695d7a1d26783e1745ad3e6cf1c14ac837cf7b8f8d8 -->
