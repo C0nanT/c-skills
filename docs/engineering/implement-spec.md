@@ -23,7 +23,7 @@ You invoke this by typing `/implement-spec`, and the agent won't reach for it on
 
 ## Models and effort
 
-Each ticket's **Difficulty** line, as [to-tickets](https://aihero.dev/skills-to-tickets) writes it, names a suggested model per host. The orchestrator spawns that ticket's implementer on the name for the host it runs on (Claude Code or Cursor), trying these in order and taking the first that applies:
+Each ticket's **Difficulty** line, as [to-tickets](./to-tickets.md) writes it, names a suggested model per host. The orchestrator spawns that ticket's implementer on the name for the host it runs on (Claude Code or Cursor), trying these in order and taking the first that applies:
 
 | Order | If the line has | The implementer runs on |
 | --- | --- | --- |
@@ -31,10 +31,10 @@ Each ticket's **Difficulty** line, as [to-tickets](https://aihero.dev/skills-to-
 | 2 | An unrecognised name, but a tier | Heavy is Opus, Standard is Sonnet, Light is Haiku |
 | 3 | No line, or one it cannot parse | Sonnet, named in the final report |
 
-- **Effort is pinned** at medium for Sonnet and Opus, even if you would approve more, and the rule reaches subagents that [tdd](https://aihero.dev/skills-tdd) and [review-axes](./review-axes.md) spawn inside the run. Haiku gets no effort setting.
+- **Effort is pinned** at medium for Sonnet and Opus, even if you would approve more, and the rule reaches subagents that [tdd](./tdd.md) and [review-axes](./review-axes.md) spawn inside the run. Haiku gets no effort setting.
 - **No human gate on Heavy tickets.** They run on Opus at medium without asking.
 - **Fix-ups never run cheap.** A fix-up takes the strongest model among the tickets involved, because a fix needs at least the judgment of the work it repairs, with a floor of Sonnet.
-- **The run stops rather than guess.** If the host cannot set the model per spawn, or the effort for a run with any Sonnet or Opus spawn, it suggests [implement](https://aihero.dev/skills-implement) instead of falling back to your session's own settings.
+- **The run stops rather than guess.** If the host cannot set the model per spawn, or the effort for a run with any Sonnet or Opus spawn, it suggests [implement](./implement.md) instead of falling back to your session's own settings.
 
 A table of ticket, model and effort is printed before the first implementer starts, without pausing for you, and repeated in the final report with any fallbacks marked.
 
