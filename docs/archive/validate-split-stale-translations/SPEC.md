@@ -1,6 +1,6 @@
 # validate: split into per-check scripts, and fail on stale pt-BR translations
 
-Status: ready-for-agent
+Status: done
 
 ## Problem Statement
 

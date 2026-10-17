@@ -11,7 +11,7 @@
 
 **Blocked by:** None (can start immediately)
 
-Status: ready-for-human
+Status: done
 
 - [x] The `to-tickets` difficulty-tier table gives Light the suggested model `Haiku (Claude Code) / claude-4.5-haiku-thinking (Cursor)`; Heavy and Standard are unchanged
 - [x] `TRADUCAO.pt-BR.md` (and `RESUMO.md` if it mentions tiers) carry the same change, with translation markers refreshed

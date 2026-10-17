@@ -1,6 +1,6 @@
 # implement-spec: run each ticket on its suggested model, effort pinned to medium
 
-Status: ready-for-agent
+Status: done
 
 ## Problem Statement
 

@@ -10,7 +10,7 @@
 
 **Blocked by:** 02
 
-Status: ready-for-human
+Status: done
 
 - [x] A fixture with an edited `SKILL.md` and a stale marker fails, naming the skill
 - [x] A fixture with a matching marker passes
