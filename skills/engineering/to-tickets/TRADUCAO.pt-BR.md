@@ -49,7 +49,7 @@ Dê a cada ticket um **nível de dificuldade** e um **modelo sugerido** para que
 | --- | --- | --- |
 | **Heavy** | Infraestrutura, deploys, migrações, decisões de arquitetura, fronteiras de segurança, refatorações amplas, qualquer coisa cujo raio de impacto cruze subsistemas | Opus (Claude Code) / Opus ou o modelo de raciocínio mais forte disponível (Cursor) |
 | **Standard** | Lógica de programação comum: uma fatia de funcionalidade, um endpoint, um componente, uma correção de bug com ramificação real. O nível padrão, e onde a maioria dos tickets se encaixa | Sonnet (Claude Code) / Sonnet (Cursor) |
-| **Light** | Trabalho mecânico, de baixo julgamento: atualização de configuração, mudanças de texto, renomeações com raio de impacto pequeno, adição de um teste que espelha um existente | Sonnet (Claude Code) / Sonnet (Cursor) |
+| **Light** | Trabalho mecânico, de baixo julgamento: atualização de configuração, mudanças de texto, renomeações com raio de impacto pequeno, adição de um teste que espelha um existente | Haiku (Claude Code) / claude-4.5-haiku-thinking (Cursor) |
 
 </difficulty-tiers>
 
@@ -137,4 +137,4 @@ Os seams das Testing Decisions da especificação que este ticket exercita, um p
 
 Em qualquer uma das formas, evite caminhos de arquivo específicos ou trechos de código: eles ficam desatualizados rápido. Exceção: se um protótipo produziu um trecho que codifica uma decisão com mais precisão do que a prosa consegue (máquina de estados, reducer, schema, formato de tipo), inclua-o e observe brevemente que veio de um protótipo. Reduza ao essencial das partes ricas em decisão, não uma demo funcional; apenas os pontos importantes.
 
-<!-- aligned-with: sha256:14246f857e03382a50824df5a6be88b687333c07b23053b990d3776534c744f3 -->
+<!-- aligned-with: sha256:e87c0eae43d7c4c77df76c7229fd20ed32ffcb9d58836122246e9a6788252f1b -->

@@ -21,6 +21,23 @@ You invoke this by typing `/implement-spec`, and the agent won't reach for it on
 - **Tickets with blocking edges**, as [to-tickets](https://aihero.dev/skills-to-tickets) writes them. Without edges the graph is flat and every ticket starts at once.
 - **A [harness](https://www.aihero.dev/ai-coding-dictionary/harness) that runs subagents in the background and gives each one a git worktree.** The skill exists to run tickets at the same time, so on a harness that runs subagents one at a time, it is only a slower `implement`.
 
+## Models and effort
+
+Each ticket's **Difficulty** line, as [to-tickets](./to-tickets.md) writes it, names a suggested model per host. The orchestrator spawns that ticket's implementer on the name for the host it runs on (Claude Code or Cursor), trying these in order and taking the first that applies:
+
+| Order | If the line has | The implementer runs on |
+| --- | --- | --- |
+| 1 | A recognised model name (one containing opus, sonnet or haiku) | That model |
+| 2 | An unrecognised name, but a tier | Heavy is Opus, Standard is Sonnet, Light is Haiku |
+| 3 | No line, or one it cannot parse | Sonnet, named in the final report |
+
+- **Effort is pinned** at medium for Sonnet and Opus, even if you would approve more, and the rule reaches subagents that [tdd](./tdd.md) and [review-axes](./review-axes.md) spawn inside the run. Haiku gets no effort setting.
+- **No human gate on Heavy tickets.** They run on Opus at medium without asking.
+- **Fix-ups never run cheap.** A fix-up takes the strongest model among the tickets involved, because a fix needs at least the judgment of the work it repairs, with a floor of Sonnet.
+- **The run stops rather than guess.** If the host cannot set the model per spawn, or the effort for a run with any Sonnet or Opus spawn, it suggests [implement](./implement.md) instead of falling back to your session's own settings.
+
+A table of ticket, model and effort is printed before the first implementer starts, without pausing for you, and repeated in the final report with any fallbacks marked.
+
 ## The integration branch
 
 Everything lands on one branch. Each implementer:
@@ -75,6 +92,7 @@ A worktree holds only what git tracks. Tests that read gitignored fixtures, loca
 
 - Several implementers are running at once whenever the graph allows, not one after another.
 - A ticket starts as soon as its last blocker lands on the integration branch, not when the whole run ends.
+- The plan table shows each ticket on its suggested model at medium effort (Haiku with none), and the final report repeats it.
 - Every ticket's trace shows `tdd` running, with a failing test before the code.
 - Merges into the integration branch are fast-forwards, not conflict resolutions.
 - The run ends on one branch with every ticket resolved, and a PR only if your tracker wanted one.
