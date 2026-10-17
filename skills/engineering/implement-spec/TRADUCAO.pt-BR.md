@@ -21,11 +21,11 @@ Os **subagentes implementadores** devem rodar em segundo plano sempre que possí
 Todo ticket tem uma linha `> **Difficulty:**`. Cada **subagente implementador** roda no modelo que essa linha sugere para o host atual, com esforço fixo.
 
 - **Leitura do modelo.** No Claude Code, use o nome antes de `(Claude Code)`; no Cursor, o nome antes de `(Cursor)`. Tolere o separador antigo ainda presente em tickets velhos, um travessão no lugar dos dois-pontos que a linha tem hoje.
-- **Ordem de resolução.** O modelo nomeado, se reconhecido; senão o tier (Heavy é Opus, Standard é Sonnet, Light é Haiku); senão Sonnet quando a linha está ausente ou não pode ser interpretada. Registre cada fallback para Sonnet causado por linha ausente ou ilegível e cite-o no relatório final.
+- **Ordem de resolução.** O modelo nomeado, se reconhecido (um nome que contenha `opus`, `sonnet` ou `haiku`, sem diferenciar maiúsculas, no lado do host na linha); senão o tier (Heavy é Opus, Standard é Sonnet, Light é Haiku); senão Sonnet quando a linha está ausente ou não pode ser interpretada. Registre cada fallback para Sonnet causado por linha ausente ou ilegível e cite-o no relatório final.
 - **Esforço.** Todo spawn de Sonnet e Opus passa `effort: medium`, nunca mais alto, mesmo que o usuário aprovasse mais. Um spawn de Haiku não passa configuração de esforço. Isso vale para subagentes criados por skills invocadas dentro da execução (`tdd`, `review-axes`).
 - **Tickets Heavy** rodam em Opus com esforço medium, sem aprovação humana.
 - **Subagentes sem ticket.** O **subagente de exploração** e o **subagente de merge** rodam Sonnet com esforço medium. Um **subagente de correção** (falhas de estado compartilhado no passo 7, achados da revisão no passo 8) usa o modelo mais forte entre os tickets envolvidos (Haiku < Sonnet < Opus), com piso de Sonnet com esforço medium, e Sonnet com esforço medium quando não for possível determinar os tickets envolvidos.
-- **Limites do host.** Se o host não consegue definir modelo ou esforço por spawn, pare antes de criar qualquer subagente, avise o usuário e sugira `/implement`. Nunca recorra ao modelo ou esforço da própria sessão.
+- **Limites do host.** Pare se o host não consegue definir o modelo por spawn, ou não consegue definir o esforço por spawn em uma execução com algum spawn de Sonnet ou Opus (uma execução só com Haiku não precisa de controle de esforço). Pare antes de criar qualquer subagente, avise o usuário e sugira `/implement`. Nunca recorra ao modelo ou esforço da própria sessão.
 
 Antes do primeiro spawn de implementador, imprima uma tabela de ticket, modelo e esforço, marcando qualquer fallback, e siga adiante sem esperar confirmação. Repita a tabela no relatório final.
 
@@ -55,4 +55,4 @@ Antes do primeiro spawn de implementador, imprima uma tabela de ticket, modelo e
 
 10. Limpe todos os worktrees dos **subagentes implementadores**.
 
-<!-- aligned-with: sha256:a4f8db16c65c192c2adb9befe98463307291f669acac2698c67861495b12cc27 -->
+<!-- aligned-with: sha256:fb950a9c300ebd03f580e072adccaca669856eb1a766f20810e903257012f3f0 -->

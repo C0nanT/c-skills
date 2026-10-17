@@ -21,11 +21,11 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 Every ticket has a `> **Difficulty:**` line. Each **implementer subagent** runs on the model that line suggests for the current host, at a pinned effort.
 
 - **Reading the model.** On Claude Code take the name before `(Claude Code)`; on Cursor, the name before `(Cursor)`. Tolerate the older separator still found in old tickets, an em-dash where the line now has a colon.
-- **Resolution order.** The named model if recognised, else the tier (Heavy is Opus, Standard is Sonnet, Light is Haiku), else Sonnet when the line is missing or unparsable. Record every Sonnet fallback caused by a missing or unparsable line and name it in the final report.
+- **Resolution order.** The named model if recognised (a name containing `opus`, `sonnet` or `haiku`, case-insensitive, on the host's side of the line), else the tier (Heavy is Opus, Standard is Sonnet, Light is Haiku), else Sonnet when the line is missing or unparsable. Record every Sonnet fallback caused by a missing or unparsable line and name it in the final report.
 - **Effort.** Every Sonnet and Opus spawn passes `effort: medium`, never higher, even if the user would approve more. A Haiku spawn passes no effort setting. This covers subagents spawned by skills invoked inside the run (`tdd`, `review-axes`).
 - **Heavy tickets** run on Opus at medium with no human gate.
 - **Subagents with no ticket.** The **exploration subagent** and the **merger subagent** run Sonnet at medium. A **fix-up subagent** (shared-state failures in step 7, review findings in step 8) uses the strongest model among the tickets involved (Haiku < Sonnet < Opus), with a floor of Sonnet at medium, and Sonnet at medium when the involved tickets cannot be determined.
-- **Host limits.** If the host cannot set the model or the effort per spawn, stop before spawning anything, tell the user, and suggest `/implement` instead. Never fall back to the session's own model or effort.
+- **Host limits.** Stop if the host cannot set the model per spawn, or cannot set the effort per spawn for a run with any Sonnet or Opus spawn (a Haiku-only run needs no effort control). Stop before spawning anything, tell the user, and suggest `/implement` instead. Never fall back to the session's own model or effort.
 
 Before the first implementer spawn, print a table of ticket, model, effort, marking any fallback, and carry on without waiting for confirmation. Repeat the table in the final report.
 
