@@ -63,7 +63,7 @@ Every ticket opens with one line, above everything else in the body: a **difficu
 | --- | --- | --- |
 | **Heavy** | Infra, deploys, migrations, architecture, security boundaries, wide refactors | Opus (Claude Code) / Opus or the strongest reasoning model you have (Cursor) |
 | **Standard** | Ordinary programming logic: a feature slice, an endpoint, a bug fix. The default | Sonnet (Claude Code) / Sonnet (Cursor) |
-| **Light** | Mechanical, low-judgement work: config bumps, copy changes, small renames | Haiku (Claude Code) / Composer or another fast cheap model (Cursor) |
+| **Light** | Mechanical, low-judgement work: config bumps, copy changes, small renames | Haiku (Claude Code) / claude-4.5-haiku-thinking (Cursor) |
 
 The tier is rated on **judgement**, not diff size: a one-line change to a deploy pipeline is Heavy; a 400-line component following an existing pattern is Standard. Ties round up.
 

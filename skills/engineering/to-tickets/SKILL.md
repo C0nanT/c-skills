@@ -49,7 +49,7 @@ Give every ticket a **difficulty tier** and a **suggested model** for whoever pi
 | --- | --- | --- |
 | **Heavy** | Infrastructure, deploys, migrations, architecture decisions, security boundaries, wide refactors, anything whose blast radius crosses subsystems | Opus (Claude Code) / Opus or the strongest reasoning model available (Cursor) |
 | **Standard** | Ordinary programming logic: a feature slice, an endpoint, a component, a bug fix with real branching. The default tier, and where most tickets belong | Sonnet (Claude Code) / Sonnet (Cursor) |
-| **Light** | Mechanical, low-judgement work: config bumps, copy changes, renames with a small blast radius, adding a test that mirrors an existing one | Sonnet (Claude Code) / Sonnet (Cursor) |
+| **Light** | Mechanical, low-judgement work: config bumps, copy changes, renames with a small blast radius, adding a test that mirrors an existing one | Haiku (Claude Code) / claude-4.5-haiku-thinking (Cursor) |
 
 </difficulty-tiers>
 
