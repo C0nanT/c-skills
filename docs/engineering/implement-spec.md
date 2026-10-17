@@ -1,6 +1,6 @@
 ## What it does
 
-`implement-spec` takes a [spec](https://www.aihero.dev/ai-coding-dictionary/spec) and its [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) and lands the whole thing in one run. The orchestrating [agent](https://www.aihero.dev/ai-coding-dictionary/agent) hands each ticket to an implementer [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent) working in its own git worktree, merges each finished branch into a single **integration branch**, runs [review-axes](./review-axes.md) over the result, and resolves the tickets.
+`implement-spec` takes a spec and its tickets and lands the whole thing in one run. The orchestrating agent hands each ticket to an implementer subagent working in its own git worktree, merges each finished branch into a single **integration branch**, runs [review-axes](./review-axes.md) over the result, and resolves the tickets.
 
 It reads the tickets as a **task graph**, not a list. Blocking edges decide what can start, so at any moment there is a **frontier** of tickets whose blockers have all landed, and every ticket on the frontier runs at once. That is the difference from working the tickets one by one. The graph's shape sets the pace, not the tickets' order on the tracker.
 
@@ -11,15 +11,15 @@ You invoke this by typing `/implement-spec`, and the agent won't reach for it on
 | Your situation | Reach for |
 | --- | --- |
 | A spec, split into tickets with blocking edges, that you want landed in one run | `/implement-spec` |
-| One ticket at a time, in your own [context window](https://www.aihero.dev/ai-coding-dictionary/context-window), [clearing](https://www.aihero.dev/ai-coding-dictionary/clearing) between tickets | [implement](https://aihero.dev/skills-implement) |
-| A spec that isn't split into tickets yet | [to-tickets](https://aihero.dev/skills-to-tickets) first |
-| A small piece of work with no real graph to it | [implement](https://aihero.dev/skills-implement) directly |
+| One ticket at a time, in your own context window, clearing between tickets | [implement](./implement.md) |
+| A spec that isn't split into tickets yet | [to-tickets](./to-tickets.md) first |
+| A small piece of work with no real graph to it | [implement](./implement.md) directly |
 
 ## Prerequisites
 
-- **An issue tracker.** The skill reads the tickets from, and resolves them on, a tracker it finds the way [to-tickets](https://aihero.dev/skills-to-tickets) does: your explicit instruction, else the one [setup-skills](./setup-skills.md) configured, else local markdown under `.scratch/<feature-slug>/tickets/`.
-- **Tickets with blocking edges**, as [to-tickets](https://aihero.dev/skills-to-tickets) writes them. Without edges the graph is flat and every ticket starts at once.
-- **A [harness](https://www.aihero.dev/ai-coding-dictionary/harness) that runs subagents in the background and gives each one a git worktree.** The skill exists to run tickets at the same time, so on a harness that runs subagents one at a time, it is only a slower `implement`.
+- **An issue tracker.** The skill reads the tickets from, and resolves them on, a tracker it finds the way [to-tickets](./to-tickets.md) does: your explicit instruction, else the one [setup-skills](./setup-skills.md) configured, else local markdown under `.scratch/<feature-slug>/tickets/`.
+- **Tickets with blocking edges**, as [to-tickets](./to-tickets.md) writes them. Without edges the graph is flat and every ticket starts at once.
+- **A harness that runs subagents in the background and gives each one a git worktree.** The skill exists to run tickets at the same time, so on a harness that runs subagents one at a time, it is only a slower `implement`.
 
 ## Models and effort
 
@@ -43,18 +43,18 @@ A table of ticket, model and effort is printed before the first implementer star
 Everything lands on one branch. Each implementer:
 
 1. confirms its worktree is based on the integration branch before it starts,
-2. builds its ticket with [tdd](https://aihero.dev/skills-tdd), red-green one slice at a time,
+2. builds its ticket with [tdd](./tdd.md), red-green one slice at a time,
 3. merges the integration branch tip into its own branch before reporting done, so landing it is a fast-forward.
 
 The tracker decides whether a pull request exists at all. If your tracker closes work through PRs, or you ask for one, the skill opens a draft PR after the first merge and marks it ready at the end. Otherwise the run stops on the integration branch with every ticket resolved the way your tracker closes work, which works fully offline against a local markdown tracker.
 
-Implementers talk to the orchestrator through [context pointers](https://www.aihero.dev/ai-coding-dictionary/context-pointer) (the spec, the ticket, shared exploration notes, earlier commits) rather than pasted summaries. This keeps each subagent's prompt small and leaves room in the orchestrator's window for the graph.
+Implementers talk to the orchestrator through context pointers (the spec, the ticket, shared exploration notes, earlier commits) rather than pasted summaries. This keeps each subagent's prompt small and leaves room in the orchestrator's window for the graph.
 
 ## Common questions
 
 **How is this different from running `/implement` on each ticket myself?**
 
-This is the question the skill exists to answer. Before it shipped, people kept building their own versions, and one user described the need: they wanted "subagents implement the tickets" instead of having "to individually create new session and tell them to implement a ticket one by one, when a spec may contain over 5 tickets." With `implement` you are the dispatcher: one [session](https://www.aihero.dev/ai-coding-dictionary/session) per ticket, clearing in between, and keeping track yourself of which tickets are unblocked. `implement-spec` hands that job to one orchestrating session. The price is that you no longer read each ticket's work as it lands; you review the integration branch at the end. To start a run, clear the context and type `/implement-spec` with a pointer to the spec (an issue number or a file path). For a small change with no real graph, skip it and use `implement` directly.
+This is the question the skill exists to answer. Before it shipped, people kept building their own versions, and one user described the need: they wanted "subagents implement the tickets" instead of having "to individually create new session and tell them to implement a ticket one by one, when a spec may contain over 5 tickets." With `implement` you are the dispatcher: one session per ticket, clearing in between, and keeping track yourself of which tickets are unblocked. `implement-spec` hands that job to one orchestrating session. The price is that you no longer read each ticket's work as it lands; you review the integration branch at the end. To start a run, clear the context and type `/implement-spec` with a pointer to the spec (an issue number or a file path). For a small change with no real graph, skip it and use `implement` directly.
 
 **Does it need GitHub? I want it to stop at the branch.**
 
@@ -78,7 +78,7 @@ This is a known problem on GitHub. The tracker's blocked-by count only drops whe
 
 **Does this replace Sandcastle or an AFK script?**
 
-No. People ask because the skills now reach into implementation: "is Sandcastle still relevant? Your skills now seem to be able to handle implementation as well." `implement-spec` puts an agent in charge of orchestration inside one harness session, which needs no infrastructure and lets you watch and steer. For work that is truly [AFK](https://www.aihero.dev/ai-coding-dictionary/afk), a deterministic loop ([Sandcastle](https://github.com/mattpocock/sandcastle), a shell script, a CI job) is faster, cheaper, and more reliable, because no agent makes the orchestration decisions.
+No. People ask because the skills now reach into implementation: "is Sandcastle still relevant? Your skills now seem to be able to handle implementation as well." `implement-spec` puts an agent in charge of orchestration inside one harness session, which needs no infrastructure and lets you watch and steer. For work that is truly AFK, a deterministic loop ([Sandcastle](https://github.com/mattpocock/sandcastle), a shell script, a CI job) is faster, cheaper, and more reliable, because no agent makes the orchestration decisions.
 
 **Parallel implementers broke each other's database or API tests.**
 
@@ -100,10 +100,10 @@ A worktree holds only what git tracks. Tests that read gitignored fixtures, loca
 
 ## Where it fits
 
-`implement-spec` is the build step of the main chain, as the parallel alternative to running [implement](https://aihero.dev/skills-implement) once per ticket:
+`implement-spec` is the build step of the main chain, as the parallel alternative to running [implement](./implement.md) once per ticket:
 
 ```txt
 grill-with-docs → to-spec → to-tickets → implement-spec → retro
 ```
 
-Its neighbours are [to-tickets](https://aihero.dev/skills-to-tickets), which declares the blocking edges it reads as a task graph, and [review-axes](./review-axes.md), which it runs over the integration branch before closing out. [ask-skills](./ask-skills.md) is the router over the whole set when you are not sure which flow you are in.
+Its neighbours are [to-tickets](./to-tickets.md), which declares the blocking edges it reads as a task graph, and [review-axes](./review-axes.md), which it runs over the integration branch before closing out. [ask-skills](./ask-skills.md) is the router over the whole set when you are not sure which flow you are in.

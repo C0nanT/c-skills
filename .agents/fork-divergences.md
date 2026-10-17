@@ -4,7 +4,7 @@ Every way this repo deliberately differs from its upstream, [mattpocock/skills](
 
 ## Renamed skills
 
-Upstream's name appears in its `SKILL.md` frontmatter, its directory, its docs page, its published slug (`https://aihero.dev/skills-<name>`), and in prose across every other skill's docs. A rename has to hold in all of them.
+Upstream's name appears in its `SKILL.md` frontmatter, its directory, its docs page, and in prose across every other skill's docs. A rename has to hold in all of them.
 
 | Upstream | Here | Why |
 | --- | --- | --- |
@@ -14,7 +14,11 @@ Upstream's name appears in its `SKILL.md` frontmatter, its directory, its docs p
 
 Only the renamed copies exist; upstream's directories are gone from the tree. `skills/engineering/ask-matt/` lingered as a headless leftover (a `PHASE-BOUNDARIES.md` and an `agents/openai.yaml` with no `SKILL.md`) until the 2026-08 sync moved both into `skills/engineering/ask-skills/`, where `SKILL.md` already pointed. A merge that recreates `ask-matt/` is recreating a broken pointer: the reference doc belongs beside the renamed skill.
 
-**Docs-page links follow the rename.** Upstream's docs pages are published at `https://aihero.dev/skills-<name>`; this fork's own `docs/` pages are not published anywhere. A merge that brings in upstream prose reintroduces the old `aihero.dev/skills-<upstream-name>` link text and the old skill name in the same breath: fix both, and link the renamed skill relatively (`./review-axes.md`, `./ask-skills.md`, `./setup-skills.md`) rather than to an `aihero.dev` slug that 404s. See `.agents/writing-docs.md` for the full rule. Sweep for it: `grep -rn "ask-matt\|setup-matt-pocock-skills\|code-review" docs/`.
+**Docs-page links follow the rename.** A merge that brings in upstream prose reintroduces the old skill name (`ask-matt`, `setup-matt-pocock-skills`, `code-review`) in link text and prose: fix it, and link the renamed skill relatively (`./review-axes.md`, `./ask-skills.md`, `./setup-skills.md`). See `.agents/writing-docs.md` for the full rule. Sweep for it: `grep -rn "ask-matt\|setup-matt-pocock-skills\|code-review" docs/`.
+
+## No `aihero.dev` links
+
+Upstream's docs link every skill through `https://aihero.dev/skills-<name>` and every dictionary term through `https://www.aihero.dev/ai-coding-dictionary/<slug>`. This fork's docs are not published there, and an upstream page may not match this fork's behaviour, so this fork links skills relatively (`./<name>.md`, `../<bucket>/<name>.md`), names a skill with no docs page in plain text, and leaves dictionary terms unlinked. This covers `docs/`, `skills/` and the guidance under `.agents/` and `CLAUDE.md`. A merge that brings upstream prose back reintroduces the links; rewrite them the same way. Sweep for it: `grep -rn "aihero.dev" docs skills`, expecting no hits.
 
 ## Changed behaviour
 

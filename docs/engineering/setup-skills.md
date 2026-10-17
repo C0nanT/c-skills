@@ -20,7 +20,7 @@ It writes config, it does not hard-code behaviour. The engineering chain assumes
 
 You invoke this by typing `/setup-skills`: the agent won't reach for it on its own.
 
-Reach for it **once per repo, before the first use of any other engineering skill**. If [to-spec](https://aihero.dev/skills-to-spec) or [to-tickets](https://aihero.dev/skills-to-tickets) start guessing where your issues live or applying labels that don't exist, it hasn't been set up here yet. Re-run it only to switch issue trackers or start over: day-to-day tweaks are just edits to `docs/agents/*.md`.
+Reach for it **once per repo, before the first use of any other engineering skill**. If [to-spec](./to-spec.md) or [to-tickets](./to-tickets.md) start guessing where your issues live or applying labels that don't exist, it hasn't been set up here yet. Re-run it only to switch issue trackers or start over: day-to-day tweaks are just edits to `docs/agents/*.md`.
 
 ## The four decisions
 
@@ -52,4 +52,4 @@ Yes. A second run finds the rules already present and leaves the file, and the b
 
 ## Where it fits
 
-`setup-skills` is a **run-once setup**: the foundation the whole engineering set stands on, not a step you repeat. Its neighbours are the skills that read what it writes: [to-spec](https://aihero.dev/skills-to-spec) / [to-tickets](https://aihero.dev/skills-to-tickets), because they publish into the issue tracker configured here. Run it first; everything downstream assumes it has. When you're unsure which skill or flow fits, [ask-skills](./ask-skills.md) routes you.
+`setup-skills` is a **run-once setup**: the foundation the whole engineering set stands on, not a step you repeat. Its neighbours are the skills that read what it writes: [to-spec](./to-spec.md) / [to-tickets](./to-tickets.md), because they publish into the issue tracker configured here. Run it first; everything downstream assumes it has. When you're unsure which skill or flow fits, [ask-skills](./ask-skills.md) routes you.
