@@ -1,6 +1,6 @@
 ## What it does
 
-You type `traduzir` when you cannot read the agent's last message in English. The [agent](https://www.aihero.dev/ai-coding-dictionary/agent) writes that same message again in Brazilian Portuguese (pt-BR), whole, with nothing added.
+You type `traduzir` when you cannot read the agent's last message in English. The agent writes that same message again in Brazilian Portuguese (pt-BR), whole, with nothing added.
 
 It is a reading aid, so it changes nothing else. The agent does not answer the questions the message asked, does not run what it proposed, and goes back to English for its next reply. Code blocks, commands, file paths and skill names stay exactly as they were, because those are the parts you copy.
 
