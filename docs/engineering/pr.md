@@ -52,7 +52,7 @@ No. It writes the body and stops. Users have asked more than once for a way to t
 
 **Does it keep the body up to date as the PR changes?**
 
-No. It writes the body at one point in time, and a PR that changes under review leaves that body stale. Ask the agent to rewrite the body after a large change. The agent is writing a PR body again, so it uses the same shape.
+Not by itself. It writes the body at one point in time, and a PR that changes under review leaves that body stale. Ask the agent to rewrite the body after a large change. The agent is writing a PR body again, so it uses the same shape. To store it on a PR that already exists, the skill has the agent find the PR for the branch, write the body with `gh api -X PATCH`, and read the PR back to confirm the text landed.
 
 **My change has no UI. What goes in Evidence?**
 
@@ -67,6 +67,7 @@ Not by itself. One user's approach is a standing instruction in the repo's agent
 - You can tell what the PR changes from the Summary visual alone, before opening the diff.
 - The body has no preamble: it starts at the Summary heading.
 - The Evidence section shows a before and an after, not a claim that tests pass.
+- After the agent updates an existing PR, reading the PR back shows the new body.
 - Every PR states a door and a blast radius, and the one-way doors are the ones you slow down on.
 
 ## Where it fits

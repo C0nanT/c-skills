@@ -34,6 +34,10 @@ Use este modelo para escrever o corpo do PR:
 
 O modelo acima é mantido em inglês porque os cabeçalhos (`## Summary`, `## Evidence`, `## Merge Danger`, `**Door:**`, `**Blast Radius:**`) são o formato literal do PR gerado. Traduza apenas o conteúdo que você preencher, se o usuário pedir um PR em outro idioma.
 
+## Gravar o corpo em um PR existente
+
+Ache o PR do branch atual com `gh pr view --json number,url`. Grave o corpo pela API: `gh api -X PATCH repos/<dono>/<repo>/pulls/<n> -F body=@<arquivo>`. Depois leia de volta com `gh pr view <n> --json body --jq .body` e confira que ele traz o texto novo antes de dar o trabalho por concluído.
+
 ## Seções
 
 Pule todos os preâmbulos e mantenha a prosa breve. Use a linguagem de domínio do usuário, a partir do `GLOSSARY.md`.
@@ -171,4 +175,4 @@ Descreva se é uma porta de mão única ou de mão dupla. Você pode voltar atr�
 
 O raio de impacto (blast radius) é o impacto potencial ou o escopo das mudanças introduzidas por este PR. Considere todas as possibilidades. Exemplos são deslocamento de layout, quebras para consumidores, responsividade para mobile etc.
 
-<!-- aligned-with: sha256:ab63f1cf78647389edcd386c9427c5dfca27ed2836930c24773ffee834c19bcd -->
+<!-- aligned-with: sha256:7a9ddba91397ede9e20f9eb8418c56f370434a0716d8612a6d8883575dd37453 -->

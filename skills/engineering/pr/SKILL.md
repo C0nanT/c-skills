@@ -32,6 +32,10 @@ Use this template for writing the PR body:
 <optional: potential ramifications of merge>
 ```
 
+## Writing the body to an existing PR
+
+Find the PR for the current branch with `gh pr view --json number,url`. Write the body through the API: `gh api -X PATCH repos/<owner>/<repo>/pulls/<n> -F body=@<file>`. Then read it back with `gh pr view <n> --json body --jq .body` and check that it holds the new text before reporting it done.
+
 ## Sections
 
 Skip all preambles and keep prose brief. Use the user's domain language from `GLOSSARY.md`.
