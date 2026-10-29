@@ -8,7 +8,7 @@ Revisão de dois eixos do diff entre o `HEAD` e um ponto fixo fornecido pelo usu
 - **Standards**: o código está de acordo com os padrões de código documentados deste repositório?
 - **Spec**: o código implementa fielmente o ticket ou a especificação de origem?
 
-Os dois eixos rodam como **subagentes paralelos**, para que não contaminem o contexto um do outro, e então esta skill agrega os achados.
+Os dois eixos rodam como **subagentes paralelos**, para que não contaminem o contexto um do outro, e então esta skill agrega os achados. Inicie cada subagente com uma janela de contexto nova.
 
 Especificações usam por padrão **markdown local**: um arquivo de especificação ou ticket em `.scratch/` ou `docs/`, que não exige configuração. Só quando a especificação vive em um tracker remoto (GitHub/GitLab) é que você precisa de `docs/agents/issue-tracker.md`; rode `/setup-skills` para configurá-lo.
 
@@ -137,4 +137,4 @@ Uma mudança pode passar em um eixo e falhar no outro:
 
 Reportá-los separadamente impede que um eixo esconda o outro.
 
-<!-- aligned-with: sha256:b283e0bbd5af23dc1a8aaafd10a4f7c509b232634d8e432286317613bd1a1a5e -->
+<!-- aligned-with: sha256:eb3d4e1a55bc8bb318bca2b892ca905358339e1ad3f1d3640786c6e5068f4613 -->

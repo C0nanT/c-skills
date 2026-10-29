@@ -21,7 +21,7 @@ Infira o repositório a partir de `git remote -v`; o `glab` faz isso automaticam
 Quando definida como `yes`, os MRs passam pelos mesmos rótulos e estados das issues, usando os equivalentes de `glab mr`:
 
 - **Ler um MR**: `glab mr view <number> --comments` e `glab mr diff <number>` para o diff.
-- **Listar MRs externos para triagem**: `glab mr list -F json`, depois mantenha apenas os MRs cujo autor não seja membro/dono do projeto (o MR de um contribuidor, e não o trabalho em andamento de um mantenedor).
+- **Listar MRs externos para triagem**: `glab mr list -O json`, depois mantenha apenas os MRs cujo autor não seja membro/dono do projeto (o MR de um contribuidor, e não o trabalho em andamento de um mantenedor).
 - **Comentar / rotular / fechar**: `glab mr note`, `glab mr update --label`/`--unlabel`, `glab mr close`.
 
 Diferente do GitHub, o GitLab numera issues e MRs separadamente, então `#42` não é ambíguo depois que você sabe qual superfície o mantenedor quer dizer.
@@ -39,10 +39,10 @@ Execute `glab issue view <number> --comments`.
 Usadas pelo `/wayfinder`. O **mapa** é uma única issue com issues **filhas** como tickets.
 
 - **Mapa**: uma única issue com o rótulo `wayfinder:map`, contendo o corpo de Notes / Decisions-so-far / Fog. `glab issue create --label wayfinder:map`. (Em planos do GitLab com epics nativos, um epic pode guardar o mapa no lugar; uma issue rotulada funciona em qualquer plano.)
-- **Ticket filho**: uma issue com `Part of #<map>` no topo da descrição e os rótulos `wayfinder:<type>` (`research`/`prototype`/`grilling`/`task`). Uma vez reivindicado, o ticket é atribuído ao dev que conduz o mapa.
+- **Ticket filho**: uma issue com `Part of #<map>` no topo da descrição, vinculada ao mapa (`glab issue create --linked-issues <map> --link-type relates_to`), e os rótulos `wayfinder:<type>` (`research`/`prototype`/`grilling`/`task`). Uma vez reivindicado, o ticket é atribuído ao dev que conduz o mapa.
 - **Bloqueio**: o **link de bloqueio nativo** do GitLab, a representação canônica e visível na interface. Adicione-o com a ação rápida `/blocked_by #<n>`, publicada como nota (`glab issue note <child> --message "/blocked_by #<blocker>"`). Links de bloqueio nativos são um recurso dos planos Premium/Ultimate; no plano gratuito (ou onde não estiverem disponíveis), recorra a uma linha `Blocked by: #<n>, #<n>` no topo da descrição. Um ticket está desbloqueado quando todos os bloqueadores estão fechados.
-- **Consulta da fronteira**: `glab issue list -O json` restrito aos filhos do mapa, descartando qualquer um com bloqueador aberto: um link nativo `blocked_by` para uma issue aberta (`glab api projects/:id/issues/<child-iid>/links`), ou uma issue aberta na linha `Blocked by`, ou com responsável; vence o primeiro na ordem do mapa.
+- **Consulta da fronteira**: liste os filhos do mapa com `glab api projects/:id/issues/<map>/links`, mantendo as issues abertas que tenham um rótulo `wayfinder:<type>`; descarte qualquer um com bloqueador aberto: um link nativo `blocked_by` para uma issue aberta (`glab api projects/:id/issues/<child-iid>/links`), ou uma issue aberta na linha `Blocked by`, ou com responsável; vence o primeiro na ordem do mapa.
 - **Reivindicar**: `glab issue update <n> --assignee @me`, a primeira escrita da sessão.
 - **Resolver**: `glab issue note <n> --message "<answer>"`, depois `glab issue close <n>`, depois acrescente um ponteiro de contexto (resumo + link) às Decisions-so-far do mapa.
 
-<!-- aligned-with: sha256:3b36851681453f96beefe3554a1d296f8f740e9fa84b83381788b60acca2bcd5 -->
+<!-- aligned-with: sha256:9a40953ac485f645ded9b482b2ef1921d27f79029d2eacd94a98f54d8d4a97bf -->

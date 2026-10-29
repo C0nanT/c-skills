@@ -84,6 +84,7 @@ For each ticket, in order:
    changed. Do not start another ticket. Report the problem and wait for instructions.
 
 Use a new subagent for every ticket. Never reuse a previous ticket's session.
+Start each one with a fresh context window, never a fork of this conversation.
 
 ## Subagent prompt
 

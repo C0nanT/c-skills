@@ -48,7 +48,7 @@ Para cada ticket, na ordem:
 6. Se passar, registre o commit do ticket (`git log -1 --oneline`) e comece o próximo.
 7. Em qualquer falha, bloqueio, problema não resolvido, resultado incerto ou critério desmarcado: **pare imediatamente**. Deixe o trabalho daquele ticket como está (o commit dele, ou o que ele deixou sem commit), para que o usuário veja exatamente o que foi alterado. Não comece outro ticket. Relate o problema e espere instruções.
 
-Use um subagente novo para cada ticket. Nunca reutilize a sessão de um ticket anterior.
+Use um subagente novo para cada ticket. Nunca reutilize a sessão de um ticket anterior. Inicie cada um com uma janela de contexto nova, nunca um fork desta conversa.
 
 ## Prompt do subagente
 
@@ -74,4 +74,4 @@ Quando todos os tickets tiverem sucesso, liste os tickets concluídos com as ses
 
 Se a sequência parar, identifique o ticket que falhou, o problema dele e onde está o trabalho dele (o commit, ou a árvore de trabalho não commitada).
 
-<!-- aligned-with: sha256:3f82198a35dd98908bb68d9602c958d3783ea6fda639e008606842e454f5721d -->
+<!-- aligned-with: sha256:b289b7e0e37e1c4dbddff835e32287653aa9debc623dc99a45f69a4c9204a363 -->

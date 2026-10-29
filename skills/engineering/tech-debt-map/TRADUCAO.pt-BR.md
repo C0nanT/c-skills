@@ -55,7 +55,7 @@ Recomende a primeira linha em uma frase, com o motivo. Se o usuário disser "you
 
 ### 3. Varredura
 
-Despache quatro subagentes em paralelo, um por grupo de eixos. Cada um lê [AXES.pt-BR.md](AXES.pt-BR.md) para as próprias seções e devolve apenas achados, sem correções:
+Despache quatro subagentes em paralelo, um por grupo de eixos, cada um com uma janela de contexto nova. Cada um lê [AXES.pt-BR.md](AXES.pt-BR.md) para as próprias seções e devolve apenas achados, sem correções:
 
 | Subagente | Seções de AXES.md |
 | --------- | ----------------- |
@@ -162,4 +162,4 @@ Depois, diga ao usuário o caminho do relatório e as três primeiras linhas, e 
 - **A partição é um contrato.** Depois que o nome e os globs de um módulo estiverem no índice, toda revisão posterior é medida contra eles. Corte com cuidado na primeira vez, e quando um corte se revelar errado, renomeie-o pelo passo 1 em vez de traçar discretamente uma nova linha.
 - Respeite as convenções e as restrições existentes do repositório, inclusive as que você teria escolhido de outro jeito.
 
-<!-- aligned-with: sha256:9127eb4e7cdde8467876aba6035277b7daff829b824fe02b9771c47320939cdb -->
+<!-- aligned-with: sha256:9d000f7edb59dc24dcd57be269845e9d586ed41172b38d123a04548ce529d749 -->

@@ -121,7 +121,7 @@ A `❌` or a `⚠️` is *also* a finding, at the severity its consequence earns
 
 ### 7. Review: one sub-agent takes Performance + Design
 
-Spawn **exactly one** sub-agent (`Agent` in Claude Code, `Task` in Cursor), `general-purpose` / `generalPurpose`.
+Spawn **exactly one** sub-agent (`Agent` in Claude Code, `Task` in Cursor), `general-purpose` / `generalPurpose`, started with a fresh context window.
 
 **Pick the model by host**: this review is meant to be cheap:
 
