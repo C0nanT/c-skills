@@ -10,7 +10,7 @@
 
 **Blocked by:** 01
 
-Status: ready-for-human
+Status: done
 
 - [x] One script per existing section, each runnable directly
 - [x] `scripts/validate.sh` runs all and keeps headings and exit behaviour

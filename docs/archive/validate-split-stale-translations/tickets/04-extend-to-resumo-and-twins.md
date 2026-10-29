@@ -10,7 +10,7 @@
 
 **Blocked by:** 03
 
-Status: ready-for-human
+Status: done
 
 - [x] A stale `RESUMO.md` fails the check
 - [x] A stale twin fails the check

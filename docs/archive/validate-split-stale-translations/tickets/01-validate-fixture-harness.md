@@ -10,7 +10,7 @@
 
 **Blocked by:** None (can start immediately)
 
-Status: ready-for-human
+Status: done
 
 - [x] A minimal valid fixture passes with exit 0
 - [x] A defective fixture fails with non-zero and the expected message

@@ -11,7 +11,7 @@
 
 **Blocked by:** None (can start immediately)
 
-Status: ready-for-human
+Status: done
 
 - [x] Model is read from the host's side of the Difficulty line (Claude Code or Cursor), tolerant of the old em-dash separator
 - [x] Unrecognised name falls back to the tier (Heavy → Opus, Standard → Sonnet, Light → Haiku); missing or unparsable line falls back to Sonnet and is named in the report

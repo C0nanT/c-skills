@@ -10,7 +10,7 @@
 
 **Blocked by:** 04
 
-Status: ready-for-human
+Status: done
 
 - [x] Every pt-BR file has a marker and the real repo passes
 - [x] The ledger documents the rule and the refresh command
