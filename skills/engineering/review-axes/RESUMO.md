@@ -8,4 +8,4 @@
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
 
-<!-- aligned-with: sha256:b283e0bbd5af23dc1a8aaafd10a4f7c509b232634d8e432286317613bd1a1a5e -->
+<!-- aligned-with: sha256:eb3d4e1a55bc8bb318bca2b892ca905358339e1ad3f1d3640786c6e5068f4613 -->

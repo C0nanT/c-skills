@@ -33,6 +33,7 @@ EXCLUDED_PATHS=(
   ".github/workflows/triage-label.yml"
   "CHANGELOG.md"
   "package.json"
+  "CONTRIBUTING.md"
   # Deleted upstream; upstream keeps an archived docs page, this fork does not.
   "docs/engineering/resolving-merge-conflicts.md"
 )

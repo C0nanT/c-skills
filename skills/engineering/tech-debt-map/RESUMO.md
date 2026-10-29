@@ -8,4 +8,4 @@
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução), `AXES.md` / `AXES.pt-BR.md` (eixos e rubricas, em inglês e em português) e este `RESUMO.md`.
 
-<!-- aligned-with: sha256:9127eb4e7cdde8467876aba6035277b7daff829b824fe02b9771c47320939cdb -->
+<!-- aligned-with: sha256:9d000f7edb59dc24dcd57be269845e9d586ed41172b38d123a04548ce529d749 -->

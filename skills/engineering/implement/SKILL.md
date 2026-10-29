@@ -9,7 +9,7 @@ If the user passes a ticket reference, fetch it from the issue tracker and state
 
 ## Subagent effort
 
-Every subagent spawned during this run, whether you spawn it or a skill you invoke does (`/tdd`, `/review-axes`), runs at **`effort: medium`**, whatever its model. The user's effort level belongs to this session only and never carries over to a spawn.
+Every subagent spawned during this run, whether you spawn it or a skill you invoke does (`/tdd`, `/review-axes`), runs at **`effort: medium`**, whatever its model. The user's effort level belongs to this session only and never carries over to a spawn. Start every subagent with a fresh context window.
 
 `high` or above (`high`, `xhigh`, `max`) needs the user's explicit yes **before** the spawn: ask, name the subagent, the model, the effort and why medium is not enough, then wait. No answer is a no. One yes covers only the spawn it was asked for.
 

@@ -23,7 +23,7 @@ Olhe o repositório atual para entender o ponto de partida. Leia o que existe; n
 
 - `git remote -v` e `.git/config`: é um repositório do GitHub? Qual?
 - `AGENTS.md` e `CLAUDE.md` na raiz do repositório: algum deles existe? Já há uma seção `## Agent skills` em algum?
-- `GLOSSARY.md` e `GLOSSARY-MAP.md` na raiz do repositório
+- `GLOSSARY.md` e `GLOSSARY-MAP.md` na raiz do repositório, e os legados `CONTEXT.md` / `CONTEXT-MAP.md`. Se existir um arquivo legado, ofereça fazer `git mv` dele para o nome `GLOSSARY` e reescrever esses nomes em `docs/agents/domain.md`.
 - `docs/adr/` e qualquer diretório `src/*/docs/adr/`
 - `docs/agents/`: a saída anterior desta skill já existe?
 - `.scratch/`: sinal de que uma convenção de issue tracker em markdown local já está em uso
@@ -50,6 +50,8 @@ Postura padrão: prefira o **markdown local**, a menos que o usuário claramente
 Registre a escolha em `docs/agents/issue-tracker.md`. Os modelos do GitHub e do GitLab trazem a flag "PRs como superfície de pedidos", com padrão **desligada**. Deixe-a desligada e não a levante: um usuário que queira PRs externos na fila de triagem pode mudar a flag no arquivo depois.
 
 > Explicação: Repositórios de código aberto costumam receber pedidos de funcionalidade como pull requests, não só como issues; um PR é uma issue com código anexado. Se você ligar esta opção, PRs externos entram na mesma fila de triagem e passam pelos mesmos rótulos e estados das issues (os PRs em andamento de colaboradores são deixados em paz). Deixe-a desligada se PRs não forem uma superfície de pedidos para você.
+
+Um tracker do GitHub ou do GitLab precisa de um repositório alcançável. Quando o usuário escolher um deles e nenhum `git remote` apontar para esse host, peça a URL do repositório e configure-o (`git init` se necessário, `git remote add origin <url>`) antes de seguir. Está feito quando `gh repo view` / `glab repo view` mostra o projeto de dentro deste diretório; se não mostrar, pare e diga ao usuário o que falta.
 
 **Seção B: Rótulos de triagem.** Sempre roda, esteja ou não instalada uma skill de triagem: os rótulos também são como `to-spec`, `to-tickets` e `review-axes` registram o estado. Faça exatamente uma pergunta:
 
@@ -230,4 +232,4 @@ Diga ao usuário que a configuração está completa e quais skills de engenhari
 
 Depois, recomende, sem executar: a skill complementar `/setup-solid` escreve uma seção SOLID no `CLAUDE.md`, no nível de arquitetura, independente de linguagem e delimitada pela regra do escoteiro, de modo que SOLID se aplique ao código novo e ao código que cada mudança já toca, em vez de disparar uma refatoração do repositório inteiro. É o padrão de código para o qual os fluxos de engenharia depois constroem. Deixe para o usuário digitar.
 
-<!-- aligned-with: sha256:877e61e41cbe4095167a75cafbeddbb0c22b27bce5db1a1490ec0f7e9c7186f6 -->
+<!-- aligned-with: sha256:33fc613f25f57eb317ed501cc16fb18d708d2fd0f9933a097574b4fed6c29745 -->

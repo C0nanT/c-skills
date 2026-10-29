@@ -92,6 +92,8 @@ are not expected to clone this project: they only have what
 
 No em-dashes anywhere in this repo's prose (`SKILL.md` files, docs, `README.md`, `CHANGELOG.md`, ADRs, changesets, code comments). Where a sentence reaches for one, rewrite it instead with a comma, colon, period, parentheses, or a conjunction, whichever the sentence actually wants; never do a blind character substitution. This matches upstream, so prose files stop conflicting on punctuation at every sync.
 
+Every skill that dispatches a subagent says to start it with a fresh context window. Some harnesses (Codex, for one) fork the parent conversation by default, and a fork inherits the parent's context, which is what the subagent was meant to escape.
+
 ## Domain Language (from GLOSSARY.md)
 
 - **Issue tracker**: the tool hosting a repo's issues (GitHub Issues, Linear, local `.scratch/`). Not "backlog".

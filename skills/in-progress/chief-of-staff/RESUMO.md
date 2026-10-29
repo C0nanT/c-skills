@@ -1,6 +1,6 @@
 # Resumo: chief-of-staff
 
-**O que faz:** transforma a sessão em um "chefe de gabinete" que persegue um objetivo de longo prazo, delegando todo o trabalho a subagentes e pensando em duas trilhas ao mesmo tempo: a tática (a tarefa atual) e a estratégica (melhorar o ambiente para as próximas tarefas). Sugere agendas recorrentes e insiste em três princípios: um ambiente que guie o agente ao acerto ("poço do sucesso"), fontes de dados úteis e a regra de "sem gambiarras".
+**O que faz:** transforma a sessão em um "chefe de gabinete" que persegue um objetivo de longo prazo, delegando todo o trabalho a subagentes e pensando em duas trilhas ao mesmo tempo: a tática (a tarefa atual) e a estratégica (melhorar o ambiente para as próximas tarefas). Guarda a memória em uma wiki de páginas markdown datadas, que citam commits e sobrevivem à sessão. Sugere agendas recorrentes e insiste em três princípios: um ambiente que guie o agente ao acerto ("poço do sucesso"), fontes de dados úteis e a regra de "sem gambiarras".
 
 **Quando usar:** quando você tem um objetivo longo, que vai acumular conhecimento ao longo de muitas mensagens, e quer uma coordenação contínua.
 
@@ -8,4 +8,4 @@
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`.
 
-<!-- aligned-with: sha256:6cc6e47ab5022f3e45e5be0fedbb0f6e645f4f0190d6b0c51c7cd60c2d7c1d98 -->
+<!-- aligned-with: sha256:d13f3a542a4664f27bf14977811ee9dcd83fae03655b20720b3441850a2008a4 -->

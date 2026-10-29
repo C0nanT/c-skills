@@ -9,7 +9,7 @@ Se o usuário passar a referência de um ticket, busque-o no issue tracker e inf
 
 ## Esforço dos subagentes
 
-Todo subagente criado durante esta execução, seja por você, seja por uma skill que você invoque (`/tdd`, `/review-axes`), roda com **`effort: medium`**, qualquer que seja o modelo. O nível de esforço do usuário pertence apenas a esta sessão e nunca é transferido para um subagente.
+Todo subagente criado durante esta execução, seja por você, seja por uma skill que você invoque (`/tdd`, `/review-axes`), roda com **`effort: medium`**, qualquer que seja o modelo. O nível de esforço do usuário pertence apenas a esta sessão e nunca é transferido para um subagente. Inicie cada subagente com uma janela de contexto nova.
 
 `high` ou acima (`high`, `xhigh`, `max`) exige o sim explícito do usuário **antes** da criação: pergunte, nomeie o subagente, o modelo, o esforço e por que o medium não basta, e então espere. Sem resposta, é não. Um sim cobre apenas a criação para a qual foi pedido.
 
@@ -69,4 +69,4 @@ Uma linha: o emoji, seguido de um motivo curto. 🟢 é o emoji **sozinho**, sem
 
 Escolha a pior cor aplicável: qualquer condição vermelha torna o veredito 🔴, mesmo que o resto tenha corrido bem.
 
-<!-- aligned-with: sha256:86dc9c7a45e21e906d811c4cdb3f28108903b861ceefa5b4dd62e618a8815c7c -->
+<!-- aligned-with: sha256:0f9b32d188a07b7ea8667e3d2323309bd0a9381a0bb93c7d05d4cd85e00a1831 -->

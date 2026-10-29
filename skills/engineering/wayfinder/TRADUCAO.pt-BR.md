@@ -112,7 +112,7 @@ O usuário invoca com uma ideia solta.
 2. **Mapeie a fronteira.** Faça o grilling de novo, desta vez **em largura**: espalhe-se pelo espaço inteiro em vez de ir fundo numa única linha, expondo as decisões abertas e os primeiros passos que podem ser dados agora. **Se isto não revelar nenhuma névoa** (o caminho até o destino já está claro, a jornada inteira é pequena o bastante para uma sessão), você não precisa de mapa. Pare e pergunte ao usuário como ele quer prosseguir.
 3. **Crie o mapa** (rótulo `wayfinder:map`): Destination e Notes preenchidos, Decisions-so-far vazio, a névoa esboçada em **Not yet specified**.
 4. **Crie os tickets que você consegue especificar agora** como issues filhas do mapa, depois conecte as arestas de bloqueio em uma **segunda passada** (issues precisam de ids antes de poderem se referenciar). Escreva as referências cruzadas nessa mesma passada, com ids reais: um placeholder `#<n>` vira link automático para uma issue não relacionada. A conexão ordena os tickets em fronteira e bloqueados; tudo o que você ainda não consegue especificar permanece na névoa: a seção **Not yet specified**.
-5. **Dispare os subagentes de pesquisa.** Para cada ticket `research` que você acabou de criar, inicie um subagente que chama a ferramenta Skill com "research" para resolvê-lo em paralelo, capturando as descobertas num branch descartável `research/<name>` com um ponteiro de contexto a partir do ticket. Faça push do branch, mas não abra PR: ele nunca é mesclado.
+5. **Dispare os subagentes de pesquisa.** Para cada ticket `research` que você acabou de criar, inicie um subagente com uma janela de contexto nova que chama a ferramenta Skill com "research" para resolvê-lo em paralelo, capturando as descobertas num branch descartável `research/<name>` com um ponteiro de contexto a partir do ticket. Faça push do branch, mas não abra PR: ele nunca é mesclado.
 6. Pare: desenhar o mapa é trabalho de uma sessão; ele não resolve nada à mão.
 
 ### Percorrer o mapa
@@ -127,4 +127,4 @@ O usuário invoca com um mapa (URL ou número). Um ticket é **opcional**: sem u
 
 O usuário pode rodar tickets desbloqueados em paralelo, então espere que outras sessões estejam editando o tracker ao mesmo tempo.
 
-<!-- aligned-with: sha256:5e9b9d6fe19709a39e63dc6c8d7babce005ad4f520a4840614eb583241e067b3 -->
+<!-- aligned-with: sha256:59cb071bd5bf920a05b981d93c2383d2edadd6395612a0d40109bac05503f866 -->

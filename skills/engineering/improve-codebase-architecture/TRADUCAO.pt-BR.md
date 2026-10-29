@@ -25,7 +25,7 @@ Este comando é _informado_ pelo modelo de domínio do projeto e se apoia em um 
 
 Leia primeiro o glossário de domínio do projeto (`GLOSSARY.md`) e os ADRs da área que você está tocando.
 
-Depois, crie um subagente para percorrer a base de código. Não siga heurísticas rígidas; explore de forma orgânica e anote onde sentir atrito:
+Depois, crie um subagente com uma janela de contexto nova para percorrer a base de código. Não siga heurísticas rígidas; explore de forma orgânica e anote onde sentir atrito:
 
 - Onde entender um conceito exige pular entre muitos módulos pequenos?
 - Onde os módulos são **rasos**, com uma interface quase tão complexa quanto a implementação?
@@ -69,6 +69,6 @@ Efeitos colaterais acontecem em linha, à medida que as decisões se consolidam:
 - **Vai nomear um módulo aprofundado com um conceito que não está no `GLOSSARY.md`?** Acrescente o termo ao `GLOSSARY.md`. Crie o arquivo de forma preguiçosa, apenas se ele ainda não existir.
 - **Refinou um termo vago durante a conversa?** Atualize o `GLOSSARY.md` ali mesmo.
 - **O usuário rejeita o candidato por um motivo que sustenta a decisão?** Ofereça um ADR, enquadrado assim: _"Quer que eu registre isto como ADR para que as próximas revisões de arquitetura não o sugiram de novo?"_ Ofereça só quando o motivo for realmente necessário para que um futuro explorador não sugira a mesma coisa de novo; pule motivos efêmeros ("não vale a pena agora") e os que são autoevidentes.
-- **Quer explorar interfaces alternativas para o módulo aprofundado?** Use a abordagem de projetar duas vezes: crie subagentes paralelos para rascunhar interfaces alternativas e depois compare-as.
+- **Quer explorar interfaces alternativas para o módulo aprofundado?** Use a abordagem de projetar duas vezes: crie subagentes paralelos, cada um com uma janela de contexto nova, para rascunhar interfaces alternativas e depois compare-as.
 
-<!-- aligned-with: sha256:3254f7ace6b1afe7da331b65599e1bddb94e6f6a0f4624f27ba27ce11b6e817b -->
+<!-- aligned-with: sha256:d63fc37ca966f1422c8906ffbd9f9d9e15576eeccf1b403de76e0daeeffe6731 -->

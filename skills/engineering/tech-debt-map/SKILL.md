@@ -55,7 +55,7 @@ Recommend the top row in one line, with the reason. If the user says "you pick",
 
 ### 3. Sweep
 
-Dispatch four sub-agents in parallel, one per axis group. Each reads [AXES.md](AXES.md) for its own sections and returns findings only, no fixes:
+Dispatch four sub-agents in parallel, one per axis group, each with a fresh context window. Each reads [AXES.md](AXES.md) for its own sections and returns findings only, no fixes:
 
 | Sub-agent | AXES.md sections |
 | --------- | ---------------- |

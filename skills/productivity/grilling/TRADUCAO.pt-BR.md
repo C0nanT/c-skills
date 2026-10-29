@@ -25,8 +25,8 @@ Redija cada pergunta de modo que um "sim" aceite a sua resposta recomendada.
 
 Cada resposta do usuário remodela a árvore: decisões resolvidas empurram a fronteira para fora e destravam perguntas que dependiam delas. Recalcule a fronteira e faça a próxima rodada. Uma pergunta cuja resposta depende de outra pergunta ainda aberta nesta rodada pertence a uma rodada _posterior_, não a esta.
 
-Encontrar _fatos_ é tarefa sua, nunca do usuário. Quando uma pergunta da fronteira depender de um fato do ambiente (sistema de arquivos, ferramentas etc.), despache um subagente para encontrá-lo; não peça ao usuário nada que você mesmo possa consultar. Não fique bloqueado por isso: uma exploração em andamento é um pré-requisito não resolvido, então apenas as perguntas que dependem dela aguardam o relatório do subagente; faça agora o restante da fronteira. As _decisões_ são do usuário: apresente cada uma a ele e espere.
+Encontrar _fatos_ é tarefa sua, nunca do usuário. Quando uma pergunta da fronteira depender de um fato do ambiente (sistema de arquivos, ferramentas etc.), despache um subagente com uma janela de contexto nova para encontrá-lo; não peça ao usuário nada que você mesmo possa consultar. Não fique bloqueado por isso: uma exploração em andamento é um pré-requisito não resolvido, então apenas as perguntas que dependem dela aguardam o relatório do subagente; faça agora o restante da fronteira. As _decisões_ são do usuário: apresente cada uma a ele e espere.
 
 A sessão termina quando a fronteira estiver vazia: cada ramo da árvore de design foi visitado, e nada foi deixado assumido em silêncio. Não aja com base nela até que o usuário confirme que chegaram a um entendimento compartilhado.
 
-<!-- aligned-with: sha256:f21becdaf62ba829a510f38dac90bc4f54ad90533b325dc3eca17e75253d67f2 -->
+<!-- aligned-with: sha256:e68c4004d491909fc6885f4a0901d4a3806a340e4c8bebca23493b7198451fe5 -->
