@@ -42,11 +42,13 @@ A table of ticket, model and effort is printed before the first implementer star
 
 Everything lands on one branch. Each implementer:
 
-1. confirms its worktree is based on the integration branch before it starts,
+1. checks its worktree against the integration branch and the sha its prompt names before it starts, and resets onto the branch if they differ,
 2. builds its ticket with [tdd](./tdd.md), red-green one slice at a time,
 3. merges the integration branch tip into its own branch before reporting done, so landing it is a fast-forward.
 
 The tracker decides whether a pull request exists at all. If your tracker closes work through PRs, or you ask for one, the skill opens a draft PR after the first merge and marks it ready at the end. Otherwise the run stops on the integration branch with every ticket resolved the way your tracker closes work, which works fully offline against a local markdown tracker.
+
+The orchestrator merges each finished branch itself with `git merge --no-ff`. A merger subagent is spawned only when git reports a conflict. While implementers run in the background, the orchestrator ends its turn and waits for their completion notices: it schedules no wakeup and no cron.
 
 Implementers talk to the orchestrator through context pointers (the spec, the ticket, shared exploration notes, earlier commits) rather than pasted summaries. This keeps each subagent's prompt small and leaves room in the orchestrator's window for the graph.
 
@@ -94,7 +96,7 @@ A worktree holds only what git tracks. Tests that read gitignored fixtures, loca
 - A ticket starts as soon as its last blocker lands on the integration branch, not when the whole run ends.
 - The plan table shows each ticket on its suggested model at medium effort (Haiku with none), and the final report repeats it.
 - Every ticket's trace shows `tdd` running, with a failing test before the code.
-- Merges into the integration branch are fast-forwards, not conflict resolutions.
+- Clean merges into the integration branch spawn no merger subagent, and no implementer has to reset a stale worktree base.
 - The run ends on one branch with every ticket resolved, and a PR only if your tracker wanted one.
 - On a local tracker, every finished ticket file has its boxes ticked and `Status: ready-for-human`, so [archive-feature](./archive-feature.md) can close the feature.
 

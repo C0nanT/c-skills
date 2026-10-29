@@ -24,7 +24,7 @@ Every ticket has a `> **Difficulty:**` line. Each **implementer subagent** runs 
 - **Resolution order.** The named model if recognised (a name containing `opus`, `sonnet` or `haiku`, case-insensitive, on the host's side of the line), else the tier (Heavy is Opus, Standard is Sonnet, Light is Haiku), else Sonnet when the line is missing or unparsable. Record every Sonnet fallback caused by a missing or unparsable line and name it in the final report.
 - **Effort.** Every Sonnet and Opus spawn passes `effort: medium`, never higher, even if the user would approve more. A Haiku spawn passes no effort setting. This covers subagents spawned by skills invoked inside the run (`tdd`, `review-axes`).
 - **Heavy tickets** run on Opus at medium with no human gate.
-- **Subagents with no ticket.** The **exploration subagent** and the **merger subagent** run Sonnet at medium. A **fix-up subagent** (shared-state failures in step 7, review findings in step 8) uses the strongest model among the tickets involved (Haiku < Sonnet < Opus), with a floor of Sonnet at medium, and Sonnet at medium when the involved tickets cannot be determined.
+- **Subagents with no ticket.** The **exploration subagent** and the **merger subagent** run Sonnet at medium. The merger is spawned only when a merge conflicts (step 5). A **fix-up subagent** (shared-state failures in step 7, review findings in step 8) uses the strongest model among the tickets involved (Haiku < Sonnet < Opus), with a floor of Sonnet at medium, and Sonnet at medium when the involved tickets cannot be determined.
 - **Host limits.** Stop if the host cannot set the model per spawn, or cannot set the effort per spawn for a run with any Sonnet or Opus spawn (a Haiku-only run needs no effort control). Stop before spawning anything, tell the user, and suggest `/implement` instead. Never fall back to the session's own model or effort.
 
 Before the first implementer spawn, print a table of ticket, model, effort, marking any fallback, and carry on without waiting for confirmation. Repeat the table in the final report.
@@ -37,12 +37,14 @@ Before the first implementer spawn, print a table of ticket, model, effort, mark
 
 3. Create the integration branch. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge in step 5 (a branch with no commits ahead of main can't open one), marked as closing the spec and tickets.
 
-4. Use **implementer subagents** to implement each ticket, each in its own worktree on its own branch, on the model and effort from **Models and effort**. Each implementer subagent:
-   - confirms its worktree is based on the integration branch before starting, and resets onto it if not;
+4. Use **implementer subagents** to implement each ticket, each in its own worktree on its own branch, on the model and effort from **Models and effort**. Open each implementer's prompt with the integration branch and the sha it must start from. Where the host lets you choose the worktree's base, use that; otherwise the implementer resets. On a local markdown tracker the spec and tickets are untracked, so they are absent from worktrees: point implementers to them by absolute path in the main checkout. Each implementer subagent:
+   - checks its worktree against that branch and sha before starting, and resets onto the integration branch if they differ;
    - calls the Skill tool with `tdd` to build the ticket, running only **isolated tests** (unit and pure logic, nothing that touches shared state). It writes the **shared-state tests** the ticket needs (database, API, e2e, anything on a shared port, file, queue, or external service) but does not run them;
    - merges the integration branch tip into its own branch before reporting done
 
-5. Once an **implementer subagent** completes, merge its work to the integration branch with a **merger subagent** (see **Models and effort**).
+   Background subagents notify you on their own when they finish: end the turn and wait for that notice, with no wakeup and no cron.
+
+5. Once an **implementer subagent** completes, merge its branch into the integration branch yourself with `git merge --no-ff`. If git reports a conflict, run `git merge --abort` and hand that merge to a **merger subagent** (see **Models and effort**).
 
 6. If this changes the **frontier** of available tickets, kick off more **implementer subagents** to work on the new tickets. This allows for maximum concurrency.
 
