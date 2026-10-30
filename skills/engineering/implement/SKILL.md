@@ -34,7 +34,7 @@ Refactor and Review run once, at the end, over the whole run.
 
 ## 1. Build
 
-Call the Skill tool with "tdd" where possible, working at pre-agreed seams. Run typechecking regularly and single test files regularly.
+Call the Skill tool with "tdd" where possible, working at pre-agreed seams. In a repo with no test suite, the repo's available checks (`validate`, `fmt`, lint, typecheck) are the isolated tests. Run typechecking regularly and single test files regularly.
 
 Anything you write that outlives the run (docblocks, code comments, READMEs, docs, ADRs) never points into `.scratch/`: that folder is wiped periodically, so the reference would dangle. State the needed fact inline, or cite a permanent file in the repo instead.
 
@@ -42,9 +42,9 @@ Done when: every piece of the spec or tickets is written.
 
 ## 2. Test
 
-Run the full test suite once.
+Run the full test suite once. In a repo with no test suite, run the checks the repo does have (`validate`, `fmt`, lint, typecheck) as the suite, and say in the report that there was no test suite. Shared-state checks that are manual (a `curl` from another country, a phone on 4G) become a human gate per **Human gates**: ask the person for the exact list of what to test, once, with the pass condition for each item.
 
-Done when: the suite has run and you know its result.
+Done when: the suite (or, with none, the repo's available checks) has run and you know its result.
 
 ## 3. Refactor
 
