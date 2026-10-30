@@ -73,7 +73,7 @@ Every ticket opens with one line, above everything else in the body: a **difficu
 
 The tier is rated on **judgement**, not diff size: a one-line change to a deploy pipeline is Heavy; a 400-line component following an existing pattern is Standard. Ties round up.
 
-It is a hint, not a gate. Nothing enforces it, and the tools name different models anyway, so the line names one per tool and expects you to substitute. Its real job is to be readable before you open a session: you can see from the board which tickets deserve your expensive model and which ones a cheap one will close.
+It is a hint, not a requirement. Nothing enforces it, and the tools name different models anyway, so the line names one per tool and expects you to substitute. Its real job is to be readable before you open a session: you can see from the board which tickets deserve your expensive model and which ones a cheap one will close.
 
 If a run comes back mostly Heavy, read that as a slicing signal rather than a model signal: the slices are probably too wide.
 

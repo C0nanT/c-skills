@@ -29,7 +29,7 @@ Esta skill só roda trabalho de nível intermediário sem supervisão. Antes de 
 
 ## Isolando o diff de cada ticket
 
-`/implement` faz commit do seu trabalho no branch atual quando termina, então **cada ticket é um commit** e a árvore de trabalho não commitada é sempre exatamente o trabalho do ticket atual enquanto ele roda.
+`/implement` faz commit do seu trabalho no branch atual quando termina, então cada ticket é um commit (um ticket com gate humano pode fazer um commit por trecho, ou seja, alguns commits) e a árvore de trabalho não commitada é sempre exatamente o trabalho do ticket atual enquanto ele roda.
 
 **Antes do primeiro ticket:**
 
@@ -41,11 +41,11 @@ Esta skill só roda trabalho de nível intermediário sem supervisão. Antes de 
 Para cada ticket, na ordem:
 
 1. **Pule se já estiver concluído**: se todo checkbox de critério de aceitação do arquivo do ticket já estiver `- [x]`, informe que ele já está completo e siga adiante.
-2. Informe o progresso ao usuário: `Ticket <N>/<M>: <title>`.
+2. Informe o progresso ao usuário: `Ticket <N>/<M>: <title>`, e anote o commit atual (`git rev-parse HEAD`) como o início do ticket.
 3. Inicie **um subagente novo**, usando o mecanismo de subagentes do host: `Agent` no Claude Code, `Task` no Cursor, o equivalente em outros hosts. Use um subagente de propósito geral com acesso total às ferramentas, em **Sonnet** (ou o modelo intermediário equivalente do host) com **`effort: medium`**. Se o host não puder definir modelo ou esforço por criação, diga isso ao usuário e pare, em vez de criar o subagente com o que a sessão usa. Se o host não tiver nenhum mecanismo de subagentes, pare e diga ao usuário que esta skill não pode rodar ali.
-4. Rode-o de forma **síncrona**, nunca em segundo plano, nunca em paralelo com outro ticket. O sequenciamento é o ponto central desta skill; cada commit só contém um ticket se exatamente um ticket estiver em andamento.
+4. Rode-o de forma **síncrona**, nunca em segundo plano, nunca em paralelo com outro ticket. O sequenciamento é o ponto central desta skill; os commits só contêm um ticket se exatamente um ticket estiver em andamento.
 5. Espere terminar e então **verifique** antes de continuar: o subagente relatou sucesso claro e completo, o trabalho dele está commitado (`git status --short` limpo), **e** todo checkbox de critério de aceitação do arquivo do ticket agora está `- [x]` (o `/review-axes` os sincroniza a partir do código no fim do `/implement`). Um relatório de sucesso com critérios desmarcados é uma falha: o código não fez o que o ticket pedia.
-6. Se passar, registre o commit do ticket (`git log -1 --oneline`) e comece o próximo.
+6. Se passar, registre a faixa de commits do ticket (`git log --oneline <início>..HEAD`, em geral um único commit) e comece o próximo.
 7. Em qualquer falha, bloqueio, problema não resolvido, resultado incerto ou critério desmarcado: **pare imediatamente**. Deixe o trabalho daquele ticket como está (o commit dele, ou o que ele deixou sem commit), para que o usuário veja exatamente o que foi alterado. Não comece outro ticket. Relate o problema e espere instruções.
 
 Use um subagente novo para cada ticket. Nunca reutilize a sessão de um ticket anterior. Inicie cada um com uma janela de contexto nova, nunca um fork desta conversa.
@@ -61,11 +61,11 @@ fixed point, so it reviews only your ticket's changes, and give it
 checkboxes.
 
 Nobody is available to answer you. Any question you would ask the user (a
-missing spec, an effort gate, an ambiguity) is a blocker: stop and report the
+missing spec, an effort approval, an ambiguity) is a blocker: stop and report the
 question. Never answer it yourself and never do that work inline.
 
 Report clear success or describe any failure, blocker, unresolved issue, or
-uncertainty. Include the hash of the commit `/implement` made.
+uncertainty. Include the hash of each commit `/implement` made.
 ```
 
 ## Relatório final
@@ -74,4 +74,4 @@ Quando todos os tickets tiverem sucesso, liste os tickets concluídos com as ses
 
 Se a sequência parar, identifique o ticket que falhou, o problema dele e onde está o trabalho dele (o commit, ou a árvore de trabalho não commitada).
 
-<!-- aligned-with: sha256:b289b7e0e37e1c4dbddff835e32287653aa9debc623dc99a45f69a4c9204a363 -->
+<!-- aligned-with: sha256:3643ddb1a3d67aba18c515b74fd3c089a01d6884914e849d2271872efbe9d75c -->

@@ -17,22 +17,9 @@ Quando o host não puder definir o esforço por subagente e o subagente herdaria
 
 Se nenhum humano puder responder (você roda como subagente, sem supervisão, ou o briefing diz que ninguém está por perto), pare e reporte a pergunta como um bloqueio. Nunca volte a fazer o trabalho na mesma sessão. Em uma sessão interativa, continue perguntando e esperando o sim, como descrito acima. A mesma regra vale para qualquer outra pergunta que esta execução faria ao usuário, como onde está a especificação: sem supervisão, isso é um bloqueio, nunca um palpite.
 
-## Gates humanos
-
-Um **ticket de gate** só avança quando uma pessoa executa uma ação (um `terraform apply`, um deploy, uma migração em produção, um teste manual). Esta sessão nunca a executa. O mesmo texto base vive no `implement-spec`; mantenha os dois em sincronia.
-
-- **Reconheça-o** pela linha `> **Gate:** human: <o que a pessoa faz>`. Sem essa linha, deduza pelos critérios de aceite (por exemplo "aplicado pela pessoa") e cite cada gate deduzido no relatório final. Um trabalho que mistura código e gate tem a parte de código construída primeiro, e depois o gate.
-- **Registre o início da execução.** Antes da primeira edição, anote `git rev-parse HEAD`: é o ponto fixo da execução inteira.
-- **Commite antes.** Ao chegar num gate, commite o que foi construído até ali (um commit por trecho entre gates, para que a árvore esteja limpa antes de a pessoa agir). O passo final de Commitar continua cobrindo o último trecho.
-- **Prepare** você mesmo o que a pessoa vai usar (um arquivo de `plan`, um script, um checklist), neste checkout, logo antes de pedir, para que bata com o checkout onde a ação roda.
-- **Peça uma vez**, com o comando exato (por exemplo `! terraform apply /tmp/x.tfplan`), e espere a confirmação. O trabalho que não depende do gate pode continuar enquanto você espera; o que depende dele espera.
-- **Depois da confirmação**, verifique você mesmo o resultado (log, métrica, `curl`). Uma checagem que falha é corrigida nesta sessão e verificada de novo antes do próximo trecho.
-- **Registre.** A confirmação conta como evidência: marque o critério correspondente `- [x]` e liste-o no relatório como "confirmado pela pessoa". O `/review-axes` sincroniza os checkboxes a partir do código, então ele não pode desfazer isso: nomeie esses critérios ao invocá-lo e, depois que ele voltar, marque de novo os que ele tiver desmarcado.
-- **Sem humano disponível** (headless, executado como subagente, ninguém acompanhando): termine todo trecho que não depende do gate, depois pare bloqueado e reporte cada gate pendente com o comando exato. Nunca contorne um gate.
-
-Refatorar e Revisar rodam uma vez só, no final, sobre a execução inteira.
-
 ## 1. Construir
+
+Antes da primeira edição, anote `git rev-parse HEAD` como o início da execução. Se um gate surgir durante a execução, trate-o conforme **Gates humanos**, no fim deste arquivo.
 
 Chame a ferramenta Skill com "tdd" sempre que possível, trabalhando nos seams acordados previamente. Num repositório sem suíte de testes, as checagens que o repositório tem (`validate`, `fmt`, lint, typecheck) são os testes isolados. Rode a checagem de tipos com frequência e rode arquivos de teste individuais com frequência.
 
@@ -60,7 +47,7 @@ Pronto quando: a refatoração foi mantida com a suíte verde, ou desfeita até 
 
 ## 4. Revisar
 
-Invoque a skill /review-axes agora, como uma chamada real de Skill. Dê a ela **a árvore de trabalho não staged** como ponto fixo: as mudanças ainda não estão em nenhum commit, então um diff baseado em referência voltaria vazio. Se existirem commits de gate, a árvore de trabalho guarda só o último trecho: commite-o primeiro (passo 5) e então dê a ela o sha de início da execução como ponto fixo, para que ela veja todos os commits da execução de uma vez. Junto, passe o caminho do ticket que você recebeu, ou o caminho da especificação quando não houver ticket, como argumento de spec, para que ela nunca precise procurar a especificação e sincronize os checkboxes certos. Deixe os checkboxes dos critérios de aceitação (`- [ ]` / `- [x]`) na especificação ou nos tickets para o `/review-axes`, que os sincroniza após a revisão de Spec com base no que o código realmente fez.
+Invoque a skill /review-axes agora, como uma chamada real de Skill. Dê a ela **a árvore de trabalho não staged** como ponto fixo: as mudanças ainda não estão em nenhum commit, então um diff baseado em referência voltaria vazio. Em uma execução com gates, siga a ordem de **Gates humanos**: o ponto fixo é o sha de início registrado da execução. Junto, passe o caminho do ticket que você recebeu, ou o caminho da especificação quando não houver ticket, como argumento de spec, para que ela nunca precise procurar a especificação e sincronize os checkboxes certos. Deixe os checkboxes dos critérios de aceitação (`- [ ]` / `- [x]`) na especificação ou nos tickets para o `/review-axes`, que os sincroniza após a revisão de Spec com base no que o código realmente fez.
 
 Pronto quando: `/review-axes` tiver devolvido seus relatórios de Standards e de Spec nesta execução. Os passos 1 a 3 concluídos são a entrada desta etapa, nunca um substituto para ela: o Veredito abaixo é construído a partir da saída da revisão, então ele não pode ser escrito antes de a revisão existir.
 
@@ -68,9 +55,9 @@ Pronto quando: `/review-axes` tiver devolvido seus relatórios de Standards e de
 
 Faça commit do seu trabalho no branch atual.
 
-Em uma execução com commits de gate, este passo roda antes da Revisão (depois de Refatorar), para que o último trecho já esteja em um commit quando o `/review-axes` fizer o diff a partir do início da execução.
+Em uma execução com gates, siga a ordem de **Gates humanos**: este passo roda antes da Revisão, e as correções feitas depois da Revisão vão em um commit final.
 
-Pronto quando: as mudanças da execução estiverem em um commit no branch atual (uma execução com gates tem um commit por trecho).
+Pronto quando: as mudanças da execução estiverem em um commit no branch atual (uma execução com gates tem um commit por trecho, mais um final para as correções pós-revisão).
 
 ## 6. Reportar
 
@@ -88,4 +75,26 @@ Uma execução com gates acrescenta: um gate confirmado e verificado não muda a
 
 Escolha a pior cor aplicável: qualquer condição vermelha torna o veredito 🔴, mesmo que o resto tenha corrido bem.
 
-<!-- aligned-with: sha256:879e7743a16021f38fab93c17cdbb617936805120321f24afa39e91a6d65362b -->
+
+## Gates humanos
+
+Um **ticket de gate** só avança quando uma pessoa executa uma ação (um `terraform apply`, um deploy, uma migração em produção, um teste manual). Esta sessão nunca a executa. O mesmo texto base vive no `implement-spec`; mantenha os dois em sincronia.
+
+- **Reconheça-o** pela linha `> **Gate:** human: <o que a pessoa faz>`. Sem essa linha, deduza pelos critérios de aceite (por exemplo "aplicado pela pessoa") e cite cada gate deduzido no relatório final. Um trabalho que mistura código e gate tem a parte de código construída primeiro, e depois o gate.
+- **Registre o início da execução.** Antes da primeira edição, anote `git rev-parse HEAD`: é o ponto fixo da execução inteira.
+- **Commite antes.** Ao chegar num gate, commite o que foi construído até ali, para que a árvore esteja limpa antes de a pessoa agir. Cada **trecho** (o trabalho entre dois gates, ou entre o início da execução e o primeiro gate) ganha o seu próprio commit; o passo Commitar cobre o último.
+- **Prepare** você mesmo o que a pessoa vai usar (um arquivo de `plan`, um script, um checklist), neste checkout, logo antes de pedir, para que bata com o checkout onde a ação roda.
+- **Peça uma vez**, com o comando exato (por exemplo `! terraform apply /tmp/x.tfplan`), e espere a confirmação. O trabalho que não depende do gate pode continuar enquanto você espera; o que depende dele espera.
+- **Depois da confirmação**, verifique você mesmo o resultado (log, métrica, `curl`). Uma checagem que falha é corrigida nesta sessão e verificada de novo antes do próximo trecho.
+- **Registre.** A confirmação conta como evidência: marque o critério correspondente `- [x]` e liste-o no relatório como "confirmado pela pessoa". O `/review-axes` sincroniza os checkboxes a partir do código, então ele não pode desfazer isso: nomeie esses critérios ao invocá-lo e, depois que ele voltar, marque de novo os que ele tiver desmarcado.
+- **Sem humano disponível** (headless, executado como subagente, ninguém acompanhando): termine todo trecho que não depende do gate, depois pare bloqueado e reporte cada gate pendente com o comando exato. Nunca contorne um gate.
+
+**Ordem de uma execução com gates.** Refatorar e Revisar rodam uma vez só, no final, sobre a execução inteira, e Commitar passa à frente de Revisar para que o último trecho já esteja commitado quando o `/review-axes` fizer o diff a partir do início registrado da execução:
+
+1. Construir e Testar cada trecho, commitando a cada gate.
+2. Refatorar, sobre tudo que mudou desde o início registrado da execução.
+3. Commitar o último trecho.
+4. Revisar, com o sha de início registrado da execução como ponto fixo.
+5. As correções que a revisão provocar vão em um commit final.
+
+<!-- aligned-with: sha256:13b2ce0340aa3981ef8604b282cfa637f30ade6c053ddde3749f39e1156da585 -->

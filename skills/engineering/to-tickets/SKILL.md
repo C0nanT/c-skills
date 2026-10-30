@@ -93,7 +93,7 @@ Do NOT close or modify any parent issue.
 
 > **Difficulty:** Heavy | Standard | Light: **suggested model:** <model> (Claude Code) / <model> (Cursor). Suggestion only, use whatever model you have to hand.
 
-> **Gate:** human: <what the person does>   (optional: only on a gate ticket, directly below the Difficulty line; omit it on every other ticket)
+> **Gate:** human: <what the person does>   (gate tickets only)
 
 **Spec:** the path of the spec this ticket comes from, relative to this ticket file (with the default layout, `../SPEC.md`). Omit the line only when no spec file exists (the plan came from the conversation).
 
@@ -117,7 +117,7 @@ Status: ready-for-agent
 
 The difficulty line is the first thing in the issue body, above every section.
 
-On a gate ticket only, add `> **Gate:** human: <what the person does>` directly below it (optional; omit it on every other ticket). The gate ticket keeps its difficulty line.
+> **Gate:** human: <what the person does>   (gate tickets only)
 
 ## Parent
 

@@ -17,22 +17,9 @@ Where the host cannot set effort per spawn and the subagent would inherit a `hig
 
 If no human can answer (you run as a subagent, unattended, or the brief says nobody is around), stop and report the question as a blocker. Never fall back to doing the work inline. In an interactive session, keep asking and waiting for the yes as above. The same rule covers every other question this run would put to the user, such as where the spec is: unattended, it is a blocker, never a guess.
 
-## Human gates
-
-A **gate ticket** only advances when a person performs an action (a `terraform apply`, a deploy, a production migration, a manual test). This session never performs it. The same base text lives in `implement-spec`; keep the two in sync.
-
-- **Recognise it** by the `> **Gate:** human: <what the person does>` line. Without that line, deduce it from the acceptance criteria (for example "applied by the person") and name every deduced gate in the final report. Work that mixes code and a gate has its code part built first, then the gate.
-- **Record the run start.** Before the first edit, note `git rev-parse HEAD`: it is the fixed point for the whole run.
-- **Commit first.** On reaching a gate, commit what was built so far (one commit per stretch between gates, so the tree is clean before the person acts). The final Commit step still covers the last stretch.
-- **Prepare** what the person will use (a `plan` file, a script, a checklist) yourself, in this checkout, right before asking, so it matches the checkout where the action runs.
-- **Ask once**, with the exact command (for example `! terraform apply /tmp/x.tfplan`), and wait for the confirmation. Work that does not depend on the gate may continue while you wait; anything that does depend on it waits.
-- **After the confirmation**, verify the result yourself (log, metric, `curl`). A failed check is fixed in this session, then verified again, before the next stretch.
-- **Record it.** The confirmation counts as evidence: tick the matching criterion `- [x]` and list it in the report as "confirmed by the person". `/review-axes` syncs checkboxes from the code, so it must not undo this: name those criteria when you invoke it, and after it returns re-tick any it flipped back.
-- **No human available** (headless, run as a subagent, nobody watching): finish every stretch that does not depend on the gate, then stop blocked and report each pending gate with its exact command. Never work around a gate.
-
-Refactor and Review run once, at the end, over the whole run.
-
 ## 1. Build
+
+Before the first edit, note `git rev-parse HEAD` as the run start. If a gate comes up during the run, handle it per **Human gates** at the end of this file.
 
 Call the Skill tool with "tdd" where possible, working at pre-agreed seams. In a repo with no test suite, the repo's available checks (`validate`, `fmt`, lint, typecheck) are the isolated tests. Run typechecking regularly and single test files regularly.
 
@@ -60,7 +47,7 @@ Done when: the refactor is either kept with a green suite, or undone back to the
 
 ## 4. Review
 
-Invoke the /review-axes skill now, as a real Skill call. Give it **the unstaged working tree** as its fixed point: the changes are not in any commit yet, so a ref-based diff would come back empty. If gate commits exist, the working tree holds only the last stretch: commit it first (step 5), then give it the recorded run-start sha as the fixed point, so it sees every commit of the run once. Alongside it, pass the path of the ticket you were given, or the spec path when there is no ticket, as the spec argument, so it never has to search for the spec and syncs the right checkboxes. Leave acceptance-criteria checkboxes (`- [ ]` / `- [x]`) in the spec or tickets to `/review-axes`, which syncs them after the Spec review based on what the code actually did.
+Invoke the /review-axes skill now, as a real Skill call. Give it **the unstaged working tree** as its fixed point: the changes are not in any commit yet, so a ref-based diff would come back empty. In a gated run, follow the order in **Human gates** instead: the fixed point is the recorded run-start sha. Alongside it, pass the path of the ticket you were given, or the spec path when there is no ticket, as the spec argument, so it never has to search for the spec and syncs the right checkboxes. Leave acceptance-criteria checkboxes (`- [ ]` / `- [x]`) in the spec or tickets to `/review-axes`, which syncs them after the Spec review based on what the code actually did.
 
 Done when: `/review-axes` has returned its Standards and Spec reports in this run. Steps 1 to 3 passing is the input to this step, never a substitute for it: the Verdict below is built from the review's output, so it cannot be written until the review exists.
 
@@ -68,9 +55,9 @@ Done when: `/review-axes` has returned its Standards and Spec reports in this ru
 
 Commit your work to the current branch.
 
-In a run with gate commits, this step runs before Review (after Refactor), so the last stretch is in a commit when `/review-axes` diffs from the run start.
+In a gated run, follow the order in **Human gates**: this step runs before Review, and fixes made after Review go in one final commit.
 
-Done when: the run's changes are in a commit on the current branch (a run with gates has one commit per stretch).
+Done when: the run's changes are in a commit on the current branch (a run with gates has one commit per stretch, plus a final one for post-review fixes).
 
 ## 6. Report
 
@@ -87,3 +74,24 @@ One line: the emoji, then a short reason. 🟢 is the emoji **alone**, with no t
 A run with gates adds: a gate confirmed and verified does not change the colour and is listed as "confirmed by the person". A gate still pending (nobody to ask, or no confirmation yet) is 🔴: name it with its exact command.
 
 Pick the worst applicable colour: any red condition makes the verdict 🔴 even if the rest went fine.
+
+## Human gates
+
+A **gate ticket** only advances when a person performs an action (a `terraform apply`, a deploy, a production migration, a manual test). This session never performs it. The same base text lives in `implement-spec`; keep the two in sync.
+
+- **Recognise it** by the `> **Gate:** human: <what the person does>` line. Without that line, deduce it from the acceptance criteria (for example "applied by the person") and name every deduced gate in the final report. Work that mixes code and a gate has its code part built first, then the gate.
+- **Record the run start.** Before the first edit, note `git rev-parse HEAD`: it is the fixed point for the whole run.
+- **Commit first.** On reaching a gate, commit what was built so far, so the tree is clean before the person acts. Each **stretch** (the work between two gates, or between the run start and the first gate) gets its own commit; the Commit step covers the last one.
+- **Prepare** what the person will use (a `plan` file, a script, a checklist) yourself, in this checkout, right before asking, so it matches the checkout where the action runs.
+- **Ask once**, with the exact command (for example `! terraform apply /tmp/x.tfplan`), and wait for the confirmation. Work that does not depend on the gate may continue while you wait; anything that does depend on it waits.
+- **After the confirmation**, verify the result yourself (log, metric, `curl`). A failed check is fixed in this session, then verified again, before the next stretch.
+- **Record it.** The confirmation counts as evidence: tick the matching criterion `- [x]` and list it in the report as "confirmed by the person". `/review-axes` syncs checkboxes from the code, so it must not undo this: name those criteria when you invoke it, and after it returns re-tick any it flipped back.
+- **No human available** (headless, run as a subagent, nobody watching): finish every stretch that does not depend on the gate, then stop blocked and report each pending gate with its exact command. Never work around a gate.
+
+**Order of a gated run.** Refactor and Review run once, at the end, over the whole run, and Commit moves ahead of Review so the last stretch is committed when `/review-axes` diffs from the recorded run start:
+
+1. Build and Test each stretch, committing at every gate.
+2. Refactor, over everything changed since the recorded run start.
+3. Commit the last stretch.
+4. Review, with the recorded run-start sha as the fixed point.
+5. Fixes the review drives go into one final commit.
