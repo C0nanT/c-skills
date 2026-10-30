@@ -43,8 +43,9 @@ so a Heavy ticket stops the run before any work is done.
 
 ## Isolating each ticket's diff
 
-`/implement` commits its work to the current branch when it finishes, so **each
-ticket is one commit** and the uncommitted working tree is always exactly the
+`/implement` commits its work to the current branch when it finishes, so each
+ticket is a commit (a ticket with a human gate may make one commit per stretch,
+so a few commits) and the uncommitted working tree is always exactly the
 current ticket's work while it runs.
 
 **Before the first ticket:**
@@ -59,7 +60,8 @@ For each ticket, in order:
 
 1. **Skip if already done**: if every acceptance-criteria checkbox in the
    ticket file is already `- [x]`, report it as already complete and move on.
-2. Report progress to the user: `Ticket <N>/<M>: <title>`.
+2. Report progress to the user: `Ticket <N>/<M>: <title>`, and note the current
+   commit (`git rev-parse HEAD`) as the ticket's start.
 3. Start **one fresh subagent**, using the host's subagent mechanism: `Agent`
    on Claude Code, `Task` on Cursor, the equivalent on other hosts. Use a
    general-purpose subagent with full tool access, on **Sonnet** (or the host's
@@ -68,16 +70,16 @@ For each ticket, in order:
    spawning at whatever the session uses. If the host has no subagent
    mechanism, stop and tell the user this skill can't run here.
 4. Run it **synchronously**, never in the background, never in parallel with
-   another ticket. Sequencing is the whole point of this skill; each commit
-   holds one ticket only if exactly one ticket is in flight.
+   another ticket. Sequencing is the whole point of this skill; the commits
+   hold one ticket only if exactly one ticket is in flight.
 5. Wait until it finishes, then **verify** before continuing: the subagent
    reported clear, complete success, its work is committed (`git status
    --short` is clean), **and** every acceptance-criteria checkbox in the
    ticket file is now `- [x]` (`/review-axes` syncs those from the code
    at the end of `/implement`). A success report with unchecked criteria is a
    failure: the code didn't do what the ticket asked.
-6. On pass, record the ticket's commit (`git log -1 --oneline`) and start the
-   next ticket.
+6. On pass, record the ticket's commit range (`git log --oneline <start>..HEAD`,
+   usually a single commit) and start the next ticket.
 7. On any failure, blocker, unresolved issue, uncertain result, or unchecked
    criterion: **stop immediately**. Leave that ticket's work as it is (its
    commit, or whatever it left uncommitted) so the user can see exactly what it
@@ -97,11 +99,11 @@ fixed point, so it reviews only your ticket's changes, and give it
 checkboxes.
 
 Nobody is available to answer you. Any question you would ask the user (a
-missing spec, an effort gate, an ambiguity) is a blocker: stop and report the
+missing spec, an effort approval, an ambiguity) is a blocker: stop and report the
 question. Never answer it yourself and never do that work inline.
 
 Report clear success or describe any failure, blocker, unresolved issue, or
-uncertainty. Include the hash of the commit `/implement` made.
+uncertainty. Include the hash of each commit `/implement` made.
 ```
 
 ## Final report

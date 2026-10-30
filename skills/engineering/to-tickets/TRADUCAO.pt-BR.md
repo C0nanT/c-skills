@@ -93,7 +93,7 @@ NÃO feche nem modifique nenhuma issue-pai.
 
 > **Difficulty:** Heavy | Standard | Light: **suggested model:** <model> (Claude Code) / <model> (Cursor). Suggestion only, use whatever model you have to hand.
 
-> **Gate:** human: <what the person does>   (optional: only on a gate ticket, directly below the Difficulty line; omit it on every other ticket)
+> **Gate:** human: <what the person does>   (gate tickets only)
 
 **Spec:** the path of the spec this ticket comes from, relative to this ticket file (with the default layout, `../SPEC.md`). Omit the line only when no spec file exists (the plan came from the conversation).
 
@@ -117,7 +117,7 @@ Status: ready-for-agent
 
 A linha de dificuldade é a primeira coisa no corpo da issue, acima de todas as seções.
 
-Apenas em um ticket de gate, adicione `> **Gate:** human: <o que a pessoa faz>` logo abaixo dela (opcional; omita em todos os outros tickets). O ticket de gate mantém a linha de dificuldade.
+> **Gate:** human: <what the person does>   (gate tickets only)
 
 ## Parent
 
@@ -144,4 +144,4 @@ Os seams das Testing Decisions da especificação que este ticket exercita, um p
 
 Em qualquer uma das formas, evite caminhos de arquivo específicos ou trechos de código: eles ficam desatualizados rápido. Exceção: se um protótipo produziu um trecho que codifica uma decisão com mais precisão do que a prosa consegue (máquina de estados, reducer, schema, formato de tipo), inclua-o e observe brevemente que veio de um protótipo. Reduza ao essencial das partes ricas em decisão, não uma demo funcional; apenas os pontos importantes.
 
-<!-- aligned-with: sha256:c7cedf497938cd2f912625550c2e04c9204fb76e01b2f169cf8e36d6c32a9a59 -->
+<!-- aligned-with: sha256:1f4e8c0ed1f457498971d30e68ea2493c11a26798217bc5043c4aeaa465ad422 -->

@@ -8,4 +8,4 @@
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução) e este `RESUMO.md`. Usa as skills `tdd` e `review-axes`, além de `/archive-feature`.
 
-<!-- aligned-with: sha256:3447445c124777bae0b0f771824b40c62e8fb7d5ab72054b0f63290249960004 -->
+<!-- aligned-with: sha256:27e5cb85b0ea2011cd98d52d371d209758655dd03e33e26a0a9061cd875d55bb -->

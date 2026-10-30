@@ -49,15 +49,17 @@ Some work only moves when a person acts: a `terraform apply`, a deploy, a produc
 
 When the run reaches a gate it:
 
-1. commits what it built so far, so you act on a clean tree (one commit per stretch between gates);
+1. commits what it built so far, so you act on a clean tree (one commit per stretch, the work between two gates);
 2. prepares what you will use (a plan file, a script) in this checkout;
 3. asks once, with the exact command, and waits;
 4. after you confirm, checks the result itself (a log, a metric, a `curl`) and fixes a failure before moving on;
 5. ticks the criterion `- [x]` and lists it in the report as "confirmed by the person". It tells `review-axes` about those criteria and re-ticks any it flips back, since that skill syncs boxes from the code and a human action leaves no code behind.
 
-In a repo with no test suite, the checks the repo does have (`validate`, `fmt`, lint, typecheck) stand in as the isolated tests while building and as the suite in the Test beat, and the report says there was no suite. Manual shared-state tests (a `curl` from another country, a phone on 4G) become a human gate with the exact list of what to test, asked once with the pass condition for each item.
+Refactor and `review-axes` still run once, at the end, over every commit of the run: the last stretch is committed first, then the review diffs from where the run started, and any fixes it drives go in one final commit. With nobody to answer, the run finishes what does not depend on the gate and stops blocked, 🔴, naming each pending gate and its command.
 
-Refactor and `review-axes` still run once, at the end, over every commit of the run (the last stretch is committed first, then the review diffs from where the run started). With nobody to answer, the run finishes what does not depend on the gate and stops blocked, 🔴, naming each pending gate and its command.
+## Repos with no test suite
+
+In a repo with no test suite, the checks the repo does have (`validate`, `fmt`, lint, typecheck) stand in as the isolated tests while building and as the suite in the Test beat, and the report says there was no suite. Manual shared-state tests (a `curl` from another country, a phone on 4G) become a human gate with the exact list of what to test, asked once with the pass condition for each item.
 
 ## Pre-agreed seams
 
