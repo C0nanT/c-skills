@@ -32,11 +32,26 @@ Each ticket's **Difficulty** line, as [to-tickets](./to-tickets.md) writes it, n
 | 3 | No line, or one it cannot parse | Sonnet, named in the final report |
 
 - **Effort is pinned** at medium for Sonnet and Opus, even if you would approve more, and the rule reaches subagents that [tdd](./tdd.md) and [review-axes](./review-axes.md) spawn inside the run. Haiku gets no effort setting.
-- **No human gate on Heavy tickets.** They run on Opus at medium without asking.
+- **No user approval needed on Heavy tickets.** They run on Opus at medium without asking.
 - **Fix-ups never run cheap.** A fix-up takes the strongest model among the tickets involved, because a fix needs at least the judgment of the work it repairs, with a floor of Sonnet.
 - **The run stops rather than guess.** If the host cannot set the model per spawn, or the effort for a run with any Sonnet or Opus spawn, it suggests [implement](./implement.md) instead of falling back to your session's own settings.
 
 A table of ticket, model and effort is printed before the first implementer starts, without pausing for you, and repeated in the final report with any fallbacks marked.
+
+## Human gates
+
+Some tickets only move when a person acts: a `terraform apply`, a deploy, a production migration, a manual test. [to-tickets](./to-tickets.md) gives each one its own **gate ticket**, marked `> **Gate:** human: <what the person does>`. A ticket without that line is still caught if its acceptance criteria describe a human action, and the final report names every gate it deduced rather than read. A pure gate ticket gets no implementer and shows as "human gate" in the model table, with no model or effort, and it is not counted as a Sonnet fallback. A ticket that mixes code and a gate is listed with its implementer's model for the code part, then the gate.
+
+When a gate reaches the frontier, the orchestrator:
+
+1. prepares what you will use (a `plan` file, say) in the main checkout after the merge, right before asking, so it matches where you run the command;
+2. asks once, with the exact command, and keeps working on tickets that do not depend on the gate while dependents wait;
+3. after you confirm, checks the result itself (a log, a metric, a `curl`), and turns a failure into a fix-up implementer on the model the gate ticket's **Difficulty** line gives;
+4. ticks the criterion `- [x]` and lists it in the final report as "confirmed by the person".
+
+With nobody to answer (headless, or run as a subagent), the independent tickets finish and the run stops blocked, reporting each pending gate with its exact command. A ticket that mixes code and a gate has the code built first by an implementer, and the gate after.
+
+The closing `review-axes` step syncs boxes from the code, so the orchestrator names the person-confirmed criteria to it and re-ticks any it flipped back before resolving the tickets.
 
 ## The integration branch
 
@@ -46,11 +61,21 @@ Everything lands on one branch. Each implementer:
 2. builds its ticket with [tdd](./tdd.md), red-green one slice at a time,
 3. merges the integration branch tip into its own branch before reporting done, so landing it is a fast-forward.
 
+If the spec, the tickets or the repo's own instructions (`CLAUDE.md`, `AGENTS.md`) explicitly say to commit straight to `main`, `main` is the integration branch and no branch is created. Implementers still get their worktrees and temporary local branches, and the final step cleans them up. Without that explicit instruction, nothing changes: the skill creates the integration branch.
+
 The tracker decides whether a pull request exists at all. If your tracker closes work through PRs, or you ask for one, the skill opens a draft PR after the first merge and marks it ready at the end. Otherwise the run stops on the integration branch with every ticket resolved the way your tracker closes work, which works fully offline against a local markdown tracker.
 
 Implementers talk to the orchestrator through context pointers (the spec, the ticket, shared exploration notes, earlier commits) rather than pasted summaries. This keeps each subagent's prompt small and leaves room in the orchestrator's window for the graph.
 
+## Repos with no test suite
+
+In a repo with no test suite, the checks the repo does have (`validate`, `fmt`, lint, typecheck) stand in as the isolated tests, the report says there was no suite, and manual shared-state tests (a `curl` from another country, a phone on 4G) become a human gate with the exact list of what to test.
+
 ## Common questions
+
+**The run stopped and asked me to run a command. What now?**
+
+That is a human gate. Run the exact command it printed, then say so. The agent verifies the result and carries on with the tickets that were waiting. Tickets that did not depend on the gate kept running in the meantime.
 
 **How is this different from running `/implement` on each ticket myself?**
 
@@ -96,6 +121,7 @@ A worktree holds only what git tracks. Tests that read gitignored fixtures, loca
 - Every ticket's trace shows `tdd` running, with a failing test before the code.
 - Merges into the integration branch are fast-forwards, not conflict resolutions.
 - The run ends on one branch with every ticket resolved, and a PR only if your tracker wanted one.
+- A human gate is asked for once, with the exact command, and the report lists it as "confirmed by the person" (or as blocked, with the pending command, if nobody was there).
 - On a local tracker, every finished ticket file has its boxes ticked and `Status: ready-for-human`, so [archive-feature](./archive-feature.md) can close the feature.
 
 ## Where it fits

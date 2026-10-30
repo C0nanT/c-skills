@@ -37,6 +37,8 @@ Divida o trabalho em tickets de **tracer bullet**.
 
 Dê a cada ticket as suas **arestas de bloqueio**: os outros tickets que precisam estar concluídos antes que ele possa começar. Um ticket sem bloqueadores pode começar imediatamente.
 
+**Separe as ações humanas.** Quando a especificação contiver uma ação que só uma pessoa pode executar (um `terraform apply`, um deploy, uma migração em produção, um teste manual em um dispositivo), dê a ela um **ticket de gate** próprio, em vez de escondê-la dentro de um ticket de código. O ticket de gate bloqueia todos os tickets que dependem da ação, e os tickets que preparam a ação o bloqueiam. Marque-o com a linha `> **Gate:** human: <o que a pessoa faz>`, logo abaixo da linha `Difficulty`, que também permanece no ticket de gate. Todos os outros tickets omitem a linha `Gate`.
+
 **Refatorações amplas são a exceção à fatia vertical.** Uma **refatoração ampla** é uma mudança mecânica (renomear uma coluna, retipar um símbolo compartilhado) cujo **raio de impacto** se espalha por toda a base de código, de modo que uma única edição quebra milhares de pontos de chamada de uma vez, e nenhuma fatia vertical consegue fechar verde. Não a force em um tracer bullet; sequencie-a como **expandir e depois contrair** (expand-contract). Primeiro expanda: adicione a nova forma ao lado da antiga, para que nada quebre. Depois migre os pontos de chamada em lotes, dimensionados pelo raio de impacto (por pacote, por diretório), cada lote sendo um ticket próprio bloqueado pela expansão, mantendo o CI verde de lote para lote porque a forma antiga ainda existe. Por fim, contraia: apague a forma antiga assim que nenhum chamador restar, em um ticket bloqueado por todos os lotes de migração. Quando nem os lotes conseguem ficar verdes sozinhos, mantenha a sequência, mas faça-os compartilhar um branch de integração, que todos bloqueiam um ticket final de integrar-e-verificar; o verde só é garantido ali.
 
 ### 4. Classifique a dificuldade de cada ticket
@@ -61,6 +63,7 @@ Apresente o detalhamento proposto como uma lista numerada. Para cada ticket, mos
 
 - **Título**: nome curto e descritivo
 - **Dificuldade**: o nível e o modelo sugerido
+- **Gate**: apenas para um ticket de gate, o que a pessoa precisa fazer
 - **Bloqueado por**: quais outros tickets (se houver) precisam ser concluídos antes
 - **O que entrega**: o comportamento de ponta a ponta que este ticket torna possível
 
@@ -90,6 +93,8 @@ NÃO feche nem modifique nenhuma issue-pai.
 
 > **Difficulty:** Heavy | Standard | Light: **suggested model:** <model> (Claude Code) / <model> (Cursor). Suggestion only, use whatever model you have to hand.
 
+> **Gate:** human: <what the person does>   (gate tickets only)
+
 **Spec:** the path of the spec this ticket comes from, relative to this ticket file (with the default layout, `../SPEC.md`). Omit the line only when no spec file exists (the plan came from the conversation).
 
 **What to build:** the end-to-end behaviour this ticket makes work, from the user's perspective, not a layer-by-layer implementation list.
@@ -111,6 +116,8 @@ Status: ready-for-agent
 > **Difficulty:** Heavy | Standard | Light: **suggested model:** <model> (Claude Code) / <model> (Cursor). Suggestion only, use whatever model you have to hand.
 
 A linha de dificuldade é a primeira coisa no corpo da issue, acima de todas as seções.
+
+> **Gate:** human: <what the person does>   (gate tickets only)
 
 ## Parent
 
@@ -137,4 +144,4 @@ Os seams das Testing Decisions da especificação que este ticket exercita, um p
 
 Em qualquer uma das formas, evite caminhos de arquivo específicos ou trechos de código: eles ficam desatualizados rápido. Exceção: se um protótipo produziu um trecho que codifica uma decisão com mais precisão do que a prosa consegue (máquina de estados, reducer, schema, formato de tipo), inclua-o e observe brevemente que veio de um protótipo. Reduza ao essencial das partes ricas em decisão, não uma demo funcional; apenas os pontos importantes.
 
-<!-- aligned-with: sha256:e87c0eae43d7c4c77df76c7229fd20ed32ffcb9d58836122246e9a6788252f1b -->
+<!-- aligned-with: sha256:1f4e8c0ed1f457498971d30e68ea2493c11a26798217bc5043c4aeaa465ad422 -->

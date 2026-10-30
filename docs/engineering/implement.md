@@ -43,6 +43,24 @@ A run is seven beats, in order:
 
 One run covers one ticket. The tickets [to-tickets](./to-tickets.md) produces are tracer-bullet vertical slices sized to fit a single fresh context window, so the intended rhythm is: clear context, implement one ticket, you commit from the message it wrote, clear again. Each ticket is self-contained, which is what makes the previous ticket's context disposable.
 
+## Human gates
+
+Some work only moves when a person acts: a `terraform apply`, a deploy, a production migration, a manual test. [to-tickets](./to-tickets.md) marks such a ticket `> **Gate:** human: <what the person does>`, and a ticket without that line is still caught when its acceptance criteria describe a human action (the report names every gate it deduced). The wording is shared with [implement-spec](./implement-spec.md); the difference is that here one session does everything.
+
+When the run reaches a gate it:
+
+1. commits what it built so far, so you act on a clean tree (one commit per stretch, the work between two gates);
+2. prepares what you will use (a plan file, a script) in this checkout;
+3. asks once, with the exact command, and waits;
+4. after you confirm, checks the result itself (a log, a metric, a `curl`) and fixes a failure before moving on;
+5. ticks the criterion `- [x]` and lists it in the report as "confirmed by the person". It tells `review-axes` about those criteria and re-ticks any it flips back, since that skill syncs boxes from the code and a human action leaves no code behind.
+
+Refactor and `review-axes` still run once, at the end, over every commit of the run: the last stretch is committed first, then the review diffs from where the run started, and any fixes it drives go in one final commit. With nobody to answer, the run finishes what does not depend on the gate and stops blocked, 🔴, naming each pending gate and its command.
+
+## Repos with no test suite
+
+In a repo with no test suite, the checks the repo does have (`validate`, `fmt`, lint, typecheck) stand in as the isolated tests while building and as the suite in the Test beat, and the report says there was no suite. Manual shared-state tests (a `curl` from another country, a phone on 4G) become a human gate with the exact list of what to test, asked once with the pass condition for each item.
+
 ## Pre-agreed seams
 
 The skill's central idea is the **seam**, the public boundary you observe behaviour at without reaching inside. Tests live at seams. When the seam is agreed before any code exists, the tests last, and you can rewrite the implementation underneath without changing them.
@@ -100,6 +118,7 @@ The agent resolved `#2` against another numbered list in context, such as a todo
 - Typechecks and single test files run repeatedly during the run, and the full suite runs once near the end (and once more after a refactor).
 - The run ends with a commit on the current branch and a verdict line.
 - The verdict colour matches what actually happened: a bare 🟢 when nothing deviated, 🟡 with the adjustment named, 🔴 with the thing you have to do spelled out.
+- A human gate is asked for once, with the exact command, after a commit of the work so far, and the report lists it as "confirmed by the person" (or as blocked, with the pending command, if nobody was there).
 - The diff is one ticket's worth of change: a vertical slice through every layer, not several tickets swept together.
 
 ## Where it fits

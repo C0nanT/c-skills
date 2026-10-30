@@ -55,6 +55,12 @@ One shape breaks the tracer-bullet rule. A **wide refactor** is a single mechani
 
 Where even the batches can't stay green alone, they share an integration branch and all block a final integrate-and-verify ticket. CI only has to be green at that ticket.
 
+## Gate tickets for human actions
+
+Some steps in a spec only a person can do: a `terraform apply`, a deploy, a production migration, a manual test on a phone. `to-tickets` gives each one its own **gate ticket** rather than burying it inside a code ticket. The gate ticket blocks every ticket that depends on the action, so the graph shows where a run needs you.
+
+A gate ticket carries one extra line, `> **Gate:** human: <what the person does>`, directly below the `Difficulty` line, which stays. Both the local template and the issue template show it as optional: it appears only on gate tickets.
+
 ## Difficulty and the model hint
 
 Every ticket opens with one line, above everything else in the body: a **difficulty tier** and a **suggested model**.
@@ -67,7 +73,7 @@ Every ticket opens with one line, above everything else in the body: a **difficu
 
 The tier is rated on **judgement**, not diff size: a one-line change to a deploy pipeline is Heavy; a 400-line component following an existing pattern is Standard. Ties round up.
 
-It is a hint, not a gate. Nothing enforces it, and the tools name different models anyway, so the line names one per tool and expects you to substitute. Its real job is to be readable before you open a session: you can see from the board which tickets deserve your expensive model and which ones a cheap one will close.
+It is a hint, not a requirement. Nothing enforces it, and the tools name different models anyway, so the line names one per tool and expects you to substitute. Its real job is to be readable before you open a session: you can see from the board which tickets deserve your expensive model and which ones a cheap one will close.
 
 If a run comes back mostly Heavy, read that as a slicing signal rather than a model signal: the slices are probably too wide.
 
@@ -103,6 +109,7 @@ The skill stops at the artifact, and there is no auto-dispatch mode. Dispatch is
 - The list comes back to you numbered, with a "Blocked by" line on each, before anything is published.
 - The ticket at the top has no blockers and can be started immediately.
 - Each ticket lists the seams it exercises, or says "None" explicitly.
+- A step only a person can do is its own ticket, with a `Gate` line under `Difficulty`, and it blocks the tickets that depend on it.
 - Each ticket opens with a difficulty tier and a model suggestion, and most of them read Standard.
 - Nothing in a ticket body is a file path or a line number, except a snippet a prototype produced.
 - Each ticket reads like something a fresh session could finish without you in the room.
