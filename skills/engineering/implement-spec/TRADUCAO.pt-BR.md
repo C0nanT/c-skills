@@ -26,10 +26,22 @@ Todo ticket tem uma linha `> **Difficulty:**`. Cada **subagente implementador** 
 - **Ordem de resolução.** O modelo nomeado, se reconhecido (um nome que contenha `opus`, `sonnet` ou `haiku`, sem diferenciar maiúsculas, no lado do host na linha); senão o tier (Heavy é Opus, Standard é Sonnet, Light é Haiku); senão Sonnet quando a linha está ausente ou não pode ser interpretada. Registre cada fallback para Sonnet causado por linha ausente ou ilegível e cite-o no relatório final.
 - **Esforço.** Todo spawn de Sonnet e Opus passa `effort: medium`, nunca mais alto, mesmo que o usuário aprovasse mais. Um spawn de Haiku não passa configuração de esforço. Isso vale para subagentes criados por skills invocadas dentro da execução (`tdd`, `review-axes`).
 - **Tickets Heavy** rodam em Opus com esforço medium, sem aprovação humana.
+- **Tickets de gate** (veja **Gates humanos**) não ganham implementador, então a tabela os lista como "gate humano", sem modelo e sem esforço, e eles não contam como fallback para Sonnet. A linha `Difficulty` deles ainda vale: um fix-up depois de uma verificação de gate que falhou trata o ticket de gate como um ticket envolvido.
 - **Subagentes sem ticket.** O **subagente de exploração** e o **subagente de merge** rodam Sonnet com esforço medium. Um **subagente de correção** (falhas de estado compartilhado no passo 7, achados da revisão no passo 8) usa o modelo mais forte entre os tickets envolvidos (Haiku < Sonnet < Opus), com piso de Sonnet com esforço medium, e Sonnet com esforço medium quando não for possível determinar os tickets envolvidos.
 - **Limites do host.** Pare se o host não consegue definir o modelo por spawn, ou não consegue definir o esforço por spawn em uma execução com algum spawn de Sonnet ou Opus (uma execução só com Haiku não precisa de controle de esforço). Pare antes de criar qualquer subagente, avise o usuário e sugira `/implement`. Nunca recorra ao modelo ou esforço da própria sessão.
 
 Antes do primeiro spawn de implementador, imprima uma tabela de ticket, modelo e esforço, marcando qualquer fallback, e siga adiante sem esperar confirmação. Repita a tabela no relatório final.
+
+## Gates humanos
+
+Um **ticket de gate** só avança quando uma pessoa executa uma ação (um `terraform apply`, um deploy, uma migração em produção, um teste manual). Ele não ganha implementador.
+
+- **Reconheça-o** pela linha `> **Gate:** human: <o que a pessoa faz>`. Sem essa linha, deduza pelos critérios de aceite (por exemplo "aplicado pela pessoa") e cite cada gate deduzido no relatório final. Um ticket que mistura código e gate tem a parte de código construída primeiro por um implementador, e depois o gate.
+- **Prepare** você mesmo o que a pessoa vai usar (um arquivo de `plan`, um script, um checklist), no checkout principal depois do merge, logo antes de pedir, para que bata com o checkout onde a ação roda. O implementador de um ticket que prepara um gate só edita, commita e roda checagens locais; ele não produz o artefato do gate.
+- **Peça uma vez**, com o comando exato (por exemplo `! terraform apply /tmp/x.tfplan`). Continue nos tickets que não dependem do gate; os dependentes esperam a confirmação.
+- **Depois da confirmação**, verifique você mesmo o resultado (log, métrica, `curl`). Uma checagem que falha vira um **subagente implementador** de correção, no modelo que **Modelos e esforço** dá para a linha `Difficulty` do ticket de gate.
+- **Registre.** A confirmação conta como evidência: marque o critério correspondente com `- [x]` e liste-o no relatório final como "confirmado pela pessoa".
+- **Sem humano disponível** (headless, executado como subagente, ninguém acompanhando): termine todos os tickets independentes, depois pare bloqueado e reporte cada gate pendente com o comando exato. Nunca contorne um gate.
 
 ## Passos
 
@@ -46,15 +58,15 @@ Antes do primeiro spawn de implementador, imprima uma tabela de ticket, modelo e
 
 5. Assim que um **subagente implementador** terminar, faça merge do trabalho dele no branch de integração com um **subagente de merge** (veja **Modelos e esforço**).
 
-6. Se isso alterar a **fronteira** de tickets disponíveis, dispare mais **subagentes implementadores** para trabalhar nos novos tickets. Isso permite máxima concorrência.
+6. Se isso alterar a **fronteira** de tickets disponíveis, dispare mais **subagentes implementadores** para trabalhar nos novos tickets. Isso permite máxima concorrência. Um ticket de gate na fronteira é tratado conforme **Gates humanos**, não disparado.
 
 7. Quando todos os tickets estiverem concluídos e mesclados, rode os **testes de estado compartilhado** uma única vez, em série, no branch de integração (sem nenhum outro subagente rodando). Implementadores em paralelo compartilham o mesmo banco, portas e serviços, então esses testes corromperiam os dados uns dos outros se rodassem durante os passos 4 a 6. Corrija todas as falhas em um único **subagente implementador** de correção novo e rode de novo apenas os testes que falharam.
 
 8. Chame a ferramenta Skill com `review-axes` no branch de integração, passando o caminho da especificação como argumento de spec. Corrija todos os problemas levantados pela revisão em um único **subagente implementador** de correção novo. Se as correções tocarem código coberto por testes de estado compartilhado, rode esses testes de novo, em série, depois.
 
 9. Se existir um PR em rascunho, marque-o como pronto para revisão. Caso contrário, resolva cada ticket da forma como o issue tracker encerra o trabalho e informe o branch de integração, com a tabela de ticket, modelo e esforço de **Modelos e esforço**.
-   Em um tracker local em markdown, resolver um ticket significa marcar o arquivo dele no checkout principal (não em um worktree): troque cada critério de aceitação que o branch de integração implementa para `- [x]`, com base no relatório de Spec do passo 8 e no trabalho mesclado do ticket, deixe os não atendidos como `- [ ]` e defina `Status: ready-for-human` quando todas as caixas estiverem marcadas. Um ticket com alguma caixa desmarcada mantém o status e é listado no relatório. É isso que o `/archive-feature` verifica antes de arquivar a funcionalidade.
+   Em um tracker local em markdown, resolver um ticket significa marcar o arquivo dele no checkout principal (não em um worktree): troque cada critério de aceitação que o branch de integração implementa para `- [x]`, com base no relatório de Spec do passo 8 e no trabalho mesclado do ticket, deixe os não atendidos como `- [ ]` (um critério de gate confirmado pela pessoa fica marcado) e defina `Status: ready-for-human` quando todas as caixas estiverem marcadas. Um ticket com alguma caixa desmarcada mantém o status e é listado no relatório. É isso que o `/archive-feature` verifica antes de arquivar a funcionalidade.
 
 10. Limpe todos os worktrees dos **subagentes implementadores**.
 
-<!-- aligned-with: sha256:4d121ba5b4d0def052d9c33c82b4c40c8903ff384348b6fde402af4f57640143 -->
+<!-- aligned-with: sha256:8c04f3ea8154af22844d30db8cb843a45c9e26443127bcfd1b1616a4e6826a5f -->
