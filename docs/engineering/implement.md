@@ -55,6 +55,8 @@ When the run reaches a gate it:
 4. after you confirm, checks the result itself (a log, a metric, a `curl`) and fixes a failure before moving on;
 5. ticks the criterion `- [x]` and lists it in the report as "confirmed by the person". It tells `review-axes` about those criteria and re-ticks any it flips back, since that skill syncs boxes from the code and a human action leaves no code behind.
 
+In a repo with no test suite, the checks the repo does have (`validate`, `fmt`, lint, typecheck) stand in as the isolated tests while building and as the suite in the Test beat, and the report says there was no suite. Manual shared-state tests (a `curl` from another country, a phone on 4G) become a human gate with the exact list of what to test, asked once with the pass condition for each item.
+
 Refactor and `review-axes` still run once, at the end, over every commit of the run (the last stretch is committed first, then the review diffs from where the run started). With nobody to answer, the run finishes what does not depend on the gate and stops blocked, 🔴, naming each pending gate and its command.
 
 ## Pre-agreed seams

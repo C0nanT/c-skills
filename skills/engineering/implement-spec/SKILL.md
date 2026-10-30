@@ -49,22 +49,22 @@ A **gate ticket** only advances when a person performs an action (a `terraform a
 
 2. (optional) Use an **exploration subagent** to conduct any exploration required by the tickets - relevant codebase files or external documentation. Run it per **Models and effort**. Ensure the exploration subagent can save files - it should save its markdown notes in a directory outside the repo, accessible by all future subagents. This lets **implementer subagents** focus on implementation rather than exploration.
 
-3. Create the integration branch. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge in step 5 (a branch with no commits ahead of main can't open one), marked as closing the spec and tickets.
+3. Create the integration branch, unless the spec, the tickets or the repo's own instructions (`CLAUDE.md`, `AGENTS.md`) explicitly say to commit straight to `main`: then `main` is the integration branch and nothing is created. Without that explicit instruction, always create the branch. Implementers keep their worktrees and temporary local branches either way (the base check in step 4 still applies), and step 10 cleans them up. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge in step 5 (a branch with no commits ahead of main can't open one), marked as closing the spec and tickets.
 
 4. Use a fresh **implementer subagent** for each ticket, each in its own worktree on its own branch, on the model and effort from **Models and effort**. Each implementer subagent:
    - confirms its worktree is based on the integration branch before starting, and resets onto it if not;
-   - calls the Skill tool with `tdd` to build the ticket, running only **isolated tests** (unit and pure logic, nothing that touches shared state). It writes the **shared-state tests** the ticket needs (database, API, e2e, anything on a shared port, file, queue, or external service) but does not run them;
+   - calls the Skill tool with `tdd` to build the ticket, running only **isolated tests** (unit and pure logic, nothing that touches shared state). It writes the **shared-state tests** the ticket needs (database, API, e2e, anything on a shared port, file, queue, or external service) but does not run them. In a repo with no test suite, the checks the repo does have (`validate`, `fmt`, lint, typecheck) count as the isolated tests, and the implementer runs those;
    - merges the integration branch tip into its own branch before reporting done
 
 5. Once an **implementer subagent** completes, merge its work to the integration branch with a **merger subagent** (see **Models and effort**).
 
 6. If this changes the **frontier** of available tickets, kick off more **implementer subagents** to work on the new tickets. This allows for maximum concurrency. A gate ticket on the frontier is handled per **Human gates**, not spawned.
 
-7. Once all tickets are complete and merged, run the **shared-state tests** once, serially, on the integration branch (no other subagent running). Parallel implementers share the same database, ports, and services, so these tests would corrupt each other's data if run during steps 4 to 6. Fix every failure in a single fresh fix-up **implementer subagent**, then rerun only the failing tests.
+7. Once all tickets are complete and merged, run the **shared-state tests** once, serially, on the integration branch (no other subagent running). Parallel implementers share the same database, ports, and services, so these tests would corrupt each other's data if run during steps 4 to 6. Fix every failure in a single fresh fix-up **implementer subagent**, then rerun only the failing tests. In a repo with no test suite, run the repo's available checks once on the integration branch instead, and say in the final report that there was no test suite. Shared-state checks that are manual (a `curl` from another country, a phone on 4G) become a gate ticket per **Human gates**: ask the person for the exact list of what to test, once, with the pass condition for each item.
 
 8. Call the Skill tool with `review-axes` on the integration branch, passing the spec path as its spec argument. Fix all issues raised by the review in a single fresh fix-up **implementer subagent**. If the fixes touch code covered by shared-state tests, rerun those tests serially afterwards.
 
 9. If a draft PR exists, mark it ready for review. Otherwise, resolve each ticket the way the issue tracker closes work, and report the integration branch, with the ticket, model, effort table from **Models and effort**.
    On a local markdown tracker, resolving a ticket means marking its file in the main checkout (not a worktree): flip each acceptance criterion the integration branch implements to `- [x]`, judged from the step-8 Spec report and the ticket's merged work, leave unmet ones `- [ ]` (a gate criterion the person confirmed is ticked), and set `Status: ready-for-human` once every box is ticked. A ticket with an unticked box keeps its status and is listed in the report. This is what `/archive-feature` checks before it archives the feature.
 
-10. Clean up all **implementer subagent** worktrees.
+10. Clean up all **implementer subagent** worktrees and their temporary local branches.

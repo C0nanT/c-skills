@@ -59,6 +59,10 @@ Everything lands on one branch. Each implementer:
 2. builds its ticket with [tdd](./tdd.md), red-green one slice at a time,
 3. merges the integration branch tip into its own branch before reporting done, so landing it is a fast-forward.
 
+If the spec, the tickets or the repo's own instructions (`CLAUDE.md`, `AGENTS.md`) explicitly say to commit straight to `main`, `main` is the integration branch and no branch is created. Implementers still get their worktrees and temporary local branches, and the final step cleans them up. Without that explicit instruction, nothing changes: the skill creates the integration branch.
+
+In a repo with no test suite, the checks the repo does have (`validate`, `fmt`, lint, typecheck) stand in as the isolated tests, the report says there was no suite, and manual shared-state tests (a `curl` from another country, a phone on 4G) become a human gate with the exact list of what to test.
+
 The tracker decides whether a pull request exists at all. If your tracker closes work through PRs, or you ask for one, the skill opens a draft PR after the first merge and marks it ready at the end. Otherwise the run stops on the integration branch with every ticket resolved the way your tracker closes work, which works fully offline against a local markdown tracker.
 
 Implementers talk to the orchestrator through context pointers (the spec, the ticket, shared exploration notes, earlier commits) rather than pasted summaries. This keeps each subagent's prompt small and leaves room in the orchestrator's window for the graph.

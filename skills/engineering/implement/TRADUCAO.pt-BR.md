@@ -34,7 +34,7 @@ Refatorar e Revisar rodam uma vez só, no final, sobre a execução inteira.
 
 ## 1. Construir
 
-Chame a ferramenta Skill com "tdd" sempre que possível, trabalhando nos seams acordados previamente. Rode a checagem de tipos com frequência e rode arquivos de teste individuais com frequência.
+Chame a ferramenta Skill com "tdd" sempre que possível, trabalhando nos seams acordados previamente. Num repositório sem suíte de testes, as checagens que o repositório tem (`validate`, `fmt`, lint, typecheck) são os testes isolados. Rode a checagem de tipos com frequência e rode arquivos de teste individuais com frequência.
 
 Tudo que você escrever e que sobreviva à execução (docblocks, comentários de código, READMEs, documentação, ADRs) nunca aponta para dentro de `.scratch/`: essa pasta é apagada periodicamente, então a referência ficaria pendurada. Declare o fato necessário diretamente no texto ou cite um arquivo permanente do repositório.
 
@@ -42,9 +42,9 @@ Pronto quando: cada parte da especificação ou dos tickets estiver escrita.
 
 ## 2. Testar
 
-Rode a suíte de testes completa uma vez.
+Rode a suíte de testes completa uma vez. Num repositório sem suíte de testes, rode como suíte as checagens que o repositório tem (`validate`, `fmt`, lint, typecheck) e diga no relatório que não havia suíte de testes. Checagens de estado compartilhado manuais (um `curl` de outro país, um celular no 4G) viram um gate humano conforme **Gates humanos**: peça à pessoa, uma vez, a lista exata do que testar, com a condição de sucesso de cada item.
 
-Pronto quando: a suíte tiver rodado e você souber o resultado.
+Pronto quando: a suíte (ou, sem ela, as checagens disponíveis do repositório) tiver rodado e você souber o resultado.
 
 ## 3. Refatorar
 
@@ -88,4 +88,4 @@ Uma execução com gates acrescenta: um gate confirmado e verificado não muda a
 
 Escolha a pior cor aplicável: qualquer condição vermelha torna o veredito 🔴, mesmo que o resto tenha corrido bem.
 
-<!-- aligned-with: sha256:d3dab1977f6be17973866a8e8dce3379d0830c2f99c9d7b86ca97503d3a45b73 -->
+<!-- aligned-with: sha256:879e7743a16021f38fab93c17cdbb617936805120321f24afa39e91a6d65362b -->
