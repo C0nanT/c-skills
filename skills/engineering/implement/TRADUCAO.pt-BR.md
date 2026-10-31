@@ -97,4 +97,4 @@ Um **ticket de gate** só avança quando uma pessoa executa uma ação (um `terr
 4. Revisar, com o sha de início registrado da execução como ponto fixo.
 5. As correções que a revisão provocar vão em um commit final.
 
-<!-- aligned-with: sha256:13b2ce0340aa3981ef8604b282cfa637f30ade6c053ddde3749f39e1156da585 -->
+<!-- aligned-with: sha256:f75744e13f8dceac6d4891ec0b9da47039d0fc914c4e2d30abaac0a9b996f423 -->

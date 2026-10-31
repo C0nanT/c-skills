@@ -144,4 +144,4 @@ Os seams das Testing Decisions da especificação que este ticket exercita, um p
 
 Em qualquer uma das formas, evite caminhos de arquivo específicos ou trechos de código: eles ficam desatualizados rápido. Exceção: se um protótipo produziu um trecho que codifica uma decisão com mais precisão do que a prosa consegue (máquina de estados, reducer, schema, formato de tipo), inclua-o e observe brevemente que veio de um protótipo. Reduza ao essencial das partes ricas em decisão, não uma demo funcional; apenas os pontos importantes.
 
-<!-- aligned-with: sha256:1f4e8c0ed1f457498971d30e68ea2493c11a26798217bc5043c4aeaa465ad422 -->
+<!-- aligned-with: sha256:46991995b1f4e80076e3421af990bcafad9c5769e94120a173b39d427e19770b -->

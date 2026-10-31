@@ -69,4 +69,4 @@ Um **ticket de gate** só avança quando uma pessoa executa uma ação (um `terr
 
 10. Limpe todos os worktrees dos **subagentes implementadores** e seus branches locais temporários.
 
-<!-- aligned-with: sha256:27e5cb85b0ea2011cd98d52d371d209758655dd03e33e26a0a9061cd875d55bb -->
+<!-- aligned-with: sha256:ea86d52be091e1a3561f5dfd5b7eee78b2b48c3e9d132464e7af906de9001d2a -->
