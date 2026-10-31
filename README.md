@@ -4,18 +4,24 @@ Coleção de agent skills (comandos `/slash`) para Claude Code. Fork do [reposit
 
 ## Instalar
 
-```bash
-npx skills@latest add C0nanT/c-skills
-```
-
-Quando o instalador perguntar quais skills levar, inclua `setup-skills`. Para atualizar, rode `npx skills@latest update`, e rode o `add` de novo para pegar skills novas.
-
-Prefere um bundle só-leitura no Claude Code? Use o plugin (escolha um dos dois, nunca ambos, senão cada skill aparece duas vezes):
+No Claude Code, o recomendado é o plugin. Dentro do Claude Code:
 
 ```text
 /plugin marketplace add C0nanT/c-skills
 /plugin install c-skills@c-skills
 ```
+
+Para atualizar: `claude plugin update c-skills` e depois `/reload-plugins`.
+
+Pelo plugin, cada skill fica com o prefixo do plugin (`/c-skills:implement`, `/c-skills:grilling`).
+
+Também dá para instalar pelo skills.sh, que serve para outros agentes (Codex, Cursor e os demais), para quem quer arquivos editáveis e para as skills de `misc/` e `in-progress/`, que o plugin não traz. Use um dos dois, nunca ambos, senão cada skill aparece duas vezes:
+
+```bash
+npx skills@latest add C0nanT/c-skills
+```
+
+Quando o instalador perguntar quais skills levar, inclua `setup-skills`. Para atualizar, rode `npx skills@latest update`, e rode o `add` de novo para pegar skills novas.
 
 ### Hooks
 
@@ -51,7 +57,13 @@ Vindo dos hooks antigos via npm? Rode a limpeza antes, veja o [MIGRATING.md](htt
 
 ## Desinstalar
 
-`npx skills add` só instala o que você escolhe; não remove o que já estava na máquina. Para tirar skills:
+Plugin:
+
+```text
+/plugin uninstall c-skills@c-skills
+```
+
+skills.sh: `npx skills add` só instala o que você escolhe; não remove o que já estava na máquina. Para tirar skills:
 
 ```bash
 npx skills@latest remove              # menu interativo
