@@ -6,7 +6,7 @@ Standing context for every harness lives here. `AGENTS.md` is a versioned pointe
 
 ## Repo Purpose
 
-A collection of agent skills (slash commands) for Claude Code, organized into bucket folders and distributed via `npx skills@latest`. Skills are plain markdown files (`SKILL.md`) that Claude reads at invocation time.
+A collection of agent skills (slash commands) for Claude Code, organized into bucket folders and distributed as a Claude Code plugin (the recommended route) and via `npx skills@latest`. Skills are plain markdown files (`SKILL.md`) that Claude reads at invocation time.
 
 ## Skill Buckets
 
@@ -22,7 +22,7 @@ Skills live under `skills/`:
 
 Every skill in `engineering/` or `productivity/` (the **promoted** buckets) must have a reference in the top-level `README.md` and an entry in `.claude-plugin/plugin.json`'s `skills` array (the Claude Code plugin ships exactly the promoted set). Skills in `misc/`, `in-progress/`, and `deprecated/` must not appear in either.
 
-Install commands are copied verbatim from [.agents/install-block.md](./.agents/install-block.md). `.claude-plugin/marketplace.json` makes the repo its own single-plugin marketplace (a fallback the install block explains, not the documented route). Run `claude plugin validate . --strict` after touching either manifest. Why a Claude plugin but not (yet) a Codex one lives in [.agents/adr/0002-ship-as-a-claude-code-plugin.md](./.agents/adr/0002-ship-as-a-claude-code-plugin.md).
+Install commands are copied verbatim from [.agents/install-block.md](./.agents/install-block.md). `.claude-plugin/marketplace.json` makes the repo its own single-plugin marketplace, the recommended route on Claude Code; skills.sh is the alternative for other harnesses, editable copies and unpromoted skills. Run `claude plugin validate . --strict` after touching either manifest. Why a Claude plugin but not (yet) a Codex one lives in [.agents/adr/0002-ship-as-a-claude-code-plugin.md](./.agents/adr/0002-ship-as-a-claude-code-plugin.md).
 
 ## Dev-only skills (`.agents/local-skills/`)
 
@@ -70,23 +70,28 @@ scripts/sync-upstream.sh  # Merge mattpocock/skills (upstream) and strip the ski
 
 This repo is a fork of [mattpocock/skills](https://github.com/mattpocock/skills). Every deliberate difference from it (renamed skills, changed behaviour, dropped paths) is recorded in [.agents/fork-divergences.md](./.agents/fork-divergences.md), and that ledger is what a sync defends. Keep it current the day you decide on a divergence; one that isn't written down is one the next merge silently reverts. Run the sync through the [sync-upstream](./.agents/local-skills/sync-upstream/SKILL.md) skill (dev-only, see below), which resolves conflicts against the ledger and then sweeps the cleanly-merged files for divergences the merge took back.
 
-## Runtime Skill Layout (reference `~/.agents/skills`, not the clone)
+## Runtime Skill Layout (the install locations, not the clone)
 
 When configuring skills, hooks, or anything that points at a skill asset at
-runtime, target the **npx install location**, not this cloned repo. End users
-are not expected to clone this project: they only have what
-`npx skills@latest` downloads.
+runtime, target where an install puts the skill, never this cloned repo. End
+users are not expected to clone this project: they only have what the plugin or
+`npx skills@latest` downloads, and the repo path (`skills/<bucket>/<skill>/`)
+exists on neither.
 
-- `npx skills@latest …` installs skills into `~/.agents/skills/<skill>/` (the
-  real directory), then symlinks each into `~/.claude/skills/<skill>` →
-  `../../.agents/skills/<skill>`.
-- This layout exists on every machine (Ubuntu, WSL) after an npx install; the
-  repo path (`skills/<bucket>/<skill>/`) does **not**.
-- So hooks/configs must reference assets via `~/.claude/skills/<skill>/…`
-  (e.g. `~/.claude/skills/caveman/SKILL.md`),
-  never a path inside the clone. This keeps them portable across machines and
-  "live" (the asset is read at runtime, so `npx` updates take effect without
-  reinstalling the hook).
+- **Plugin**: Claude Code copies the plugin into its cache, at a path that
+  changes with each version. Resolve it at runtime from the `installPath` of
+  the `c-skills@…` entry in `~/.claude/plugins/installed_plugins.json`, then
+  append the repo-relative path (`skills/<bucket>/<skill>/…`). Never hard-code
+  the cache path.
+- **skills.sh**: `npx skills@latest …` installs into `~/.agents/skills/<skill>/`
+  (the real directory), then symlinks each into `~/.claude/skills/<skill>` →
+  `../../.agents/skills/<skill>`. Reference that through
+  `~/.claude/skills/<skill>/…`.
+- A hook that reads a skill asset checks both, so it works on either route and
+  stays "live" (the asset is read at runtime, so updates take effect without
+  reinstalling the hook). The `caveman` function in `c-mods` still reads only
+  `~/.claude/skills/caveman/SKILL.md`, so on the plugin route it finds nothing
+  until `c-mods` follows this rule.
 
 ## Writing Style
 

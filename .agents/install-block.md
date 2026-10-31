@@ -2,9 +2,32 @@
 
 One install story, one wording. `README.md` and every page under `docs/` must say **this** and nothing else. Change it here first, then propagate. `README.md` carries it in Portuguese; the commands stay verbatim.
 
-## skills.sh first
+## Claude Code plugin first
 
-The documented route is skills.sh: it copies the skills into `~/.agents/skills/<skill>/` and symlinks each into every agent's skills directory (`~/.claude/skills/<skill>` on Claude Code). The files are yours to edit. Hooks and configs that point at a skill asset at runtime reference that install location, never this clone (see `CLAUDE.md`).
+The documented route on Claude Code is the plugin. `.claude-plugin/marketplace.json` makes this repo its own single-plugin marketplace, shipping exactly the promoted set listed in `.claude-plugin/plugin.json`. It is a read-only bundle: updates arrive with `claude plugin update`, and the files live in Claude Code's plugin cache, not in a folder you edit.
+
+<canonical-block name="claude-code-plugin">
+
+```text
+/plugin marketplace add C0nanT/c-skills
+/plugin install c-skills@c-skills
+```
+
+Update with `claude plugin update c-skills`, then `/reload-plugins`.
+
+</canonical-block>
+
+<canonical-block name="claude-code-plugin-remove">
+
+```text
+/plugin uninstall c-skills@c-skills
+```
+
+</canonical-block>
+
+## skills.sh (alternative)
+
+skills.sh serves the cases the plugin does not: other harnesses (Codex, Cursor and the rest), skill files you want to edit, and the unpromoted skills in `misc/` and `in-progress/`, which the plugin never ships. It copies the skills into `~/.agents/skills/<skill>/` and symlinks each into every agent's skills directory (`~/.claude/skills/<skill>` on Claude Code).
 
 <canonical-block name="skills-sh">
 
@@ -44,24 +67,9 @@ Without `-g` the command acts on the current project; with `-g`, on `~/.agents/s
 
 `skills@latest` is the pinned spelling everywhere.
 
-## Claude Code plugin (fallback)
-
-`.claude-plugin/marketplace.json` makes this repo its own single-plugin marketplace, shipping exactly the promoted set listed in `.claude-plugin/plugin.json`. It is a fallback for people who want a read-only bundle, not the documented route.
-
-<canonical-block name="claude-code-plugin">
-
-```text
-/plugin marketplace add C0nanT/c-skills
-/plugin install c-skills@c-skills
-```
-
-Update with `claude plugin update c-skills`, then `/reload-plugins`.
-
-</canonical-block>
-
 ## The two routes are exclusive
 
-The plugin is a read-only bundle you subscribe to. skills.sh writes files you own and edit. Installing both leaves the user with every skill twice: always say "pick one".
+The plugin is a read-only bundle you subscribe to. skills.sh writes files you own and edit. Installing both leaves the user with every skill twice: always say "pick one". The one exception is an unpromoted skill added with the single-skill form next to the plugin: the plugin does not carry it, so nothing doubles.
 
 ## Hooks
 
