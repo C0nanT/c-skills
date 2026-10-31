@@ -8,4 +8,4 @@
 
 **Arquivos:** `SKILL.md` (original em inglês), `TRADUCAO.pt-BR.md` (tradução), `PHASE-BOUNDARIES.md` / `PHASE-BOUNDARIES.pt-BR.md` (árvore de limites de fase, em inglês e em português) e este `RESUMO.md`.
 
-<!-- aligned-with: sha256:77d819c2f0eebe04ddcff89dcd81f1f96dbe890a75a49818d6a7f648935906ac -->
+<!-- aligned-with: sha256:303ec53ed6119d25592a1ce72ea48b749ee27e573d866aa5ffe4fdcd18dd3d82 -->

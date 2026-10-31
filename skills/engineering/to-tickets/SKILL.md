@@ -115,9 +115,9 @@ Status: ready-for-agent
 
 > **Difficulty:** Heavy | Standard | Light: **suggested model:** <model> (Claude Code) / <model> (Cursor). Suggestion only, use whatever model you have to hand.
 
-The difficulty line is the first thing in the issue body, above every section.
-
 > **Gate:** human: <what the person does>   (gate tickets only)
+
+The difficulty line is the first thing in the issue body, with the `Gate` line directly below it on a gate ticket, both above every section.
 
 ## Parent
 

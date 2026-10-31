@@ -39,7 +39,7 @@ Um **ticket de gate** só avança quando uma pessoa executa uma ação (um `terr
 - **Reconheça-o** pela linha `> **Gate:** human: <o que a pessoa faz>`. Sem essa linha, deduza pelos critérios de aceite (por exemplo "aplicado pela pessoa") e cite cada gate deduzido no relatório final. Um ticket que mistura código e gate tem a parte de código construída primeiro por um implementador (listado na tabela com o modelo dele), e depois o gate.
 - **Prepare** você mesmo o que a pessoa vai usar (um arquivo de `plan`, um script, um checklist), no checkout principal depois do merge, logo antes de pedir, para que bata com o checkout onde a ação roda. O implementador de um ticket que prepara um gate só edita, commita e roda checagens locais; ele não produz o artefato do gate.
 - **Peça uma vez**, com o comando exato (por exemplo `! terraform apply /tmp/x.tfplan`). Continue nos tickets que não dependem do gate; os dependentes esperam a confirmação.
-- **Depois da confirmação**, verifique você mesmo o resultado (log, métrica, `curl`). Uma checagem que falha vira um **subagente implementador** de correção, no modelo que **Modelos e esforço** dá para a linha `Difficulty` do ticket de gate.
+- **Depois da confirmação**, verifique você mesmo o resultado (log, métrica, `curl`). Uma checagem que falha vira um **subagente implementador** de correção, pela regra de correção de **Modelos e esforço**: o ticket de gate conta como ticket envolvido, então o piso de Sonnet com esforço medium continua valendo.
 - **Registre.** A confirmação conta como evidência: marque o critério correspondente com `- [x]` e liste-o no relatório final como "confirmado pela pessoa".
 - **Sem humano disponível** (headless, executado como subagente, ninguém acompanhando): termine todos os tickets independentes, depois pare bloqueado e reporte cada gate pendente com o comando exato. Nunca contorne um gate.
 
@@ -69,4 +69,4 @@ Um **ticket de gate** só avança quando uma pessoa executa uma ação (um `terr
 
 10. Limpe todos os worktrees dos **subagentes implementadores** e seus branches locais temporários.
 
-<!-- aligned-with: sha256:27e5cb85b0ea2011cd98d52d371d209758655dd03e33e26a0a9061cd875d55bb -->
+<!-- aligned-with: sha256:ea86d52be091e1a3561f5dfd5b7eee78b2b48c3e9d132464e7af906de9001d2a -->

@@ -3,7 +3,7 @@ name: implement
 description: "Implemente um trabalho com base em uma especificação ou conjunto de tickets. Use quando o usuário quiser que uma especificação, ticket ou plano acordado pronto seja construído, ou quando disser para implementar."
 ```
 
-Implemente o trabalho descrito pelo usuário na especificação ou nos tickets, em seis passos. Cada passo só está concluído quando o seu critério de conclusão é atendido.
+Implemente o trabalho descrito pelo usuário na especificação ou nos tickets, em seis passos. Cada passo só está concluído quando o seu critério de conclusão é atendido. Uma execução com gates commita (passo 5) antes de revisar (passo 4): veja **Ordem de uma execução com gates** em **Gates humanos**.
 
 Se o usuário passar a referência de um ticket, busque-o no issue tracker e informe o título antes de começar. Se a referência for ambígua, pergunte.
 
@@ -40,7 +40,7 @@ Uma passada de limpeza no código que esta execução escreveu, somente enquanto
 - **Pré-condição:** a suíte completa estava verde após o passo Testar. Se não estava, pule este passo e diga isso no Veredito.
 - **Escopo:** apenas o código que o diff da execução criou ou alterou (a árvore de trabalho não commitada; portanto, sob `/delegate-tickets`, exatamente o ticket atual; quando gates causaram commits, tudo que mudou desde o início registrado da execução). Uma refatoração valiosa que você note fora do diff nunca é aplicada: anote-a para o Veredito.
 - **Regra:** nenhuma mudança de comportamento. Nunca edite um teste para fazer uma refatoração passar.
-- **Snapshot primeiro.** Use `git stash create` (registra o estado sem alterar nenhuma referência, índice ou árvore de trabalho) ou copie para o lado os arquivos do diff.
+- **Snapshot primeiro.** Use `git stash create` (registra o estado sem alterar nenhuma referência, índice ou árvore de trabalho) ou copie para o lado os arquivos do diff. Se o `git stash create` não imprimir nada (a árvore está limpa, como quando o commit de um gate encerrou a execução), o snapshot é `git rev-parse HEAD`.
 - **Depois de refatorar, rode a suíte completa.** Verde: mantenha a refatoração. Vermelho: restaure o snapshot para que a árvore de trabalho fique exatamente no estado verde anterior à refatoração (para um snapshot de `git stash create`, `git restore --source=<snapshot> --worktree -- <arquivos>`, que deixa o índice intocado; apague também qualquer arquivo que a refatoração criou e recrie qualquer um que ela tenha apagado, pois um snapshot não cobre esses casos), e então siga para a Revisão.
 
 Pronto quando: a refatoração foi mantida com a suíte verde, ou desfeita até o snapshot verde, ou pulada porque a suíte estava vermelha.
@@ -97,4 +97,4 @@ Um **ticket de gate** só avança quando uma pessoa executa uma ação (um `terr
 4. Revisar, com o sha de início registrado da execução como ponto fixo.
 5. As correções que a revisão provocar vão em um commit final.
 
-<!-- aligned-with: sha256:13b2ce0340aa3981ef8604b282cfa637f30ade6c053ddde3749f39e1156da585 -->
+<!-- aligned-with: sha256:f75744e13f8dceac6d4891ec0b9da47039d0fc914c4e2d30abaac0a9b996f423 -->

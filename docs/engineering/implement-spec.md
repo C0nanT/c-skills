@@ -46,7 +46,7 @@ When a gate reaches the frontier, the orchestrator:
 
 1. prepares what you will use (a `plan` file, say) in the main checkout after the merge, right before asking, so it matches where you run the command;
 2. asks once, with the exact command, and keeps working on tickets that do not depend on the gate while dependents wait;
-3. after you confirm, checks the result itself (a log, a metric, a `curl`), and turns a failure into a fix-up implementer on the model the gate ticket's **Difficulty** line gives;
+3. after you confirm, checks the result itself (a log, a metric, a `curl`), and turns a failure into a fix-up implementer, counting the gate ticket among the tickets involved, so the Sonnet floor for fix-ups still holds;
 4. ticks the criterion `- [x]` and lists it in the final report as "confirmed by the person".
 
 With nobody to answer (headless, or run as a subagent), the independent tickets finish and the run stops blocked, reporting each pending gate with its exact command. A ticket that mixes code and a gate has the code built first by an implementer, and the gate after.
