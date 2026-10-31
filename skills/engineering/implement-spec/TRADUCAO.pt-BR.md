@@ -24,11 +24,11 @@ Todo ticket tem uma linha `> **Difficulty:**`. Cada **subagente implementador** 
 
 - **Leitura do modelo.** No Claude Code, use o nome antes de `(Claude Code)`; no Cursor, o nome antes de `(Cursor)`. Tolere o separador antigo ainda presente em tickets velhos, um travessão no lugar dos dois-pontos que a linha tem hoje.
 - **Ordem de resolução.** O modelo nomeado, se reconhecido (um nome que contenha `opus`, `sonnet` ou `haiku`, sem diferenciar maiúsculas, no lado do host na linha); senão o tier (Heavy é Opus, Standard é Sonnet, Light é Haiku); senão Sonnet quando a linha está ausente ou não pode ser interpretada. Registre cada fallback para Sonnet causado por linha ausente ou ilegível e cite-o no relatório final.
-- **Esforço.** Todo spawn de Sonnet e Opus passa `effort: medium`, nunca mais alto, mesmo que o usuário aprovasse mais. Um spawn de Haiku não passa configuração de esforço. Isso vale para subagentes criados por skills invocadas dentro da execução (`tdd`, `review-axes`).
+- **Esforço.** Todo spawn num modelo que aceita esforço (Opus, Sonnet e Haiku no Claude Code) passa `effort: medium`, nunca mais alto, mesmo que o usuário aprovasse mais. Um modelo sem suporte a esforço (como o `claude-4.5-haiku-thinking` no Cursor) não recebe configuração de esforço. Isso vale para subagentes criados por skills invocadas dentro da execução (`tdd`, `review-axes`).
 - **Tickets Heavy** rodam em Opus com esforço medium, sem precisar de aprovação do usuário.
 - **Tickets de gate** (veja **Gates humanos**): um ticket de gate puro não ganha implementador, então a tabela o lista como "gate humano", sem modelo e sem esforço, e ele não conta como fallback para Sonnet. Um ticket misto (código e gate) é listado com o modelo do implementador para a parte de código, e depois o gate. A linha `Difficulty` deles ainda vale: um fix-up depois de uma verificação de gate que falhou trata o ticket de gate como um ticket envolvido.
 - **Subagentes sem ticket.** O **subagente de exploração** e o **subagente de merge** rodam Sonnet com esforço medium. Um **subagente de correção** (falhas de estado compartilhado no passo 7, achados da revisão no passo 8) usa o modelo mais forte entre os tickets envolvidos (Haiku < Sonnet < Opus), com piso de Sonnet com esforço medium, e Sonnet com esforço medium quando não for possível determinar os tickets envolvidos.
-- **Limites do host.** Pare se o host não consegue definir o modelo por spawn, ou não consegue definir o esforço por spawn em uma execução com algum spawn de Sonnet ou Opus (uma execução só com Haiku não precisa de controle de esforço). Pare antes de criar qualquer subagente, avise o usuário e sugira `/implement`. Nunca recorra ao modelo ou esforço da própria sessão.
+- **Limites do host.** Pare se o host não consegue definir o modelo por spawn, ou não consegue definir o esforço por spawn em uma execução com algum spawn num modelo que aceita esforço (uma execução só com modelos sem suporte a esforço não precisa de controle de esforço). Pare antes de criar qualquer subagente, avise o usuário e sugira `/implement`. Nunca recorra ao modelo ou esforço da própria sessão.
 
 Antes do primeiro spawn de implementador, imprima uma tabela de ticket, modelo e esforço, marcando qualquer fallback, e siga adiante sem esperar confirmação. Repita a tabela no relatório final.
 
@@ -69,4 +69,4 @@ Um **ticket de gate** só avança quando uma pessoa executa uma ação (um `terr
 
 10. Limpe todos os worktrees dos **subagentes implementadores** e seus branches locais temporários.
 
-<!-- aligned-with: sha256:ea86d52be091e1a3561f5dfd5b7eee78b2b48c3e9d132464e7af906de9001d2a -->
+<!-- aligned-with: sha256:16206324787d9fc9a960a2e7e88236ea4d2c7c351ee57b1418a1532164af2a8b -->
