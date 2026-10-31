@@ -89,9 +89,8 @@ exists on neither.
   `~/.claude/skills/<skill>/…`.
 - A hook that reads a skill asset checks both, so it works on either route and
   stays "live" (the asset is read at runtime, so updates take effect without
-  reinstalling the hook). The `caveman` function in `c-mods` still reads only
-  `~/.claude/skills/caveman/SKILL.md`, so on the plugin route it finds nothing
-  until `c-mods` follows this rule.
+  reinstalling the hook). The `caveman` function in `c-mods` (4.0.1 and later)
+  is the reference: skills.sh copy first, then the plugin's.
 
 ## Writing Style
 
