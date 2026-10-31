@@ -36,7 +36,7 @@ A run is seven beats, in order:
 2. Drive [tdd](./tdd.md) at the pre-agreed seams, one red-green slice at a time.
 3. Typecheck often, run single test files as it goes.
 4. Run the full test suite once, at the end.
-5. Refactor the run's own diff, only if the suite is green: no behaviour change, no test edits, snapshot first (with `git stash create`, which leaves the index alone), rerun the suite, and restore the snapshot if it went red.
+5. Refactor the run's own diff, only if the suite is green: no behaviour change, no test edits, snapshot first (with `git stash create`, which leaves the index alone, or `HEAD` when the tree is already clean), rerun the suite, and restore the snapshot if it went red.
 6. Run [review-axes](./review-axes.md) against the unstaged working tree, passing it the ticket path (or the spec path when there is no ticket) so it never has to search for the spec and ticks the right checkboxes. This is a gate, not a suggestion: the verdict is built from its Standards and Spec reports, so a run that skipped it has nothing to base the verdict on.
 7. Commit the work to the current branch.
 8. Give a verdict (🟢 / 🟡 / 🔴).
@@ -79,7 +79,7 @@ That is the verdict, a fork addition that ends the run. 🟢 is printed bare, wi
 
 **What does the refactor step do, and what if it breaks something?**
 
-After the full suite is green, `implement` makes one cleanup pass over the code its own diff created or changed, never beyond it. It changes no behaviour and edits no tests. Before starting it snapshots the working tree with `git stash create` (or copies the files aside), which records the state without changing any ref, the index or the working tree. It then reruns the full suite: green keeps the refactor, red restores the snapshot exactly and the run carries on. The verdict is 🟡 when the refactor was skipped (suite red), undone, or when a worthwhile refactor was spotted outside the diff, in which case it suggests a prefactor ticket and never applies it.
+After the full suite is green, `implement` makes one cleanup pass over the code its own diff created or changed, never beyond it. It changes no behaviour and edits no tests. Before starting it snapshots the working tree with `git stash create` (or copies the files aside), which records the state without changing any ref, the index or the working tree. When the tree is already clean (a gate's commit ended the run), the snapshot is `HEAD`. It then reruns the full suite: green keeps the refactor, red restores the snapshot exactly and the run carries on. The verdict is 🟡 when the refactor was skipped (suite red), undone, or when a worthwhile refactor was spotted outside the diff, in which case it suggests a prefactor ticket and never applies it.
 
 **Can I point it at all my tickets at once, or run several in parallel?**
 

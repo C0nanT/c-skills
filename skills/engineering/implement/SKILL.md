@@ -3,7 +3,7 @@ name: implement
 description: "Implement a piece of work based on a spec or set of tickets. Use when the user wants a ready spec, ticket, or agreed plan built, or says to implement it."
 ---
 
-Implement the work described by the user in the spec or tickets, in six steps. Each step is done only when its completion criterion holds.
+Implement the work described by the user in the spec or tickets, in six steps. Each step is done only when its completion criterion holds. A run with gates commits (step 5) before it reviews (step 4): see **Order of a gated run** under **Human gates**.
 
 If the user passes a ticket reference, fetch it from the issue tracker and state its title before starting. If the reference is ambiguous, ask.
 
@@ -40,7 +40,7 @@ One cleanup pass over the code this run wrote, only while the suite is green.
 - **Precondition:** the full suite was green after Test. If it was not, skip this step and say so in the Verdict.
 - **Scope:** only code the run's diff created or changed (the uncommitted working tree, so under `/delegate-tickets` exactly the current ticket; when gates caused commits, everything changed since the recorded run start). A worthwhile refactor you see outside the diff is never applied: note it for the Verdict.
 - **Rule:** no behaviour change. Never edit a test to make a refactor pass.
-- **Snapshot first.** Use `git stash create` (records the state, changes no ref, index or working tree) or copy the diff's files aside.
+- **Snapshot first.** Use `git stash create` (records the state, changes no ref, index or working tree) or copy the diff's files aside. If `git stash create` prints nothing (the tree is clean, as when a gate's commit ended the run), the snapshot is `git rev-parse HEAD`.
 - **After refactoring, run the full suite.** Green: keep the refactor. Red: restore the snapshot so the working tree is exactly the pre-refactor green state (for a `git stash create` snapshot, `git restore --source=<snapshot> --worktree -- <files>`, which leaves the index alone; also delete any file the refactor created and recreate any it deleted, since a snapshot does not cover them), then carry on to Review.
 
 Done when: the refactor is either kept with a green suite, or undone back to the green snapshot, or skipped because the suite was red.

@@ -115,9 +115,9 @@ Status: ready-for-agent
 
 > **Difficulty:** Heavy | Standard | Light: **suggested model:** <model> (Claude Code) / <model> (Cursor). Suggestion only, use whatever model you have to hand.
 
-A linha de dificuldade é a primeira coisa no corpo da issue, acima de todas as seções.
-
 > **Gate:** human: <what the person does>   (gate tickets only)
+
+A linha de dificuldade é a primeira coisa no corpo da issue, com a linha `Gate` logo abaixo dela num ticket de gate, as duas acima de todas as seções.
 
 ## Parent
 
