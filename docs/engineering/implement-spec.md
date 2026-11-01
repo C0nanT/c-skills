@@ -49,6 +49,8 @@ When a gate reaches the frontier, the orchestrator:
 3. after you confirm, checks the result itself (a log, a metric, a `curl`), and turns a failure into a fix-up implementer, counting the gate ticket among the tickets involved, so the Sonnet floor for fix-ups still holds;
 4. ticks the criterion `- [x]` and lists it in the final report as "confirmed by the person".
 
+If a later fix-up (a shared-state failure or a review finding) changes something a confirmed gate already applied, the orchestrator asks for that gate again once the fix is merged, so what is running always matches a commit.
+
 With nobody to answer (headless, or run as a subagent), the independent tickets finish and the run stops blocked, reporting each pending gate with its exact command. A ticket that mixes code and a gate has the code built first by an implementer, and the gate after.
 
 The closing `review-axes` step syncs boxes from the code, so the orchestrator names the person-confirmed criteria to it and re-ticks any it flipped back before resolving the tickets.

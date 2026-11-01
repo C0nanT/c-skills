@@ -3,7 +3,7 @@ name: implement
 description: "Implemente um trabalho com base em uma especificação ou conjunto de tickets. Use quando o usuário quiser que uma especificação, ticket ou plano acordado pronto seja construído, ou quando disser para implementar."
 ```
 
-Implemente o trabalho descrito pelo usuário na especificação ou nos tickets, em seis passos. Cada passo só está concluído quando o seu critério de conclusão é atendido. Uma execução com gates commita (passo 5) antes de revisar (passo 4): veja **Ordem de uma execução com gates** em **Gates humanos**.
+Implemente o trabalho descrito pelo usuário na especificação ou nos tickets, em seis passos. Cada passo só está concluído quando o seu critério de conclusão é atendido. Uma execução com gates refatora e commita cada trecho no seu gate, e commita o último trecho (passo 5) antes de revisar (passo 4): veja **Ordem de uma execução com gates** em **Gates humanos**.
 
 Se o usuário passar a referência de um ticket, busque-o no issue tracker e informe o título antes de começar. Se a referência for ambígua, pergunte.
 
@@ -38,12 +38,13 @@ Pronto quando: a suíte (ou, sem ela, as checagens disponíveis do repositório)
 Uma passada de limpeza no código que esta execução escreveu, somente enquanto a suíte estiver verde.
 
 - **Pré-condição:** a suíte completa estava verde após o passo Testar. Se não estava, pule este passo e diga isso no Veredito.
-- **Escopo:** apenas o código que o diff da execução criou ou alterou (a árvore de trabalho não commitada; portanto, sob `/delegate-tickets`, exatamente o ticket atual; quando gates causaram commits, tudo que mudou desde o início registrado da execução). Uma refatoração valiosa que você note fora do diff nunca é aplicada: anote-a para o Veredito.
+- **Escopo:** apenas o código que o diff da execução criou ou alterou (a árvore de trabalho não commitada; portanto, sob `/delegate-tickets`, exatamente o ticket atual; numa execução com gates, o trecho atual, refatorado antes do seu commit para que a pessoa aplique o código já refatorado). O código que um trecho anterior commitou fica fora do diff. Uma refatoração valiosa que você note fora do diff nunca é aplicada: anote-a para o Veredito.
 - **Regra:** nenhuma mudança de comportamento. Nunca edite um teste para fazer uma refatoração passar.
-- **Snapshot primeiro.** Use `git stash create` (registra o estado sem alterar nenhuma referência, índice ou árvore de trabalho) ou copie para o lado os arquivos do diff. Se o `git stash create` não imprimir nada (a árvore está limpa, como quando o commit de um gate encerrou a execução), o snapshot é `git rev-parse HEAD`.
-- **Depois de refatorar, rode a suíte completa.** Verde: mantenha a refatoração. Vermelho: restaure o snapshot para que a árvore de trabalho fique exatamente no estado verde anterior à refatoração (para um snapshot de `git stash create`, `git restore --source=<snapshot> --worktree -- <arquivos>`, que deixa o índice intocado; apague também qualquer arquivo que a refatoração criou e recrie qualquer um que ela tenha apagado, pois um snapshot não cobre esses casos), e então siga para a Revisão.
+- **Diff vazio:** quando a árvore está limpa (o commit de um gate encerrou a execução), não há o que refatorar: pule este passo.
+- **Snapshot primeiro.** Use `git stash create` (registra o estado sem alterar nenhuma referência, índice ou árvore de trabalho) ou copie para o lado os arquivos do diff.
+- **Depois de refatorar, rode a suíte completa.** Verde: mantenha a refatoração. Vermelho: restaure o snapshot para que a árvore de trabalho fique exatamente no estado verde anterior à refatoração (para um snapshot de `git stash create`, `git restore --source=<snapshot> --worktree -- <arquivos>`, que deixa o índice intocado; apague também qualquer arquivo que a refatoração criou e recrie qualquer um que ela tenha apagado, pois um snapshot não cobre esses casos), e então siga para a Revisão (num trecho com gate, para o commit dele).
 
-Pronto quando: a refatoração foi mantida com a suíte verde, ou desfeita até o snapshot verde, ou pulada porque a suíte estava vermelha.
+Pronto quando: a refatoração foi mantida com a suíte verde, ou desfeita até o snapshot verde, ou pulada porque a suíte estava vermelha ou o diff estava vazio.
 
 ## 4. Revisar
 
@@ -71,7 +72,7 @@ Uma linha: o emoji, seguido de um motivo curto. 🟢 é o emoji **sozinho**, sem
 - 🟡 Implementado, mas algo precisou ser ajustado no meio do caminho: a lógica planejada mudou, uma abordagem foi trocada, um detalhe da especificação foi interpretado, ou `/review-axes` levantou achados que merecem atenção. Também é 🟡: a refatoração foi desfeita porque a suíte ficou vermelha depois dela (motivo em uma linha), ou uma refatoração valiosa foi vista fora do diff (sugira um ticket de pré-fatoração, nunca aplique). Uma refatoração que foi mantida não afeta a cor. Uma refatoração pulada porque a suíte estava vermelha é declarada no Veredito, e a suíte vermelha em si define a cor como faz hoje. Diga o que mudou e por quê.
 - 🔴 Algo não foi concluído, ou o usuário precisa agir antes de seguir: uma parte não foi implementada, `/review-axes` encontrou uma lacuna na especificação, uma decisão precisa da avaliação dele, uma etapa de credencial, migração ou manual é necessária, ou qualquer coisa que quebre o fluxo "apenas comece o próximo ticket". Diga o que é e o que ele precisa fazer.
 
-Uma execução com gates acrescenta: um gate confirmado e verificado não muda a cor e é listado como "confirmado pela pessoa". Um gate ainda pendente (ninguém para perguntar, ou sem confirmação) é 🔴: nomeie-o com o comando exato.
+Uma execução com gates acrescenta: um gate confirmado e verificado não muda a cor e é listado como "confirmado pela pessoa". Um gate ainda pendente (ninguém para perguntar, ou sem confirmação, incluindo uma reaplicação pedida por uma correção tardia) é 🔴: nomeie-o com o comando exato.
 
 Escolha a pior cor aplicável: qualquer condição vermelha torna o veredito 🔴, mesmo que o resto tenha corrido bem.
 
@@ -82,19 +83,19 @@ Um **ticket de gate** só avança quando uma pessoa executa uma ação (um `terr
 
 - **Reconheça-o** pela linha `> **Gate:** human: <o que a pessoa faz>`. Sem essa linha, deduza pelos critérios de aceite (por exemplo "aplicado pela pessoa") e cite cada gate deduzido no relatório final. Um trabalho que mistura código e gate tem a parte de código construída primeiro, e depois o gate.
 - **Registre o início da execução.** Antes da primeira edição, anote `git rev-parse HEAD`: é o ponto fixo da execução inteira.
-- **Commite antes.** Ao chegar num gate, commite o que foi construído até ali, para que a árvore esteja limpa antes de a pessoa agir. Cada **trecho** (o trabalho entre dois gates, ou entre o início da execução e o primeiro gate) ganha o seu próprio commit; o passo Commitar cobre o último.
+- **Commite antes.** Ao chegar num gate, rode Testar e Refatorar no trecho e então commite-o, para que a árvore esteja limpa e refatorada antes de a pessoa agir. Cada **trecho** (o trabalho entre dois gates, ou entre o início da execução e o primeiro gate) ganha o seu próprio commit; o passo Commitar cobre o último.
 - **Prepare** você mesmo o que a pessoa vai usar (um arquivo de `plan`, um script, um checklist), neste checkout, logo antes de pedir, para que bata com o checkout onde a ação roda.
 - **Peça uma vez**, com o comando exato (por exemplo `! terraform apply /tmp/x.tfplan`), e espere a confirmação. O trabalho que não depende do gate pode continuar enquanto você espera; o que depende dele espera.
 - **Depois da confirmação**, verifique você mesmo o resultado (log, métrica, `curl`). Uma checagem que falha é corrigida nesta sessão e verificada de novo antes do próximo trecho.
 - **Registre.** A confirmação conta como evidência: marque o critério correspondente `- [x]` e liste-o no relatório como "confirmado pela pessoa". O `/review-axes` sincroniza os checkboxes a partir do código, então ele não pode desfazer isso: nomeie esses critérios ao invocá-lo e, depois que ele voltar, marque de novo os que ele tiver desmarcado.
+- **Reaplique depois de uma correção tardia.** Uma correção feita depois de um gate (as correções pós-revisão, ou qualquer outra) que muda o que um gate confirmado já aplicou deixa esse gate pendente de novo: desmarque o critério dele, commite a correção, depois prepare, peça, verifique e registre de novo como acima, para que o que foi aplicado continue correspondendo a um commit.
 - **Sem humano disponível** (headless, executado como subagente, ninguém acompanhando): termine todo trecho que não depende do gate, depois pare bloqueado e reporte cada gate pendente com o comando exato. Nunca contorne um gate.
 
-**Ordem de uma execução com gates.** Refatorar e Revisar rodam uma vez só, no final, sobre a execução inteira, e Commitar passa à frente de Revisar para que o último trecho já esteja commitado quando o `/review-axes` fizer o diff a partir do início registrado da execução:
+**Ordem de uma execução com gates.** Refatorar roda uma vez por trecho, antes do commit dele, para que todo gate aplique código já refatorado. Revisar roda uma vez só, no final, sobre a execução inteira, e Commitar passa à frente de Revisar para que o último trecho já esteja commitado quando o `/review-axes` fizer o diff a partir do início registrado da execução:
 
-1. Construir e Testar cada trecho, commitando a cada gate.
-2. Refatorar, sobre tudo que mudou desde o início registrado da execução.
-3. Commitar o último trecho.
-4. Revisar, com o sha de início registrado da execução como ponto fixo.
-5. As correções que a revisão provocar vão em um commit final.
+1. Construir, Testar e Refatorar cada trecho, e então commitá-lo no seu gate.
+2. Construir, Testar e Refatorar o último trecho, e então commitá-lo.
+3. Revisar, com o sha de início registrado da execução como ponto fixo.
+4. As correções que a revisão provocar vão em um commit final. Se elas mudarem o que um gate confirmado aplicou, reaplique esse gate conforme **Reaplique depois de uma correção tardia**.
 
-<!-- aligned-with: sha256:f75744e13f8dceac6d4891ec0b9da47039d0fc914c4e2d30abaac0a9b996f423 -->
+<!-- aligned-with: sha256:101bc47c19cd625ca64373718756eeac82edcc2ad2c1ae2f50d2622f84ea8e12 -->

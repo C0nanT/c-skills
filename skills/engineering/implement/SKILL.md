@@ -3,7 +3,7 @@ name: implement
 description: "Implement a piece of work based on a spec or set of tickets. Use when the user wants a ready spec, ticket, or agreed plan built, or says to implement it."
 ---
 
-Implement the work described by the user in the spec or tickets, in six steps. Each step is done only when its completion criterion holds. A run with gates commits (step 5) before it reviews (step 4): see **Order of a gated run** under **Human gates**.
+Implement the work described by the user in the spec or tickets, in six steps. Each step is done only when its completion criterion holds. A run with gates refactors and commits each stretch at its gate, and commits the last stretch (step 5) before it reviews (step 4): see **Order of a gated run** under **Human gates**.
 
 If the user passes a ticket reference, fetch it from the issue tracker and state its title before starting. If the reference is ambiguous, ask.
 
@@ -38,12 +38,13 @@ Done when: the suite (or, with none, the repo's available checks) has run and yo
 One cleanup pass over the code this run wrote, only while the suite is green.
 
 - **Precondition:** the full suite was green after Test. If it was not, skip this step and say so in the Verdict.
-- **Scope:** only code the run's diff created or changed (the uncommitted working tree, so under `/delegate-tickets` exactly the current ticket; when gates caused commits, everything changed since the recorded run start). A worthwhile refactor you see outside the diff is never applied: note it for the Verdict.
+- **Scope:** only code the run's diff created or changed (the uncommitted working tree, so under `/delegate-tickets` exactly the current ticket; in a gated run, the current stretch, refactored before its commit so the person applies the refactored code). Code a previous stretch committed is outside the diff. A worthwhile refactor you see outside the diff is never applied: note it for the Verdict.
 - **Rule:** no behaviour change. Never edit a test to make a refactor pass.
-- **Snapshot first.** Use `git stash create` (records the state, changes no ref, index or working tree) or copy the diff's files aside. If `git stash create` prints nothing (the tree is clean, as when a gate's commit ended the run), the snapshot is `git rev-parse HEAD`.
-- **After refactoring, run the full suite.** Green: keep the refactor. Red: restore the snapshot so the working tree is exactly the pre-refactor green state (for a `git stash create` snapshot, `git restore --source=<snapshot> --worktree -- <files>`, which leaves the index alone; also delete any file the refactor created and recreate any it deleted, since a snapshot does not cover them), then carry on to Review.
+- **Empty diff:** when the tree is clean (a gate's commit ended the run), there is nothing to refactor: skip this step.
+- **Snapshot first.** Use `git stash create` (records the state, changes no ref, index or working tree) or copy the diff's files aside.
+- **After refactoring, run the full suite.** Green: keep the refactor. Red: restore the snapshot so the working tree is exactly the pre-refactor green state (for a `git stash create` snapshot, `git restore --source=<snapshot> --worktree -- <files>`, which leaves the index alone; also delete any file the refactor created and recreate any it deleted, since a snapshot does not cover them), then carry on to Review (in a gated stretch, to its commit).
 
-Done when: the refactor is either kept with a green suite, or undone back to the green snapshot, or skipped because the suite was red.
+Done when: the refactor is either kept with a green suite, or undone back to the green snapshot, or skipped because the suite was red or the diff was empty.
 
 ## 4. Review
 
@@ -71,7 +72,7 @@ One line: the emoji, then a short reason. 🟢 is the emoji **alone**, with no t
 - 🟡 Implemented, but something had to be adjusted mid-flight: planned logic changed, an approach was swapped, a spec detail was interpreted, or `/review-axes` raised findings worth a look. Also 🟡: the refactor was undone because the suite went red after it (one-line reason), or a worthwhile refactor was seen outside the diff (suggest a prefactor ticket, never apply it). A refactor that was kept has no effect on the colour. A refactor skipped because the suite was red is stated in the Verdict, and the red suite itself sets the colour as it does today. Say what changed and why.
 - 🔴 Something did not land, or the user has to act before moving on: a piece was not implemented, `/review-axes` found a spec gap, a decision needs their call, a credential/migration/manual step is required, anything that breaks their "just start the next ticket" flow. Say what it is and what they need to do.
 
-A run with gates adds: a gate confirmed and verified does not change the colour and is listed as "confirmed by the person". A gate still pending (nobody to ask, or no confirmation yet) is 🔴: name it with its exact command.
+A run with gates adds: a gate confirmed and verified does not change the colour and is listed as "confirmed by the person". A gate still pending (nobody to ask, or no confirmation yet, including a re-application a late fix asked for) is 🔴: name it with its exact command.
 
 Pick the worst applicable colour: any red condition makes the verdict 🔴 even if the rest went fine.
 
@@ -81,17 +82,17 @@ A **gate ticket** only advances when a person performs an action (a `terraform a
 
 - **Recognise it** by the `> **Gate:** human: <what the person does>` line. Without that line, deduce it from the acceptance criteria (for example "applied by the person") and name every deduced gate in the final report. Work that mixes code and a gate has its code part built first, then the gate.
 - **Record the run start.** Before the first edit, note `git rev-parse HEAD`: it is the fixed point for the whole run.
-- **Commit first.** On reaching a gate, commit what was built so far, so the tree is clean before the person acts. Each **stretch** (the work between two gates, or between the run start and the first gate) gets its own commit; the Commit step covers the last one.
+- **Commit first.** On reaching a gate, run Test and Refactor on the stretch, then commit it, so the tree is clean and refactored before the person acts. Each **stretch** (the work between two gates, or between the run start and the first gate) gets its own commit; the Commit step covers the last one.
 - **Prepare** what the person will use (a `plan` file, a script, a checklist) yourself, in this checkout, right before asking, so it matches the checkout where the action runs.
 - **Ask once**, with the exact command (for example `! terraform apply /tmp/x.tfplan`), and wait for the confirmation. Work that does not depend on the gate may continue while you wait; anything that does depend on it waits.
 - **After the confirmation**, verify the result yourself (log, metric, `curl`). A failed check is fixed in this session, then verified again, before the next stretch.
 - **Record it.** The confirmation counts as evidence: tick the matching criterion `- [x]` and list it in the report as "confirmed by the person". `/review-axes` syncs checkboxes from the code, so it must not undo this: name those criteria when you invoke it, and after it returns re-tick any it flipped back.
+- **Re-apply after a late fix.** A fix made after a gate (the post-review fixes, or any other) that changes what a confirmed gate already applied makes that gate pending again: untick its criterion, commit the fix, then prepare, ask, verify and record it again as above, so what was applied still matches a commit.
 - **No human available** (headless, run as a subagent, nobody watching): finish every stretch that does not depend on the gate, then stop blocked and report each pending gate with its exact command. Never work around a gate.
 
-**Order of a gated run.** Refactor and Review run once, at the end, over the whole run, and Commit moves ahead of Review so the last stretch is committed when `/review-axes` diffs from the recorded run start:
+**Order of a gated run.** Refactor runs once per stretch, before its commit, so every gate applies refactored code. Review runs once, at the end, over the whole run, and Commit moves ahead of Review so the last stretch is committed when `/review-axes` diffs from the recorded run start:
 
-1. Build and Test each stretch, committing at every gate.
-2. Refactor, over everything changed since the recorded run start.
-3. Commit the last stretch.
-4. Review, with the recorded run-start sha as the fixed point.
-5. Fixes the review drives go into one final commit.
+1. Build, Test and Refactor each stretch, then commit it at its gate.
+2. Build, Test and Refactor the last stretch, then commit it.
+3. Review, with the recorded run-start sha as the fixed point.
+4. Fixes the review drives go into one final commit. If they change what a confirmed gate applied, re-apply that gate per **Re-apply after a late fix**.
