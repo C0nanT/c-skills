@@ -61,7 +61,7 @@ Then check what moved rather than changed: `git status` for files upstream renam
 
 ## 5. Check the repo's own invariants
 
-The merge can leave the repo internally inconsistent without a single conflict. Read `CLAUDE.md` for the invariants this repo declares, and verify each one that the merge could have touched. Typically:
+The merge can leave the repo internally inconsistent without a single conflict. Read the repo's `CLAUDE.md` (here `.claude/CLAUDE.md`) for the invariants this repo declares, and verify each one that the merge could have touched. Typically:
 
 - Manifests that must list every promoted skill, and must not list the others.
 - `README.md` and per-bucket `README.md`s that must carry an entry each.

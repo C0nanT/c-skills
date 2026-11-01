@@ -1,7 +1,8 @@
 node_modules
 
-# .claude/ is local harness state, except the dev-only skill symlink below.
+# .claude/ is local harness state, except the repo's CLAUDE.md and the dev-only skill symlink below.
 .claude/*
+!.claude/CLAUDE.md
 !.claude/skills/
 .claude/skills/*
 !.claude/skills/sync-upstream
