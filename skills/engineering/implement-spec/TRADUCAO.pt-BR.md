@@ -27,7 +27,7 @@ Todo ticket tem uma linha `> **Difficulty:**`. Cada **subagente implementador** 
 - **Esforço.** Todo spawn num modelo que aceita esforço (Opus, Sonnet e Haiku no Claude Code) passa `effort: medium`, nunca mais alto, mesmo que o usuário aprovasse mais. Um modelo sem suporte a esforço (como o `claude-4.5-haiku-thinking` no Cursor) não recebe configuração de esforço. Isso vale para subagentes criados por skills invocadas dentro da execução (`tdd`, `review-axes`).
 - **Tickets Heavy** rodam em Opus com esforço medium, sem precisar de aprovação do usuário.
 - **Tickets de gate** (veja **Gates humanos**): um ticket de gate puro não ganha implementador, então a tabela o lista como "gate humano", sem modelo e sem esforço, e ele não conta como fallback para Sonnet. Um ticket misto (código e gate) é listado com o modelo do implementador para a parte de código, e depois o gate. A linha `Difficulty` deles ainda vale: um fix-up depois de uma verificação de gate que falhou trata o ticket de gate como um ticket envolvido.
-- **Subagentes sem ticket.** O **subagente de exploração** e o **subagente de merge** rodam Sonnet com esforço medium. Um **subagente de correção** (falhas de estado compartilhado no passo 7, achados da revisão no passo 8) usa o modelo mais forte entre os tickets envolvidos (Haiku < Sonnet < Opus), com piso de Sonnet com esforço medium, e Sonnet com esforço medium quando não for possível determinar os tickets envolvidos.
+- **Subagentes sem ticket.** O **subagente de exploração** e o **subagente de merge** (criado só quando um merge do passo 5 falha) rodam Sonnet com esforço medium. Um **subagente de correção** (falhas de estado compartilhado no passo 7, achados da revisão no passo 8) usa o modelo mais forte entre os tickets envolvidos (Haiku < Sonnet < Opus), com piso de Sonnet com esforço medium, e Sonnet com esforço medium quando não for possível determinar os tickets envolvidos.
 - **Limites do host.** Pare se o host não consegue definir o modelo por spawn, ou não consegue definir o esforço por spawn em uma execução com algum spawn num modelo que aceita esforço (uma execução só com modelos sem suporte a esforço não precisa de controle de esforço). Pare antes de criar qualquer subagente, avise o usuário e sugira `/implement`. Nunca recorra ao modelo ou esforço da própria sessão.
 
 Antes do primeiro spawn de implementador, imprima uma tabela de ticket, modelo e esforço, marcando qualquer fallback, e siga adiante sem esperar confirmação. Repita a tabela no relatório final.
@@ -57,7 +57,7 @@ Um **ticket de gate** só avança quando uma pessoa executa uma ação (um `terr
    - chama a ferramenta Skill com `tdd` para construir o ticket, rodando apenas **testes isolados** (unitários e de lógica pura, nada que toque estado compartilhado). Ele escreve os **testes de estado compartilhado** que o ticket exige (banco de dados, API, e2e, qualquer coisa em porta, arquivo, fila ou serviço externo compartilhado), mas não os executa. Num repositório sem suíte de testes, as checagens que o repositório tem (`validate`, `fmt`, lint, typecheck) contam como os testes isolados, e o implementador as executa;
    - faz merge da ponta do branch de integração no próprio branch antes de reportar que terminou
 
-5. Assim que um **subagente implementador** terminar, faça merge do trabalho dele no branch de integração com um **subagente de merge** (veja **Modelos e esforço**).
+5. Assim que um **subagente implementador** terminar, faça você mesmo o merge do trabalho dele no branch de integração, no checkout onde o branch de integração está (o checkout principal, onde os gates são preparados): `git merge --no-ff -m "Merge <ref do ticket>: <título do ticket>" <branch do implementador>`. O implementador já fez merge da ponta da integração antes de reportar que terminou, então isso quase sempre é limpo. Se falhar por qualquer motivo (um conflito, ou o git se recusando a mexer em arquivos não commitados), rode `git merge --abort` quando houver um merge em andamento e então passe o merge para um **subagente de merge** (veja **Modelos e esforço**). Nunca resolva um conflito inline.
 
 6. Se isso alterar a **fronteira** de tickets disponíveis, dispare mais **subagentes implementadores** para trabalhar nos novos tickets. Isso permite máxima concorrência. Um ticket de gate na fronteira é tratado conforme **Gates humanos**, não disparado.
 
@@ -70,4 +70,4 @@ Um **ticket de gate** só avança quando uma pessoa executa uma ação (um `terr
 
 10. Limpe todos os worktrees dos **subagentes implementadores** e seus branches locais temporários.
 
-<!-- aligned-with: sha256:4c632c3eecee35635847e5dbb9f34c17630d2f1dfb7ced3ca2da42cd306de6f0 -->
+<!-- aligned-with: sha256:1a41ee394727cf493b09342ccdd6784bf283aad2e0224796e23c38350afd2df0 -->
