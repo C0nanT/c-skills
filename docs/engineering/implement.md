@@ -36,7 +36,7 @@ A run is seven beats, in order:
 2. Drive [tdd](./tdd.md) at the pre-agreed seams, one red-green slice at a time.
 3. Typecheck often, run single test files as it goes.
 4. Run the full test suite once, at the end.
-5. Refactor the run's own diff, only if the suite is green: no behaviour change, no test edits, snapshot first (with `git stash create`, which leaves the index alone, or `HEAD` when the tree is already clean), rerun the suite, and restore the snapshot if it went red.
+5. Refactor the run's own diff, only if the suite is green: no behaviour change, no test edits, skipped when there is nothing uncommitted to refactor, snapshot first (with `git stash create`, which leaves the index alone), rerun the suite, and restore the snapshot if it went red.
 6. Run [review-axes](./review-axes.md) against the unstaged working tree, passing it the ticket path (or the spec path when there is no ticket) so it never has to search for the spec and ticks the right checkboxes. This is a gate, not a suggestion: the verdict is built from its Standards and Spec reports, so a run that skipped it has nothing to base the verdict on.
 7. Commit the work to the current branch.
 8. Give a verdict (🟢 / 🟡 / 🔴).
@@ -49,13 +49,13 @@ Some work only moves when a person acts: a `terraform apply`, a deploy, a produc
 
 When the run reaches a gate it:
 
-1. commits what it built so far, so you act on a clean tree (one commit per stretch, the work between two gates);
+1. tests and refactors what it built so far, then commits it, so you act on a clean tree and apply code that is already refactored (one commit per stretch, the work between two gates);
 2. prepares what you will use (a plan file, a script) in this checkout;
 3. asks once, with the exact command, and waits;
 4. after you confirm, checks the result itself (a log, a metric, a `curl`) and fixes a failure before moving on;
 5. ticks the criterion `- [x]` and lists it in the report as "confirmed by the person". It tells `review-axes` about those criteria and re-ticks any it flips back, since that skill syncs boxes from the code and a human action leaves no code behind.
 
-Refactor and `review-axes` still run once, at the end, over every commit of the run: the last stretch is committed first, then the review diffs from where the run started, and any fixes it drives go in one final commit. With nobody to answer, the run finishes what does not depend on the gate and stops blocked, 🔴, naming each pending gate and its command.
+`review-axes` still runs once, at the end, over every commit of the run: the last stretch is refactored and committed first, then the review diffs from where the run started, and any fixes it drives go in one final commit. If a fix changes something a gate already applied, the run asks you to apply that gate again, the same way, so what is running always matches a commit. With nobody to answer, the run finishes what does not depend on the gate and stops blocked, 🔴, naming each pending gate and its command.
 
 ## Repos with no test suite
 
@@ -79,7 +79,7 @@ That is the verdict, a fork addition that ends the run. 🟢 is printed bare, wi
 
 **What does the refactor step do, and what if it breaks something?**
 
-After the full suite is green, `implement` makes one cleanup pass over the code its own diff created or changed, never beyond it. It changes no behaviour and edits no tests. Before starting it snapshots the working tree with `git stash create` (or copies the files aside), which records the state without changing any ref, the index or the working tree. When the tree is already clean (a gate's commit ended the run), the snapshot is `HEAD`. It then reruns the full suite: green keeps the refactor, red restores the snapshot exactly and the run carries on. The verdict is 🟡 when the refactor was skipped (suite red), undone, or when a worthwhile refactor was spotted outside the diff, in which case it suggests a prefactor ticket and never applies it.
+After the full suite is green, `implement` makes one cleanup pass over the code its own diff created or changed, never beyond it. It changes no behaviour and edits no tests. Before starting it snapshots the working tree with `git stash create` (or copies the files aside), which records the state without changing any ref, the index or the working tree. When the tree is already clean (a gate's commit ended the run), there is nothing to refactor and the step is skipped. In a run with gates, each stretch is refactored before the commit you apply, so code already applied is never refactored afterwards. It then reruns the full suite: green keeps the refactor, red restores the snapshot exactly and the run carries on. The verdict is 🟡 when the refactor was skipped (suite red), undone, or when a worthwhile refactor was spotted outside the diff, in which case it suggests a prefactor ticket and never applies it.
 
 **Can I point it at all my tickets at once, or run several in parallel?**
 
@@ -115,7 +115,7 @@ The agent resolved `#2` against another numbered list in context, such as a todo
 
 - The session opens by reading the ticket or spec and restating what it will build, rather than asking you what to build.
 - You can see an actual `/tdd` invocation in the trace, not just tests appearing in the diff.
-- Typechecks and single test files run repeatedly during the run, and the full suite runs once near the end (and once more after a refactor).
+- Typechecks and single test files run repeatedly during the run, and the full suite runs once near the end (and once more after a refactor). In a run with gates, that happens for each stretch, before the commit you apply.
 - The run ends with a commit on the current branch and a verdict line.
 - The verdict colour matches what actually happened: a bare 🟢 when nothing deviated, 🟡 with the adjustment named, 🔴 with the thing you have to do spelled out.
 - A human gate is asked for once, with the exact command, after a commit of the work so far, and the report lists it as "confirmed by the person" (or as blocked, with the pending command, if nobody was there).

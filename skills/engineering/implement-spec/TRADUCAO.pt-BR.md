@@ -41,6 +41,7 @@ Um **ticket de gate** só avança quando uma pessoa executa uma ação (um `terr
 - **Peça uma vez**, com o comando exato (por exemplo `! terraform apply /tmp/x.tfplan`). Continue nos tickets que não dependem do gate; os dependentes esperam a confirmação.
 - **Depois da confirmação**, verifique você mesmo o resultado (log, métrica, `curl`). Uma checagem que falha vira um **subagente implementador** de correção, pela regra de correção de **Modelos e esforço**: o ticket de gate conta como ticket envolvido, então o piso de Sonnet com esforço medium continua valendo.
 - **Registre.** A confirmação conta como evidência: marque o critério correspondente com `- [x]` e liste-o no relatório final como "confirmado pela pessoa".
+- **Reaplique depois de uma correção tardia.** Uma correção depois de um gate (falhas de estado compartilhado no passo 7, achados da revisão no passo 8) que muda o que um gate confirmado já aplicou deixa esse gate pendente de novo: desmarque o critério dele e, depois do merge da correção e antes do passo 9, prepare, peça, verifique e registre de novo como acima, para que o que foi aplicado continue correspondendo a um commit.
 - **Sem humano disponível** (headless, executado como subagente, ninguém acompanhando): termine todos os tickets independentes, depois pare bloqueado e reporte cada gate pendente com o comando exato. Nunca contorne um gate.
 
 ## Passos
@@ -69,4 +70,4 @@ Um **ticket de gate** só avança quando uma pessoa executa uma ação (um `terr
 
 10. Limpe todos os worktrees dos **subagentes implementadores** e seus branches locais temporários.
 
-<!-- aligned-with: sha256:16206324787d9fc9a960a2e7e88236ea4d2c7c351ee57b1418a1532164af2a8b -->
+<!-- aligned-with: sha256:4c632c3eecee35635847e5dbb9f34c17630d2f1dfb7ced3ca2da42cd306de6f0 -->

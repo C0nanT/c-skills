@@ -41,6 +41,7 @@ A **gate ticket** only advances when a person performs an action (a `terraform a
 - **Ask once**, with the exact command (for example `! terraform apply /tmp/x.tfplan`). Keep working on tickets that do not depend on the gate; dependents wait for the confirmation.
 - **After the confirmation**, verify the result yourself (log, metric, `curl`). A failed check becomes a fix-up **implementer subagent**, on the fix-up rule in **Models and effort**: the gate ticket counts as an involved ticket, so the floor of Sonnet at medium still applies.
 - **Record it.** The confirmation counts as evidence: tick the matching criterion `- [x]`, and list it in the final report as "confirmed by the person".
+- **Re-apply after a late fix.** A fix-up after a gate (shared-state failures in step 7, review findings in step 8) that changes what a confirmed gate already applied makes that gate pending again: untick its criterion and, once the fix is merged and before step 9, prepare, ask, verify and record it again as above, so what was applied still matches a commit.
 - **No human available** (headless, run as a subagent, nobody watching): finish every independent ticket, then stop blocked and report each pending gate with its exact command. Never work around a gate.
 
 ## Steps
