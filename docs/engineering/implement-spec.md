@@ -61,7 +61,9 @@ Everything lands on one branch. Each implementer:
 
 1. confirms its worktree is based on the integration branch before it starts,
 2. builds its ticket with [tdd](./tdd.md), red-green one slice at a time,
-3. merges the integration branch tip into its own branch before reporting done, so landing it is a fast-forward.
+3. merges the integration branch tip into its own branch before reporting done, so landing it is clean.
+
+The orchestrator lands each finished branch itself, with one `git merge --no-ff` per ticket whose message names the ticket. Only a merge that fails (a conflict, usually from two tickets touching the same file) goes to a merger subagent, after `git merge --abort`. A clean merge is one command instead of a whole subagent (about 33k tokens each in a measured run).
 
 If the spec, the tickets or the repo's own instructions (`CLAUDE.md`, `AGENTS.md`) explicitly say to commit straight to `main`, `main` is the integration branch and no branch is created. Implementers still get their worktrees and temporary local branches, and the final step cleans them up. Without that explicit instruction, nothing changes: the skill creates the integration branch.
 
@@ -121,7 +123,7 @@ A worktree holds only what git tracks. Tests that read gitignored fixtures, loca
 - A ticket starts as soon as its last blocker lands on the integration branch, not when the whole run ends.
 - The plan table shows each ticket on its suggested model at medium effort (none for a model without effort support), and the final report repeats it.
 - Every ticket's trace shows `tdd` running, with a failing test before the code.
-- Merges into the integration branch are fast-forwards, not conflict resolutions.
+- Merges into the integration branch are one merge commit per ticket, done by the orchestrator, with a merger subagent only when a merge conflicted.
 - The run ends on one branch with every ticket resolved, and a PR only if your tracker wanted one.
 - A human gate is asked for once, with the exact command, and the report lists it as "confirmed by the person" (or as blocked, with the pending command, if nobody was there).
 - On a local tracker, every finished ticket file has its boxes ticked and `Status: ready-for-human`, so [archive-feature](./archive-feature.md) can close the feature.
